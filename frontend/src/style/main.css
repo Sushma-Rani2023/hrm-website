@@ -243,3 +243,20 @@ body {
   .leave_type_color_5 {
     background: #00BCD4 !important; }
   
+    .form-group {
+      margin-bottom: 20px; 
+      font-size: 1rem;
+    }
+
+    .main-container{
+      width: 80%;
+      margin: auto;
+    }
+
+    .form_cntainer{
+
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    

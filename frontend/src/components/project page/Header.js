@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
   return (
-	<div className="header" style={{margin:"35px"}}>
+	<div className="header border">
 <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
     <a className="navbar-brand" href="https://inzint.com
