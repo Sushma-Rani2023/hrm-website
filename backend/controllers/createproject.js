@@ -43,4 +43,42 @@ const Projectfindbycode = (req,res) => {
     })
 }
 
-module.exports = {Createproject , Projectfindbycode};
+const updateproject = (req,res) => {
+  const id = req.params.id;
+  console.log(id);
+  CreateProject.findByIdAndUpdate(id, req.body,{ useFindandModify: false} )
+   .then(data =>{
+    if(!data){
+        res.status(404).send({message : `Cannot Update Project with ${id}.Maybe project not found`})
+    }
+    else{
+        res.send(data)
+    }
+   })
+   .catch(err => {
+    res.status(500).send({message : `Error Update project information `})
+   })   
+}
+
+const deleteproject = (req, res)=> {
+    const id = req.params.id;
+
+    CreateProject.findByIdAndDelete(id)
+    .then(data => {
+        if(!data){
+            res.status(404).send({message:`cannot dalete with id ${id} Maybe id is wrong`})
+        }
+        else{
+            res.send({
+                message : "Project was deleted successfully!"
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message : "Could not delete Project with id " + id
+        })
+    })
+}
+
+module.exports = {Createproject , Projectfindbycode , updateproject , deleteproject};
