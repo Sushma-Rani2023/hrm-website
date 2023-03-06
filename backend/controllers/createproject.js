@@ -26,4 +26,21 @@ const Createproject = (req,res,next) => {
      })
 }
 
-module.exports = Createproject;
+
+const Projectfindbycode = (req,res) => {
+    console.log(req.params.Projectcode);
+    CreateProject.find({ Projectcode : req.params.Projectcode})
+    .then(result => {
+        res.status(200).json({
+            projectData : result
+        });
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    })
+}
+
+module.exports = {Createproject , Projectfindbycode};

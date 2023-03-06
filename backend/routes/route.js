@@ -1,9 +1,12 @@
 const express = require('express');
 
-const CreateProject = require('../controllers/createproject');
+const {Createproject, 
+    Projectfindbycode} = require('../controllers/createproject');
 
 const Router = express.Router();
 
-Router.post('/createproject', CreateProject);
+Router.post('/createproject', Createproject);
+
+Router.get('/description/:Projectcode' , Projectfindbycode);
 
 module.exports = Router;
