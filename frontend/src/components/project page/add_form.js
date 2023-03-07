@@ -5,7 +5,7 @@ import {React , useState} from 'react'
 
 import axios from '../../axios'
 
-function add_form() {
+function Add_form() {
   const navigate= useNavigate;
 
   const [project, setProject] = useState({});
@@ -111,4 +111,4 @@ function add_form() {
     )
 }
 
-export default add_form
+export default Add_form
