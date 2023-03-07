@@ -2,8 +2,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 //import { ReactDOM } from "react";
-import Add_project from "./components/project page/add_project"
-import Add_form from "./components/project page/add_form"
+import Add_project from "./components/project page/Add_project"
+import Add_form from "./components/project page/Add_form"
 //import { render } from "@testing-library/react";
 function App() {
 

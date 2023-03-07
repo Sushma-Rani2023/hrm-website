@@ -9,7 +9,7 @@ const Router = express.Router();
 
 Router.post('/createproject', Createproject);
 
-Router.get('/description/:Projectcode' , Projectfindbycode);
+Router.get('/description/' , Projectfindbycode);
 
 Router.put('/updateproject/:id', updateproject);
 

@@ -29,22 +29,43 @@ const Createproject = (req,res,next) => {
 
 
 const Projectfindbycode = (req,res) => {
-    console.log(req.params.Projectcode);
-    CreateProject.find({ Projectcode : req.params.Projectcode})
-    .then(result => {
-        res.status(200).json({
-            projectData : result
-        });
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({
-            error:err
+
+    if(req.query.id){
+      const id = req.query.id;
+      CreateProject.findById(id)
+      .then((data)=> {
+        if(!data){
+            res.status(404).send({message: 'Not found project with id' + id});
+        }
+        else{
+            res.send(data)
+        }
+      })
+      .catch(err => {
+        res.status(500).send({message:'Error occured'})
+      })
+    }
+    else{
+        CreateProject.find()
+        .then(result => {
+            res.status(200).json({
+                projectData : result
+            });
         })
-    })
+        .catch(err =>{
+            console.log(err);
+            res.status(500).json({
+                error:err
+            })
+        })
+    }
+   
 }
 
 const updateproject = (req,res) => {
+    if(!req.body){
+        res.Status(404).send({message:'Project to be update cannot be empty'})
+    }
   const id = req.params.id;
   console.log(id);
   CreateProject.findByIdAndUpdate(id, req.body,{ useFindandModify: false} )
