@@ -56,8 +56,8 @@ function Add() {
         <td>{data.Projectmanager}</td>
         <td>{data.ProjectStartDate}</td>
         <td>{data.Projectstatus}</td>
-        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={}>Edit</button>
-        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={}>Delete</button></td>
+        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" >Edit</button>
+        <button className="edit-delete-buttons" variant="tertiary" size="xs" >Delete</button></td>
         </tr>)
  
       }
