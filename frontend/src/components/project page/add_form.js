@@ -6,7 +6,7 @@ import {React , useState} from 'react'
 import axios from '../../axios'
 
 function Add_form() {
-  const navigate= useNavigate;
+  const navigate= useNavigate();
 
   const [project, setProject] = useState({});
 
@@ -23,6 +23,7 @@ function Add_form() {
    axios.post('/project/createproject',project)
    .then( (response) => {
       console.log(response.data)
+      navigate("/")
    })
   // const response = await fetch('http://localhost:8080/project/createproject',{
   // method:'POST',
@@ -42,6 +43,23 @@ function Add_form() {
         <div classNameName="row main-row_header" style={{fontSize:'1.5rem'}}>
      <p classNameName="col-md-12">Details of new project</p>
    </div>
+
+   <div className="row form_container" style={{display: "flex"}}>
+        <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
+          Inzint's project
+        </div>
+        <div className="col-md-3 col-md-offset-6 pull-right-12">
+          <button
+            type="button"
+            className="btn btn-outline-primary"
+            onClick={() => {
+              navigate("/add_project/");
+            }}
+          >
+            Add Project
+          </button>
+        </div>
+      </div>
    <br/>
 
    <div>
@@ -95,7 +113,7 @@ function Add_form() {
 
       <div className="form-group row">
         <div className="col-md-offset-3 col-md-3">
-          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" onClick={()=>navigate("/")}>Add new project</button>
+          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Add new project</button>
         </div>
       </div>
     </form>
