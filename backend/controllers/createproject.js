@@ -2,6 +2,7 @@ const CreateProject = require('../models/Createprojectmodel')
 
 
 const Createproject = (req,res,next) => {
+    
     const project = new CreateProject({
         Projectname:req.body.Projectname,
         Projectcode:req.body.Projectcode,

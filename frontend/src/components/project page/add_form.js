@@ -1,9 +1,39 @@
-import React from 'react' 
+ 
 import {useNavigate} from 'react-router-dom'
 import Header from './Header'
+import {React , useState} from 'react' 
+
+import axios from '../../axios'
 
 function add_form() {
   const navigate= useNavigate;
+
+  const [project, setProject] = useState({});
+
+  const handleform = (e) => {
+     console.log(e.target.value);
+     setProject({
+      ...project ,
+      [e.target.name] : e.target.value 
+     })
+  }
+
+  const handlesubmit = async (e) => {
+   e.preventDefault();
+   axios.post('/project/createproject',project)
+   .then( (response) => {
+      console.log(response.data)
+   })
+  // const response = await fetch('http://localhost:8080/project/createproject',{
+  // method:'POST',
+  // body:JSON.stringify(project),
+  // headers:{
+  //    'Content-Type':'application/json'
+  //  }
+  // })
+  // const data = await response.json();
+  // console.log(data);
+  }
 
     return (
         <div>
@@ -18,33 +48,33 @@ function add_form() {
    <div className="row" >
   <div className="col-md-12">
 
-    <form className="form-horizontal" method="POST" action="/users/add/" id="add_new_user_form">
-
+    <form className="form-horizontal" method="POST" action="/users/add/" id="add_new_user_form" onSubmit={handlesubmit}>
+     <p>{JSON.stringify(project)}</p>
       <div className="form-group row ">
-        <label for="projectname" className="col-md-3 control-label">Project Name</label>
+        <label for="projectname" className="col-md-3 control-label" >Project Name</label>
         <div className="col-md-3">
-          <input className="form-control" id="projectname" name="projectname" required />
+          <input className="form-control" id="projectname" name="Projectname" onChange={handleform} required />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="projectcode" className="col-md-3 control-label">Project code</label>
         <div className="col-md-3">
-          <input className="form-control" id="projectcode" name="projectcode" required />
+          <input className="form-control" id="projectcode" name="Projectcode" onChange={handleform} required />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="projectmanager" className="col-md-3 control-label">Project Manager</label>
         <div className="col-md-3">
-          <input className="form-control" id="projectmanager" name="projectmanager" required />
+          <input className="form-control" id="projectmanager" name="Projectmanager" onChange={handleform} required />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="projectstartdate" className="col-md-3 control-label">Project start date</label>
         <div className="col-md-3">
-          <input  type='date' className="form-control" id="projectstartdate" name="projectstartdate" required />
+          <input  type='date' className="form-control" id="projectstartdate" name="ProjectStartDate" onChange={handleform} required />
         </div>
       </div>
 
@@ -52,14 +82,14 @@ function add_form() {
       <div className="form-group row">
         <label for="projectstatus" className="col-md-3 control-label">Project Status</label>
         <div className="col-md-3">
-          <input className="form-control" id="projectstatus" name="projectstatus" required />
+          <input className="form-control" id="projectstatus" name="Projectstatus" onChange={handleform} required />
         </div>
       </div>
  
       <div className="form-group row">
         <label for="projectdescription" className="col-md-3 control-label">Project Description</label>
         <div className="col-md-10">
-          <textarea className="form-control" id="projectdescription" rows={3} name="projectdescription" />
+          <textarea className="form-control" id="projectdescription" rows={3} name="description" onChange={handleform}/>
         </div>
       </div>
 
