@@ -1,14 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "./Header";
+import axios from "../../axios";
 function Add() {
   const navigate = useNavigate();
-  const [data , setData] = useState();
+  const [data , setData] = useState([]);
+  const getAds = async () => {
+    const res = await axios.get('/project/description')
+    setData(res.data.projectData)
+  }
+
 
   useEffect(() => {
-    fetch('/ads').then(response => {
-      setData(response.json())
-    })
+    getAds()
   }, [])
   
   return (
@@ -44,7 +48,21 @@ function Add() {
       </tr>
     </thead>
     <tbody>
-
+    {
+      data.map((data,index) => {
+         return (<tr key={index}>
+        <td>{data.Projectname}</td>
+        <td>{data.Projectcode}</td>
+        <td>{data.Projectmanager}</td>
+        <td>{data.ProjectStartDate}</td>
+        <td>{data.Projectstatus}</td>
+        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={}>Edit</button>
+        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={}>Delete</button></td>
+        </tr>)
+ 
+      }
+      )
+    } 
     </tbody>
   </table>
 </div>
