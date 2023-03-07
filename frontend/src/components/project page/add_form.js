@@ -44,22 +44,7 @@ function Add_form() {
      <p classNameName="col-md-12">Details of new project</p>
    </div>
 
-   <div className="row form_container" style={{display: "flex"}}>
-        <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
-          Inzint's project
-        </div>
-        <div className="col-md-3 col-md-offset-6 pull-right-12">
-          <button
-            type="button"
-            className="btn btn-outline-primary"
-            onClick={() => {
-              navigate("/add_project/");
-            }}
-          >
-            Add Project
-          </button>
-        </div>
-      </div>
+   
    <br/>
 
    <div>
