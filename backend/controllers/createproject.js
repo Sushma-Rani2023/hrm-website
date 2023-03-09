@@ -81,7 +81,7 @@ const updateproject = async (req, res) => {
       .save()
       .then((data) => {
         res.json({
-          message: "project is updated",
+          message: "project is updated at mongo",
           updatedProject: data,
         });
       })
