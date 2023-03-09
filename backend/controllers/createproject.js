@@ -62,25 +62,35 @@ const Projectfindbycode = (req,res) => {
    
 }
 
-const updateproject = (req,res) => {
-    if(!req.body){
-        res.Status(404).send({message:'Project to be update cannot be empty'})
-    }
-  const id = req.params.id;
-  console.log(id);
-  CreateProject.findByIdAndUpdate(id, req.body,{ useFindandModify: false} )
-   .then(data =>{
-    if(!data){
-        res.status(404).send({message : `Cannot Update Project with ${id}.Maybe project not found`})
-    }
-    else{
-        res.send(data)
-    }
-   })
-   .catch(err => {
-    res.status(500).send({message : `Error Update project information `})
-   })   
-}
+
+
+const updateproject = async (req, res) => {
+    const { Projectname, Projectcode, Projectmanager, ProjectStartDate, Projectstatus , description } = req.body;
+    const id = req.params.id;
+    const project = await CreateProject.findByIdAndUpdate(id);
+  
+    project.Projectname = Projectname || project.Projectname;
+    project.Projectcode = Projectcode || project.Projectcode;
+    project.Projectmanager = Projectmanager || project.Projectmanager;
+    project.ProjectStartDate = ProjectStartDate || project.ProjectStartDate;
+    project.Projectstatus = Projectstatus || project.Projectstatus;
+    project.description = description || project.description;
+    
+  
+    project
+      .save()
+      .then((data) => {
+        res.json({
+          message: "project is updated",
+          updatedProject: data,
+        });
+      })
+      .catch((err) => {
+        res.json({
+          message: err.message,
+        });
+      });
+  };
 
 const deleteproject = (req, res)=> {
     const id = req.params.id;
