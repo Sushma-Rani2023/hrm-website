@@ -40,8 +40,8 @@ function Add_form() {
         <div>
 
         <Header/>
-        <div classNameName="row main-row_header" style={{fontSize:'1.5rem'}}>
-     <p classNameName="col-md-12">Details of new project</p>
+        <div className="row main-row_header" style={{fontSize:'1.5rem'}}>
+     <p className="col-md-12">Details of new project</p>
    </div>
 
    

@@ -10,10 +10,21 @@ function Add() {
     setData(res.data.projectData)
   }
 
-
   useEffect(() => {
     getAds()
   }, [])
+
+  function Delete (editId){
+    axios.delete(`/project/deleteproject/${editId}`)
+        .then(response => console.log('Delete successful'))
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
+    const updated_data=data.filter((item)=>item._id!==editId)
+    setData(updated_data)
+
+    
+};
   
   return (
     <div>
@@ -36,7 +47,7 @@ function Add() {
         </div>
       </div>
       <div className="col-md-9" style={{width:'100%',marginTop:'45px'}}>
-  <table class="table table-hover">
+  <table className="table table-hover">
     <thead>
       <tr>
         <th>Project Name</th>
@@ -56,8 +67,10 @@ function Add() {
         <td>{data.Projectmanager}</td>
         <td>{data.ProjectStartDate}</td>
         <td>{data.Projectstatus}</td>
-        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" >Edit</button>
-        <button className="edit-delete-buttons" variant="tertiary" size="xs" >Delete</button></td>
+        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
+              navigate("/update_project/",{state:{EditId:data._id}});
+            }} >Edit</button>
+        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
  
       }

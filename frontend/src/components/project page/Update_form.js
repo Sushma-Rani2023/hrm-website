@@ -9,28 +9,7 @@ function Update_form() {
   console.log(location.state.EditId)
   const navigate= useNavigate();
   const [project, setProject] = useState({});
-  const [data , setData] = useState([]);
-
-  const getAds = async () => {
-    const res = await axios.get(`/project/description/${location.state.EditId}`)
-    setData(res.data.projectData)
-  }
-
-  useEffect(() => {
-    getAds()
-  }, [])
-
-
-  function Update (editId){
-    axios.put(`/project/updateproject/${editId}`)
-        .then(response => {console.log('Updated successful')
-      setData(response.data.projectData)})
-        .catch(error => {
-            console.error('There was an error!', error);
-        });
-   
- 
-};
+  
 
   const handleform = (e) => {
      setProject({
@@ -40,10 +19,14 @@ function Update_form() {
   }
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('/project/createproject',project)
-   .then( (response) => {
-      console.log(response.data)
-      navigate("/")
+   axios.put(`/project/updateproject/${location.state.EditId}`,project)
+        .then(response => {console.log('Updated successful'
+        )
+        console.log(response,response.data,response.projectData)
+        navigate("/")})
+        .catch(error => {
+            console.error('There was an error!', error);
+  
    })
   
   }
@@ -108,7 +91,7 @@ function Update_form() {
 
       <div className="form-group row">
         <div className="col-md-offset-3 col-md-3">
-          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" onClick={()=>Update(location.state.EditId)}>Update project</button>
+          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click">Update project</button>
         </div>
       </div>
     </form>
