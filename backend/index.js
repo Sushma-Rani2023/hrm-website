@@ -5,6 +5,7 @@ const app = express();
 const connectDB = require('./config/db');
 const bodyparser = require('body-parser');
 const Router = require('./routes/route');
+const Router1 = require('./routes/Clientroutes');
 //const { default: App } = require('../frontend/src/App');
 
 
@@ -20,6 +21,8 @@ app.use(bodyparser.json());
 
 
 app.use('/project',Router);
+
+app.use('/Client',Router1);
 
 
 
