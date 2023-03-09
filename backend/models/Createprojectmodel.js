@@ -6,7 +6,7 @@ const CreateProjectSchema = new mongoose.Schema({
     Projectmanager:String,
     ProjectStartDate:String,
     Projectstatus: String,
-    Projectdescription:String
+    description:String
 })
 
 module.exports = mongoose.model('CreateProject', CreateProjectSchema);
