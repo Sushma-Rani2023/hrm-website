@@ -5,26 +5,24 @@ import {React , useState} from 'react'
 
 import axios from '../../axios'
 
-function Add_form() {
+function Add_client() {
   const navigate= useNavigate();
 
   const [project, setProject] = useState({});
+
   const handleform = (e) => {
-   
     
      setProject({
       ...project ,
       [e.target.name] : e.target.value 
      })
-  
   }
-
 
   const handlesubmit = async (e) => {
    e.preventDefault();
    axios.post('/project/createproject',project)
    .then( (response) => {
-      console.log('creating project',response.data,project)
+      console.log(response.data)
       navigate("/")
    })
   // const response = await fetch('http://localhost:8080/project/createproject',{
@@ -92,9 +90,9 @@ function Add_form() {
       </div>
  
       <div className="form-group row">
-        <label for="projectdescription" className="col-md-3 control-label" >Project Description</label>
-        <div className="col-md-10" style={{maxWidth:'450px'}}>
-          <textarea className="form-control" id="projectdescription" rows={3}  name="description" onChange={handleform}/>
+        <label for="projectdescription" className="col-md-3 control-label">Project Description</label>
+        <div className="col-md-10">
+          <textarea className="form-control" id="projectdescription" rows={3} name="description" onChange={handleform}/>
         </div>
       </div>
 

@@ -8,21 +8,22 @@ function Update_form() {
   const location =useLocation()
   console.log(location.state.EditId)
   const navigate= useNavigate();
-  const [project, setProject] = useState({});
-  
+  const [project, setProject] = useState(location.state.data);
+ 
 
   const handleform = (e) => {
      setProject({
       ...project ,
       [e.target.name] : e.target.value 
      })
+
   }
+
   const handlesubmit = async (e) => {
    e.preventDefault();
    axios.put(`/project/updateproject/${location.state.EditId}`,project)
         .then(response => {console.log('Updated successful'
         )
-        console.log(response,response.data,response.projectData)
         navigate("/")})
         .catch(error => {
             console.error('There was an error!', error);
@@ -35,8 +36,8 @@ function Update_form() {
         <div>
 
         <Header/>
-        <div classNameName="row main-row_header" style={{fontSize:'1.5rem'}}>
-     <p classNameName="col-md-12">Update the details of project</p>
+        <div className="row main-row_header" style={{fontSize:'1.5rem'}}>
+     <p className="col-md-12">Update the details of project</p>
    </div>
 
    <br/>
@@ -49,28 +50,28 @@ function Update_form() {
       <div className="form-group row ">
         <label for="projectname" className="col-md-3 control-label" >Project Name</label>
         <div className="col-md-3">
-          <input className="form-control" id="projectname"  name="Projectname" onChange={handleform}  />
+          <input className="form-control" id="projectname" value={project.Projectname} name="Projectname" onChange={handleform}  />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="projectcode" className="col-md-3 control-label">Project code</label>
         <div className="col-md-3">
-          <input className="form-control" id="projectcode" name="Projectcode" onChange={handleform}  />
+          <input className="form-control" id="projectcode" value={project.Projectcode} name="Projectcode" onChange={handleform}  />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="projectmanager" className="col-md-3 control-label">Project Manager</label>
         <div className="col-md-3">
-          <input className="form-control" id="projectmanager" name="Projectmanager" onChange={handleform}  />
+          <input className="form-control" id="projectmanager" value={project.Projectmanager} name="Projectmanager" onChange={handleform}  />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="projectstartdate" className="col-md-3 control-label">Project start date</label>
         <div className="col-md-3">
-          <input  type='date' className="form-control" id="projectstartdate" name="ProjectStartDate" onChange={handleform}  />
+          <input  type='date' className="form-control" id="projectstartdate" value={project.ProjectStartDate} name="ProjectStartDate" onChange={handleform}  />
         </div>
       </div>
 
@@ -78,14 +79,14 @@ function Update_form() {
       <div className="form-group row">
         <label for="projectstatus" className="col-md-3 control-label">Project Status</label>
         <div className="col-md-3">
-          <input className="form-control" id="projectstatus" name="Projectstatus" onChange={handleform}  />
+          <input className="form-control" id="projectstatus" value={project.Projectstatus}name="Projectstatus" onChange={handleform}  />
         </div>
       </div>
  
       <div className="form-group row">
         <label for="projectdescription" className="col-md-3 control-label">Project Description</label>
-        <div className="col-md-10">
-          <textarea className="form-control" id="projectdescription" rows={3} name="description" onChange={handleform}/>
+        <div className="col-md-10" style={{maxWidth:'450px'}}>
+          <textarea className="form-control" id="projectdescription" rows={3}  value={project.description} name="description" onChange={handleform}/>
         </div>
       </div>
 

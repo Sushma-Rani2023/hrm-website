@@ -8,7 +8,7 @@ function Add() {
   const getAds = async () => {
     const res = await axios.get('/project/description')
     setData(res.data.projectData)
-   
+    console.log('###########3',res,res.data)
   }
 
   useEffect(() => {
@@ -69,9 +69,9 @@ function Add() {
         <td>{data.Projectmanager}</td>
         <td>{data.ProjectStartDate}</td>
         <td>{data.Projectstatus}</td>
-        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.description}</td>
+        <td>{data.description}</td>
         <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
-              navigate("/update_project/",{state:{EditId:data._id,data:data}});
+              navigate("/update_project/",{state:{EditId:data._id}});
             }} >Edit</button>
         <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
