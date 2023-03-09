@@ -11,7 +11,7 @@ function Add_form() {
   const [project, setProject] = useState({});
 
   const handleform = (e) => {
-     console.log(e.target.value);
+    
      setProject({
       ...project ,
       [e.target.name] : e.target.value 
@@ -52,7 +52,7 @@ function Add_form() {
   <div className="col-md-12">
 
     <form className="form-horizontal" method="POST" action="/users/add/" id="add_new_user_form" onSubmit={handlesubmit}>
-     <p>{JSON.stringify(project)}</p>
+     
       <div className="form-group row ">
         <label for="projectname" className="col-md-3 control-label" >Project Name</label>
         <div className="col-md-3">
