@@ -1,13 +1,16 @@
 import {useNavigate} from 'react-router-dom'
 import Header from '../project page/Header'
 import {React , useState} from 'react' 
+import { useLocation } from 'react-router-dom'
+
 
 import axios from '../../axios'
 
-function Client_form() {
+function Update_Client() {
   const navigate= useNavigate();
+  const location =useLocation();
 
-  const [client, set] = useState({});
+  const [client, set] = useState(location.state.data);
   const handleform = (e) => {
     
      set({
@@ -18,23 +21,25 @@ function Client_form() {
   }
 
   const handlesubmit = async (e) => {
-   e.preventDefault();
-   axios.post('/client/info/',client)
-   .then( (response) => {
-      console.log('creating ',client)
-      navigate("/create_client")
-   })
-  }
-
+    e.preventDefault();
+    axios.put(`/client/updateproject/${client._id}`,client)
+         .then(response => {console.log('Updated successful'
+         )
+         navigate("/")})
+         .catch(error => {
+             console.error('There was an error!', error);
+   
+    })
+   
+   }
     return (
         <div>
 
         <Header/>
         <div className="row main-row_header" style={{fontSize:'1.5rem'}}>
-     <p className="col-md-12">Details of new Client</p>
+     <p className="col-md-12">Details of Client</p>
    </div>
 
-   
    <br/>
 
    <div>
@@ -46,54 +51,52 @@ function Client_form() {
       <div className="form-group row ">
         <label for="clientname" className="col-md-3 control-label" >Client Name</label>
         <div className="col-md-3">
-          <input className="form-control" id="clientname" name="Clientname"  onChange={handleform} required />
+          <input className="form-control" id="clientname" value={client.Clientname} name="Clientname"  onChange={handleform}  />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="clientcode" className="col-md-3 control-label">Client code</label>
         <div className="col-md-3">
-          <input className="form-control" id="clientcode" name="Clientcode"  onChange={handleform} required />
+          <input className="form-control" id="clientcode" name="Clientcode" value={client.Clientcode} onChange={handleform} />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="clientmanager" className="col-md-3 control-label">Client Manager</label>
         <div className="col-md-3">
-          <input className="form-control" id="clientmanager" name="Clientmanager" onChange={handleform} required />
+          <input className="form-control" id="clientmanager" name="Clientmanager" value={client.Clientmanager} onChange={handleform} />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="currencyselector" className="col-md-3 control-label">Currency Selector</label>
         <div className="col-md-3">
-          <input  type='string' className="form-control" id="currencyselector"  name="Currencyselector" onChange={handleform} required />
+          <input  type='string' className="form-control" id="currencyselector" value={client.currencyselector} name="currencyselector" onChange={handleform} />
         </div>
       </div>
 
 
       <div className="form-group row">
-        <label for="billing" name="Billing" onChange={handleform} className="col-md-3 control-label">Billing </label>
-        <select className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'12px'}} >
-        <option name="Hourly cost">Hourly cost</option>
-        <option name="fixed cost">Fixed cost</option>
-
-        </select>
+        <label for="billing" name='Billing' value={client.Billing} className="col-md-3 control-label">Billing </label>
+       <select  className='form-select ' style={{maxWidth:'255px',marginLeft:'10px'}} >
+           <option value="1">Hourly</option>
+           <option value="2">Fixed Cost</option>
+       </select>
 
        </div>
     
  
       <div className="form-group row">
-        <label for="description" className="col-md-3 control-label" >Optional</label>
+        <label for="description" className="col-md-3 control-label" > Optional</label>
         <div className="col-md-10" style={{maxWidth:'450px'}}>
-          <textarea className="form-control" id="description" rows={3}  name="Optional" onChange={handleform}/>
+          <textarea className="form-control" id="description" rows={3} value={client.Optional} name="Optional" onChange={handleform}/>
         </div>
       </div>
 
-
       <div className="form-group row">
         <div className="col-md-offset-3 col-md-3">
-          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Add new Client </button>
+          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Update Client </button>
         </div>
       </div>
     </form>
@@ -109,4 +112,4 @@ function Client_form() {
     )
 }
 
-export default Client_form
+export default Update_Client

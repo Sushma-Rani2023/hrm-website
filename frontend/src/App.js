@@ -7,6 +7,7 @@ import Add_form from "./components/project page/Add_form"
 import Update_form from "./components/project page/Update_form"
 import Add_client from  "./components/client page/Add_Client"
 import Client_form from "./components/client page/Client_form";
+import Update_client from "./components/client page/Update_client"
 //import { render } from "@testing-library/react";
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/update_project" element={<Update_form/>}/>
         <Route path="/create_client" element={<Add_client/>}/>
         <Route path="/Add_client" element={<Client_form/>}/>
+        <Route path='/update_client' element=<Update_client/>/>
       </Routes>
 
     </BrowserRouter>

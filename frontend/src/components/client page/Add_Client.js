@@ -55,10 +55,8 @@ function Add_client() {
         <th>Client Code</th>
         <th>Client Manager</th>
         <th>Currency Selector</th>
-        <th>Project Status</th>
         <th>Billing</th>
-        <th>Description</th>
-        <th>Billing address</th>
+        <th>Optional</th>
         <th>Action</th>
         </tr>
         <tbody>
@@ -68,12 +66,12 @@ function Add_client() {
         <td>{data.Clientname}</td>
         <td>{data.Clientcode}</td>
         <td>{data.Clientmanager}</td>
+        <td>{data.Currencyselector}</td>
         <td>{data.Billing}</td>
-        <td>{data.Projectstatus}</td>
-        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.description}</td>
-        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.description}</td>
+        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
+
         <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
-              navigate("/update_project/",{state:{EditId:data._id,data:data}});
+              navigate("/update_client/",{state:{data:data}});
             }} >Edit</button>
         <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
