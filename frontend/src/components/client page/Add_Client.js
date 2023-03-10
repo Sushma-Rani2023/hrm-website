@@ -7,7 +7,6 @@ function Add_Client() {
   const [data , setData] = useState([]);
   const getAds = async () => {
     const res = await axios.get('/client/Clientdetails')
-    console.log(res)
     setData(res.data.ClientData)
    
     console.log(data)
@@ -42,7 +41,7 @@ function Add_Client() {
             type="button"
             className="btn btn-outline-primary"
             onClick={() => {
-              navigate("/Add_client/");
+              navigate("/client/add");
             }}
           >
             Add Client
@@ -73,7 +72,7 @@ function Add_Client() {
         <td>{data.Billing}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
         <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
-              navigate("/update_Client/",{state:{data:data}});
+              navigate("/Client/update",{state:{data:data}});
             }} >Edit</button>
         <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)

@@ -40,7 +40,7 @@ function Add() {
             type="button"
             className="btn btn-outline-primary"
             onClick={() => {
-              navigate("/add_project/");
+              navigate("/project/add");
             }}
           >
             Add Project
@@ -71,7 +71,7 @@ function Add() {
         <td>{data.Projectstatus}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.description}</td>
         <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
-              navigate("/update_project/",{state:{EditId:data._id,data:data}});
+              navigate("/project/update",{state:{EditId:data._id,data:data}});
             }} >Edit</button>
         <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)

@@ -2,6 +2,7 @@ import {useNavigate} from 'react-router-dom'
 import Header from '../project page/Header'
 import {React , useState} from 'react' 
 import { useLocation } from 'react-router-dom'
+import SelectCurrency from 'react-select-currency'
 
 
 import axios from '../../axios'
@@ -24,7 +25,7 @@ function Update_Client() {
     e.preventDefault();
     axios.put(`/client/updateclient/${client._id}`,client)
          .then(response => {console.log('Updated successful')
-         navigate("/create_client")})
+         navigate("/client")})
          .catch(error => {
              console.error('There was an error!', error);
    
@@ -69,10 +70,9 @@ function Update_Client() {
       </div>
 
       <div className="form-group row">
-        <label for="currencyselector" className="col-md-3 control-label">Currency Selector</label>
-        <div className="col-md-3">
-          <input  type='string' className="form-control" id="currencyselector" value={client.Currencyselector} name="Currencyselector" onChange={handleform} />
-        </div>
+        <label for="currencyselector" className="col-md-3 control-label">Currency </label>
+        <SelectCurrency className='form-select col-md-13' style={{maxWidth:'260px',marginLeft:'100px'}} value={client.Currencyselector} name="Currencyselector" onChange={handleform} />
+
       </div>
 
 

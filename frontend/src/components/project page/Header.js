@@ -15,7 +15,7 @@ function Header() {
         <a className="nav-link active" aria-current="page" href="#">Calender</a>
         <a className="nav-link" href="#">Employee</a>
         <a className="nav-link" href="/">Project</a>
-        <a className="nav-link" href="/create_client">Client</a>
+        <a className="nav-link" href="/client">Client</a>
         <a className="nav-link" href="#">Team View</a>
         
       </div>

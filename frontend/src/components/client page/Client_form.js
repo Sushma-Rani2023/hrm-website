@@ -1,6 +1,8 @@
 import {useNavigate} from 'react-router-dom'
 import Header from '../project page/Header'
 import {React , useState} from 'react' 
+import SelectCurrency from 'react-select-currency';
+
 
 import axios from '../../axios'
 
@@ -22,9 +24,10 @@ function Client_form() {
    axios.post('/client/info',client)
    .then( (response) => {
       console.log('creating ',client)
-      navigate("/create_client")
+      navigate("/client")
    })
   }
+  
 
     return (
         <div>
@@ -65,11 +68,13 @@ function Client_form() {
       </div>
 
       <div className="form-group row">
-        <label for="currencyselector" className="col-md-3 control-label">Currency Selector</label>
-        <div className="col-md-3">
-          <input  type='string' className="form-control" id="currencyselector"  name="Currencyselector" onChange={handleform} required />
+        <label for="currencyselector" className="col-md-3 control-label">Currency </label>
+    
+        <SelectCurrency className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'12px'}} value={'USD'} name="Currencyselector" onChange={handleform} />
+
+          {/* <input  type='string' className="form-control" id="currencyselector"  name="Currencyselector" onChange={handleform} required /> */}
         </div>
-      </div>
+      
 
 
       <div className="form-group row">

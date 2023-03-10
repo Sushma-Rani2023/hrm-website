@@ -17,11 +17,11 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Add_project/>}/>
-        <Route path="/add_project/" element={<Add_form/>}/>
-        <Route path="/update_project" element={<Update_form/>}/>
-        <Route path="/create_client" element={<Add_client/>}/>
-        <Route path="/Add_client" element={<Client_form/>}/>
-        <Route path='/update_client' element=<Update_client/>/>
+        <Route path="/project/add" element={<Add_form/>}/>
+        <Route path="/project/update" element={<Update_form/>}/>
+        <Route path="/client" element={<Add_client/>}/>
+        <Route path="/client/add" element={<Client_form/>}/>
+        <Route path='/client/update' element=<Update_client/>/>
       </Routes>
 
     </BrowserRouter>
