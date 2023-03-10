@@ -6,6 +6,7 @@ const Clientinfo = (req,res) => {
         Clientname:req.body.Clientname,
         Clientcode:req.body.Clientcode,
         Clientmanager:req.body.Clientmanager,
+        Currencyselector:req.body.Currencyselector,
         Billing:req.body.Billing,
         Optional:req.body.Optional,
        })
@@ -67,6 +68,7 @@ const updateClient = async (req, res) => {
     Updatedclient.Clientname = Clientname || Updatedclient.Clientname;
     Updatedclient.Clientcode = Clientcode || Updatedclient.Clientcode;
     Updatedclient.Clientmanager = Clientmanager || Updatedclient.Clientmanager;
+    Updatedclient.Currencyselector = Currencyselector || Updatedclient.Currencyselector;
     Updatedclient.Billing = Billing || Updatedclient.Billing;
     Updatedclient.Optional = Optional || Updatedclient.Optional;
     
