@@ -19,7 +19,7 @@ function Client_form() {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('/client/info/',client)
+   axios.post('/client/info',client)
    .then( (response) => {
       console.log('creating ',client)
       navigate("/create_client")
@@ -73,10 +73,11 @@ function Client_form() {
 
 
       <div className="form-group row">
-        <label for="billing" name="Billing" onChange={handleform} className="col-md-3 control-label">Billing </label>
-        <select className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'12px'}} >
-        <option name="Hourly cost">Hourly cost</option>
-        <option name="fixed cost">Fixed cost</option>
+        <label for="billing" className="col-md-3 control-label">Billing </label>
+        <select  className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'12px'}} name="Billing" onChange={handleform} >
+        <option value="" selected>Choose Here</option>
+        <option value="Hourly cost">Hourly cost</option>
+        <option value="Fixed cost">Fixed cost</option>
 
         </select>
 

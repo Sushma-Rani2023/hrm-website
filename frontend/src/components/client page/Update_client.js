@@ -22,7 +22,7 @@ function Update_Client() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/client/updateproject/${client._id}`,client)
+    axios.put(`/client/updateclient/${client._id}`,client)
          .then(response => {console.log('Updated successful'
          )
          navigate("/")})

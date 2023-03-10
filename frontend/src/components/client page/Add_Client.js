@@ -2,13 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../project page/Header";
 import axios from "../../axios";
-function Add_client() {
+function Add_Client() {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
   const getAds = async () => {
-    const res = await axios.get('/client/Clientdetails')
-    setData(res.data.projectData)
-    console.log('###########3',res,res.data)
+    const res = await axios.get('/client/info')
+    setData(res.data.ClientData)
+   
+    console.log(data)
   }
 
   useEffect(() => {
@@ -16,7 +17,7 @@ function Add_client() {
   }, [])
 
   function Delete (editId){
-    axios.delete(`/client/deleted/${editId}`)
+    axios.delete(`/client/delete/${editId}`)
         .then(response => console.log('Delete successful'))
         .catch(error => {
             console.error('There was an error!', error);
@@ -33,7 +34,7 @@ function Add_client() {
 
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
-          Inzint's Client
+          Inzint's Client 
         </div>
         <div className="col-md-3 col-md-offset-6 pull-right-12" style={{display:'right'}}>
           <button
@@ -57,11 +58,12 @@ function Add_client() {
         <th>Currency Selector</th>
         <th>Billing</th>
         <th>Optional</th>
-        <th>Action</th>
-        </tr>
-        <tbody>
-        {
-          data.map((data,index) => {
+        <th>Client Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {
+      data.map((data,index) => {
          return (<tr key={index}>
         <td>{data.Clientname}</td>
         <td>{data.Clientcode}</td>
@@ -69,24 +71,19 @@ function Add_client() {
         <td>{data.Currencyselector}</td>
         <td>{data.Billing}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
-
         <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
-              navigate("/update_client/",{state:{data:data}});
+              navigate("/update_Client/",{state:{data:data}});
             }} >Edit</button>
         <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
+ 
       }
       )
-        }
-
-        </tbody>
-
-
-    </thead>
-    
+    } 
+    </tbody>
   </table>
 </div>
     </div>
   );
 }
-export default Add_client;
+export default Add_Client;
