@@ -77,11 +77,11 @@ function Update_Client() {
 
 
       <div className="form-group row">
-        <label for="billing" name='Billing' value={client.Billing} className="col-md-3 control-label">Billing </label>
-       <select  className='form-select ' style={{maxWidth:'255px',marginLeft:'10px'}} >
-           <option value="" selected>Choose Here</option>
-           <option value="1">Hourly</option>
-           <option value="2">Fixed Cost</option>
+        <label for="billing" className="col-md-3 control-label">Billing </label>
+       <select  name='Billing' onChange={handleform} className='form-select ' style={{maxWidth:'255px',marginLeft:'10px'}} >
+       <option value={client.Billing} selected>Choose Here...</option>
+           <option value="Hourly Cost">Hourly Cost</option>
+           <option value="Fixed Cost">Fixed Cost</option>
        </select>
 
        </div>

@@ -18,7 +18,7 @@ function Add_Client() {
   }, [])
 
   function Delete (editId){
-    axios.delete(`/client/delete/${editId}`)
+    axios.delete(`/client/deleted/${editId}`)
         .then(response => console.log('Delete successful'))
         .catch(error => {
             console.error('There was an error!', error);
