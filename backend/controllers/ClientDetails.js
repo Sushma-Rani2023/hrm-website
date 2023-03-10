@@ -47,7 +47,7 @@ const Clientget = (req,res) => {
         ClientDetails.find()
         .then(result => {
             res.status(200).json({
-                projectData : result
+                ClientData : result
             });
         })
         .catch(err =>{
