@@ -6,7 +6,8 @@ function Add_Client() {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
   const getAds = async () => {
-    const res = await axios.get('/client/info')
+    const res = await axios.get('/client/Clientdetails')
+    console.log(res)
     setData(res.data.ClientData)
    
     console.log(data)

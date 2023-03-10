@@ -23,9 +23,8 @@ function Update_Client() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     axios.put(`/client/updateclient/${client._id}`,client)
-         .then(response => {console.log('Updated successful'
-         )
-         navigate("/")})
+         .then(response => {console.log('Updated successful')
+         navigate("/create_client")})
          .catch(error => {
              console.error('There was an error!', error);
    
@@ -72,7 +71,7 @@ function Update_Client() {
       <div className="form-group row">
         <label for="currencyselector" className="col-md-3 control-label">Currency Selector</label>
         <div className="col-md-3">
-          <input  type='string' className="form-control" id="currencyselector" value={client.currencyselector} name="currencyselector" onChange={handleform} />
+          <input  type='string' className="form-control" id="currencyselector" value={client.Currencyselector} name="Currencyselector" onChange={handleform} />
         </div>
       </div>
 
@@ -80,6 +79,7 @@ function Update_Client() {
       <div className="form-group row">
         <label for="billing" name='Billing' value={client.Billing} className="col-md-3 control-label">Billing </label>
        <select  className='form-select ' style={{maxWidth:'255px',marginLeft:'10px'}} >
+           <option value="" selected>Choose Here</option>
            <option value="1">Hourly</option>
            <option value="2">Fixed Cost</option>
        </select>
