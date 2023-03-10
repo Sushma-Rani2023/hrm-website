@@ -61,7 +61,7 @@ const Clientget = (req,res) => {
 }
 
 const updateClient = async (req, res) => {
-    const { Clientname, Clientcode, Clientmanager, Billing, Optional  } = req.body;
+    const { Clientname, Clientcode, Clientmanager,Currencyselector, Billing, Optional  } = req.body;
     const id = req.params.id;
     const Updatedclient = await ClientDetails.findByIdAndUpdate(id);
   
