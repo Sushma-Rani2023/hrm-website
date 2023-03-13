@@ -11,6 +11,7 @@ import Update_client from "./components/client page/Update_client"
 import Add_Role from "./components/role/Add_role";
 import Role_form from "./components/role/Role_form"
 import Update_role from "./components/role/Update_role"
+import Add_mem from "./components/team member/Add_mem";
 //import { render } from "@testing-library/react";
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/role" element={<Add_Role/>}></Route>
         <Route path="/role/add" element={<Role_form/>}></Route>
         <Route path="/role/update" element={<Update_role/>}></Route>
+        <Route path="team member" element={<Add_mem/>}></Route>
       </Routes>
 
     </BrowserRouter>

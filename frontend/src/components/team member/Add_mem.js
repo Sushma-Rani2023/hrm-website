@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../project page/Header";
 import axios from "../../axios";
-function Add_Role() {
+function Add_mem() {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
   const getAds = async () => {
@@ -32,7 +32,7 @@ function Add_Role() {
 
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
-          Roles
+         Team Members
         </div>
         <div className="col-md-3 col-md-offset-6 pull-right-12" style={{display:'right'}}>
           <button
@@ -42,7 +42,7 @@ function Add_Role() {
               navigate("/role/add");
             }}
           >
-            Add Role
+            Add  Member
           </button>
         </div>
       </div>
@@ -79,4 +79,4 @@ function Add_Role() {
     </div>
   );
 }
-export default Add_Role;
+export default Add_mem;
