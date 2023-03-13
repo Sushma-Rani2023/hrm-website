@@ -8,6 +8,9 @@ import Update_form from "./components/project page/Update_form"
 import Add_client from  "./components/client page/Add_Client"
 import Client_form from "./components/client page/Client_form";
 import Update_client from "./components/client page/Update_client"
+import Add_Role from "./components/role/Add_role";
+import Role_form from "./components/role/Role_form"
+import Update_role from "./components/role/Update_role"
 //import { render } from "@testing-library/react";
 function App() {
 
@@ -22,6 +25,9 @@ function App() {
         <Route path="/client" element={<Add_client/>}/>
         <Route path="/client/add" element={<Client_form/>}/>
         <Route path='/client/update' element=<Update_client/>/>
+        <Route path="/role" element={<Add_Role/>}></Route>
+        <Route path="/role/add" element={<Role_form/>}></Route>
+        <Route path="/role/update" element={<Update_role/>}></Route>
       </Routes>
 
     </BrowserRouter>

@@ -92,7 +92,7 @@ function Client_form() {
       <div className="form-group row">
         <label for="description" className="col-md-3 control-label" >Optional</label>
         <div className="col-md-10" style={{maxWidth:'450px'}}>
-          <textarea className="form-control" id="description" rows={3}  name="Optional" onChange={handleform}/>
+          <textarea className="form-control" id="description" rows={3} maxLength='200' name="Optional" onChange={handleform}/>
         </div>
       </div>
 
