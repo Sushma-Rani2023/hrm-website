@@ -79,7 +79,7 @@ const updateengineer = (req,res) =>{
 
 const deleteengineer = (req,res) => {
     const id = req.params.id;
-    const deleteeng = engineerroles.findByIdAndDelete(id)
+    engineerroles.findByIdAndDelete(id)
     .then(data => {
         if(!data){
             res.status(404).send({message:`Data not found with id = ${id}` })
