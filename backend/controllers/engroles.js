@@ -51,10 +51,10 @@ const getengineerinfo = (req,res) => {
     }
 }
 
-const updateengineer = (req,res) =>{
+const updateengineer = async (req,res) =>{
     const { Name , Description, Optional} = req.body;
     const id = req.params.id;
-    const newengineerinfo = engineerroles.findByIdAndUpdate(id);
+    const newengineerinfo = await engineerroles.findByIdAndUpdate(id);
 
     
     newengineerinfo.Name = Name|| newengineerinfo.Name;
