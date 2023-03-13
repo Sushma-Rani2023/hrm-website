@@ -44,7 +44,7 @@ function Client_form() {
    <div className="row" >
   <div className="col-md-12">
 
-    <form className="form-horizontal" method="POST" action="/users/add/" id="add_new_user_form" onSubmit={handlesubmit}>
+    <form className="form-horizontal" method="POST" zzs id="add_new_user_form" onSubmit={handlesubmit}>
      
       <div className="form-group row ">
         <label for="clientname" className="col-md-3 control-label" >Client Name</label>
@@ -79,7 +79,7 @@ function Client_form() {
 
       <div className="form-group row">
         <label for="billing" className="col-md-3 control-label">Billing </label>
-        <select  className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'100px'}} name="Billing" onChange={handleform} >
+        <select  className='form-select col-md-3'  style={{maxWidth:'255px',marginLeft:'275px'}} name="Billing" onChange={handleform} >
         <option value="" selected>Choose Here</option>
         <option value="Hourly cost">Hourly cost</option>
         <option value="Fixed cost">Fixed cost</option>
