@@ -70,7 +70,7 @@ function Client_form() {
       <div className="form-group row">
         <label for="currencyselector" className="col-md-3 control-label">Currency </label>
     
-        <SelectCurrency className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'12px'}} value={'USD'} name="Currencyselector" onChange={handleform} />
+        <SelectCurrency className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'100px'}} value={'USD'} name="Currencyselector" onChange={handleform} />
 
           {/* <input  type='string' className="form-control" id="currencyselector"  name="Currencyselector" onChange={handleform} required /> */}
         </div>
@@ -79,7 +79,7 @@ function Client_form() {
 
       <div className="form-group row">
         <label for="billing" className="col-md-3 control-label">Billing </label>
-        <select  className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'12px'}} name="Billing" onChange={handleform} >
+        <select  className='form-select col-md-3' style={{maxWidth:'255px',marginLeft:'100px'}} name="Billing" onChange={handleform} >
         <option value="" selected>Choose Here</option>
         <option value="Hourly cost">Hourly cost</option>
         <option value="Fixed cost">Fixed cost</option>

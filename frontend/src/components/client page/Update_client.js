@@ -71,14 +71,14 @@ function Update_Client() {
 
       <div className="form-group row">
         <label for="currencyselector" className="col-md-3 control-label">Currency </label>
-        <SelectCurrency className='form-select col-md-13' style={{maxWidth:'260px',marginLeft:'100px'}} value={client.Currencyselector} name="Currencyselector" onChange={handleform} />
+        <SelectCurrency className='form-select ' style={{maxWidth:'255px',marginLeft:'275px'}} value={client.Currencyselector} name="Currencyselector" onChange={handleform} />
 
       </div>
 
 
       <div className="form-group row">
         <label for="billing" className="col-md-3 control-label">Billing </label>
-       <select  name='Billing' onChange={handleform} className='form-select ' style={{maxWidth:'255px',marginLeft:'10px'}} >
+       <select  name='Billing' onChange={handleform} className='form-select ' style={{maxWidth:'255px',marginLeft:'12px'}} >
        <option value={client.Billing} selected>Choose Here...</option>
            <option value="Hourly Cost">Hourly Cost</option>
            <option value="Fixed Cost">Fixed Cost</option>
