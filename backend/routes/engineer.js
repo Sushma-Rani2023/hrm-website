@@ -11,8 +11,8 @@ Router2.post('/createengineer', engineercreate);
 
 Router2.get('/engineerinfo', getengineerinfo);
 
-Router2.put('/updateengineer' , updateengineer);
+Router2.put('/updateengineer/:id' , updateengineer);
 
-Router2.delete('/deleteengineer' , deleteengineer);
+Router2.delete('/deleteengineer/:id' , deleteengineer);
 
 module.exports = Router2;
