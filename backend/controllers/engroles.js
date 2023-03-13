@@ -77,4 +77,24 @@ const updateengineer = (req,res) =>{
     })
 }
 
-module.exports = {engineercreate , getengineerinfo , updateengineer};
+const deleteengineer = (req,res) => {
+    const id = req.params.id;
+    const deleteeng = engineerroles.findByIdAndDelete(id)
+    .then(data => {
+        if(!data){
+            res.status(404).send({message:`Data not found with id = ${id}` })
+        }
+        else{
+            res.status(200).send({message: 'Data deleted successfully'})
+        }
+    })
+
+    .catch(err => {
+        res.status(500).send({
+            message : "Could not delete data with id" + id,
+            error: err
+        })
+    })
+}
+
+module.exports = {engineercreate , getengineerinfo , updateengineer, deleteengineer};
