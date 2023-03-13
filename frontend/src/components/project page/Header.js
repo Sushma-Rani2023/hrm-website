@@ -13,12 +13,10 @@ function Header() {
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav">
         <a className="nav-link active" aria-current="page" href="#">Calender</a>
-        <a className="nav-link" href="#">Employee</a>
         <a className="nav-link" href="/">Project</a>
         <a className="nav-link" href="/client">Client</a>
         <a className="nav-link" href="/role">Role</a>
         <a className="nav-link" href="/team member">Team Member</a>
-        <a className="nav-link" href="#">Team View</a>
         
       </div>
     </div>

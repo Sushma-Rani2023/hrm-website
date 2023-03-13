@@ -52,6 +52,14 @@ function Client_form() {
       </div>
 
 
+      <div className="form-group row ">
+       <label for="rate" className="col-md-3 control-label" >Rate per Hour</label>
+       <div className="col-md-3">
+         <input className="form-control" id="rate" name="Optional"  onChange={handleform} />
+       </div>
+     </div>
+
+
       <div className="form-group row">
         <label for="description" className="col-md-3 control-label" >Description</label>
         <div className="col-md-10" style={{maxWidth:'450px'}}>
@@ -59,13 +67,7 @@ function Client_form() {
         </div>
       </div>
       
-      <div className="form-group row">
-        <label for="optional" className="col-md-3 control-label" >Rate per Hour</label>
-        <div className="col-md-10" style={{maxWidth:'450px'}}>
-          <textarea className="form-control" id="optional" rows={3} maxLength="200" name="Optional" onChange={handleform}/>
-        </div>
-      </div>
-
+      
 
       <div className="form-group row">
         <div className="col-md-offset-3 col-md-3">

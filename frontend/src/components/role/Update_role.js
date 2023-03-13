@@ -46,12 +46,19 @@ function Update_role() {
    <div className="row" >
   <div className="col-md-12">
 
-  <form className="form-horizontal" method="POST" action="/users/add/" id="add_new_user_form" onSubmit={handlesubmit}>
+  <form className="form-horizontal" method="POST"  id="add_new_user_form" onSubmit={handlesubmit}>
      
      <div className="form-group row ">
        <label for="rolename" className="col-md-3 control-label" >Name</label>
        <div className="col-md-3">
          <input className="form-control" id="rolename" name="Name" value={role.Name}  onChange={handleform} required />
+       </div>
+     </div>
+
+     <div className="form-group row ">
+       <label for="rate" className="col-md-3 control-label" >Rate per Hour</label>
+       <div className="col-md-3">
+         <input className="form-control" id="rate" name="Optional" value={role.Optional}  onChange={handleform} />
        </div>
      </div>
 
@@ -63,13 +70,7 @@ function Update_role() {
        </div>
      </div>
      
-     <div className="form-group row">
-       <label for="optional" className="col-md-3 control-label" >Rate per Hour</label>
-       <div className="col-md-10" style={{maxWidth:'450px'}}>
-         <textarea className="form-control" id="optional" rows={3} maxLength="200" value={role.Optional} name="Optional" onChange={handleform}/>
-       </div>
-     </div>
-
+     
 
      <div className="form-group row">
        <div className="col-md-offset-3 col-md-3">

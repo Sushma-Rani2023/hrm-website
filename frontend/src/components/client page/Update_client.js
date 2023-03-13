@@ -46,7 +46,7 @@ function Update_Client() {
    <div className="row" >
   <div className="col-md-12">
 
-    <form className="form-horizontal" method="POST" action="/users/add/" id="add_new_user_form" onSubmit={handlesubmit}>
+    <form className="form-horizontal" method="POST" id="add_new_user_form" onSubmit={handlesubmit}>
      
       <div className="form-group row ">
         <label for="clientname" className="col-md-3 control-label" >Client Name</label>

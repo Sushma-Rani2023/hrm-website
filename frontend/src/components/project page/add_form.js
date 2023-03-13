@@ -52,7 +52,7 @@ function Add_form() {
    <div className="row" >
   <div className="col-md-12">
 
-    <form className="form-horizontal" method="POST" action="/users/add/" id="add_new_user_form" onSubmit={handlesubmit}>
+    <form className="form-horizontal" method="POST"  id="add_new_user_form" onSubmit={handlesubmit}>
      
       <div className="form-group row ">
         <label for="projectname" className="col-md-3 control-label" >Project Name</label>

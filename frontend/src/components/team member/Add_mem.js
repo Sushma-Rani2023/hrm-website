@@ -39,10 +39,10 @@ function Add_mem() {
             type="button"
             className="btn btn-outline-primary"
             onClick={() => {
-              navigate("/role/add");
+              navigate("/team member/add");
             }}
           >
-            Add  Member
+            Team Member
           </button>
         </div>
       </div>

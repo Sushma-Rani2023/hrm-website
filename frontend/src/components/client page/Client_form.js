@@ -27,8 +27,6 @@ function Client_form() {
       navigate("/client")
    })
   }
-  
-
     return (
         <div>
 
