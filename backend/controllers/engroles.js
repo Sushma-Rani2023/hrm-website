@@ -3,7 +3,6 @@ const engineerroles = require('../models/engineerroles');
 const engineercreate = (req,res) => {
 
   const Engineer = new engineerroles({
-    Roles:req.body.Roles,
     Name:req.body.Name,
     Description:req.body.Description,
     Optional:req.body.Optional
@@ -52,4 +51,30 @@ const getengineerinfo = (req,res) => {
     }
 }
 
-module.exports = engineercreate;
+const updateengineer = (req,res) =>{
+    const { Name , Description, Optional} = req.body;
+    const id = req.params.id;
+    const newengineerinfo = engineerroles.findByIdAndUpdate(id);
+
+    
+    newengineerinfo.Name = Name|| newengineerinfo.Name;
+    newengineerinfo.Description = Description|| newengineerinfo.Description;
+    newengineerinfo.Optional = Optional|| newengineerinfo.Optional;
+
+    newengineerinfo
+    .save()
+    .then(data => {
+        res.json({
+            message:'Engineer is updated',
+            Updatedengineer:data
+        })
+    })
+    .catch(err => {
+        res.json({
+            message:"Error Occured",
+            error:err
+        })
+    })
+}
+
+module.exports = {engineercreate , getengineerinfo , updateengineer};
