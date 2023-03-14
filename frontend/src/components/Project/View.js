@@ -2,13 +2,19 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../project page/Header";
 import axios from "../../axios";
+import Add_Role from "../role/Add_role";
+import Add_Client from "../client page/Add_Client";
 
 function View() {
   const location = useLocation();
   //const [data, setData]=useState(location.state.data);
   const data = location.state.data;
   console.log(data);
+  const [role,setRole]=useState(false)
+  const [task,setTask]=useState(false)
+  const [team,setTeam]=useState(false)
   return (
+    <>
     <div>
       <Header />
 
@@ -17,7 +23,7 @@ function View() {
           <Link to={"/"}>{data.Projectname}</Link>{" "}
         </h3>
       </div>
-      <div  style={{marginTop:'20px',backgroundColor: "#f8f9fa"}}>
+      <div  style={{marginTop:'20px',backgroundColor: "#f8f9fa" , height:'100px'}}>
       <div
         style={{
           display: "flex",
@@ -79,9 +85,9 @@ function View() {
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav">
-        <a className="nav-link link-secondary" href="#">Team Member</a>
-        <a className="nav-link link-secondary" href="/">Tasks</a>
-        <a className="nav-link link-secondary" href="/client">Role</a>
+      <button  className="btn btn-outline-primary" onClick={()=>{setTask((prev) => !prev) ; setRole(false) ; setTeam(false)} }>Task</button>
+      <button style={{marginLeft:'10px'}} className="btn btn-outline-primary" onClick={()=>{setTeam((prev) => !prev); setRole(false);setTask(false)} }>Team Member</button>
+        <button style={{marginLeft:'10px'}} className="btn btn-outline-primary" onClick={()=>{setRole((prev) => !prev); setTeam(false); setTask(false)}}>Role</button>
         
       </div>
     </div>
@@ -89,6 +95,20 @@ function View() {
 </nav> 
 </div>
     </div>
+    {role &&
+        <div style={{marginLeft:"20px"}}>
+            <Add_Role/>
+        </div>
+    
+    }
+
+    {team &&
+        <div style={{marginLeft:"20px"}}>
+            <Add_Client/>
+        </div>
+    
+    }
+    </>
   );
 }
 

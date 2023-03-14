@@ -28,7 +28,6 @@ function Add_Role() {
   
   return (
     <div>
-      <Header />
 
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
@@ -42,7 +41,7 @@ function Add_Role() {
               navigate("/role/add");
             }}
           >
-            Add Role
+            +
           </button>
         </div>
       </div>
