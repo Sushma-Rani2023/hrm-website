@@ -90,7 +90,7 @@ function Update_Client() {
       <div className="form-group row">
         <label for="description" className="col-md-3 control-label" > Optional</label>
         <div className="col-md-10" style={{maxWidth:'450px'}}>
-          <textarea className="form-control" id="description" rows={3} value={client.Optional} name="Optional" onChange={handleform}/>
+          <textarea className="form-control" id="description" maxLength='200' rows={3} value={client.Optional} name="Optional" onChange={handleform}/>
         </div>
       </div>
 

@@ -86,7 +86,7 @@ function Update_form() {
       <div className="form-group row">
         <label for="projectdescription" className="col-md-3 control-label">Project Description</label>
         <div className="col-md-10" style={{maxWidth:'450px'}}>
-          <textarea className="form-control" id="projectdescription" rows={3}  value={project.description} name="description" onChange={handleform}/>
+          <textarea className="form-control" id="projectdescription" rows={3} maxLength='500'  value={project.description} name="description" onChange={handleform}/>
         </div>
       </div>
 

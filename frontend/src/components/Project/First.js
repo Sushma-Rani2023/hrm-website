@@ -1,19 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "./Header";
+import Header from "../project page/Header";
 import axios from "../../axios";
 function Add() {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
   const getAds = async () => {
     const res = await axios.get('/project/description')
+    console.log(res.data.projectData)
     setData(res.data.projectData)
-   
   }
 
+  
   useEffect(() => {
     getAds()
   }, [])
+
+
 
   function Delete (editId){
     axios.delete(`/project/deleteproject/${editId}`)
@@ -26,6 +29,8 @@ function Add() {
 
     
 };
+
+console.log('data',data)
   
   return (
     <div>
@@ -48,15 +53,10 @@ function Add() {
         </div>
       </div>
       <div className="col-md-9" style={{width:'100%',marginTop:'45px'}}>
-  <table className="table table-hover">
+  <table className="table table-hover" >
     <thead>
       <tr>
         <th>Project Name</th>
-        <th>Project Code</th>
-        <th>Project Manager</th>
-        <th>Project StartDate</th>
-        <th>Project Status</th>
-        <th>Project Description</th>
         <th>Project Action</th>
       </tr>
     </thead>
@@ -64,17 +64,15 @@ function Add() {
     {
       data.map((data,index) => {
          return (<tr key={index}>
-        <td>{data.Projectname}</td>
-        <td>{data.Projectcode}</td>
-        <td>{data.Projectmanager}</td>
-        <td>{data.ProjectStartDate}</td>
-        <td>{data.Projectstatus}</td>
-        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.description}</td>
-        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
+        <td><Link to="/project1/view" state={{ data: data }}>
+  {data.Projectname}
+</Link></td>
+        <td> <button className="btn btn-outline-secondary" variant="tertiary" size="xs" onClick={() => {
               navigate("/project/update",{state:{EditId:data._id,data:data}});
             }} >Edit</button>
-        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
+        <button className="btn btn-outline-secondary" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
+
  
       }
       )

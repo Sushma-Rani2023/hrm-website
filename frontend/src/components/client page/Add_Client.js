@@ -71,10 +71,10 @@ function Add_Client() {
         <td>{data.Currencyselector}</td>
         <td>{data.Billing}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
-        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
+        <td> <button className="btn btn-outline-secondary" size="xs" onClick={() => {
               navigate("/Client/update",{state:{data:data}});
             }} >Edit</button>
-        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
+        <button className="btn btn-outline-secondary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
  
       }

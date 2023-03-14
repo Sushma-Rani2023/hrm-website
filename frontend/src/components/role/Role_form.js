@@ -55,7 +55,7 @@ function Client_form() {
       <div className="form-group row ">
        <label for="rate" className="col-md-3 control-label" >Rate per Hour</label>
        <div className="col-md-3">
-         <input className="form-control" id="rate" name="Optional"  onChange={handleform} />
+         <input type={Number} className="form-control" id="rate" name="Optional"  onChange={handleform} />
        </div>
      </div>
 
