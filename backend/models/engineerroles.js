@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const EngRoleSchema = new mongoose.Schema({
     Name:String,
     Description:String,
-    Optional:String,
+    Optional:Number,
     
 })
 
