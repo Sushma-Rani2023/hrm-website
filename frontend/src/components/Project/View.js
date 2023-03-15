@@ -19,11 +19,11 @@ function View() {
       <Header />
 
       <div>
-        <h3>
+        <h6>
           <Link to={"/"}>{data.Projectname}</Link>{" "}
-        </h3>
+        </h6>
       </div>
-      <div  style={{marginTop:'20px',backgroundColor: "#f8f9fa" , height:'100px'}}>
+      <div  style={{marginTop:'20px',backgroundColor: "#f8f9fa" ,maxHeight:"200px"}}>
       <div
         style={{
           display: "flex",
@@ -32,27 +32,27 @@ function View() {
         }}
       >
         <div  style={{ marginTop: "15px" }}>
-          <p><h6  style={{ color: "black" }}> Code </h6>
+          <p><h8  style={{ color: "black" }}> Code </h8>
           </p>
           <p>{data.Projectcode}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
             {" "}
-            <h6 style={{ color: "black" }}> Status </h6>
+            <h8 style={{ color: "black" }}> Status </h8>
           </p>
           <p>{data.Projectstatus}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
             {" "}
-            <h6 style={{ color: "black" }}>Manager</h6>
+            <h8 style={{ color: "black" }}>Manager</h8>
           </p>
           <p>{data.Projectmanager}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
-            <h6 style={{ color: "black" }}>Start Date</h6>
+            <h8 style={{ color: "black" }}>Start Date</h8>
           </p>
           <p>{data.ProjectStartDate}</p>
         </div>
@@ -64,7 +64,7 @@ function View() {
           }}
         >
           <p>
-            <h6 style={{ color: "black" }}> Description </h6>
+            <h8 style={{ color: "black" }}> Description </h8>
           </p>
           <p>{data.description}</p>
         </div>

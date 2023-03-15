@@ -1,5 +1,4 @@
 import {useNavigate} from 'react-router-dom'
-import Header from '../project page/Header'
 import {React , useState} from 'react' 
 
 import axios from '../../axios'
@@ -29,8 +28,6 @@ function Client_form() {
 
     return (
         <div>
-
-        <Header/>
         <div className="row main-row_header" style={{fontSize:'1.5rem'}}>
      <p className="col-md-12">Details of new Role</p>
    </div>
@@ -55,7 +52,7 @@ function Client_form() {
       <div className="form-group row ">
        <label for="rate" className="col-md-3 control-label" >Rate per Hour</label>
        <div className="col-md-3">
-         <input type={Number} className="form-control" id="rate" name="Optional"  onChange={handleform} />
+         <input type="number" className="form-control" id="rate" name="Optional"  onChange={handleform} />
        </div>
      </div>
 
