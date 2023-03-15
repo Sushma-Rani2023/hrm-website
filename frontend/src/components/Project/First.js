@@ -71,10 +71,10 @@ console.log('data',data)
     {
       data.map((data,index) => {
          return (<tr key={index}>
-        <td><Link to="/project1/view" state={{ data: data }} style={{textDecoration:"none"}}>
+        <td><Link to="/project/view" state={{ data: data }} style={{textDecoration:"none"}}>
           <h4>{data.Projectname}</h4>
           </Link></td>
-        <td> <button className="btn btn-outline-secondary" variant="tertiary" size="xs" onClick={() => {
+        <td> <div onClick={() => {
               navigate("/project/update",{state:{EditId:data._id,data:data}});
             }}> <i style={{width:"80px",height:'40px'}} className="fa-solid fa-pencil"/> 
             
