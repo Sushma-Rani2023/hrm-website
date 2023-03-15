@@ -33,7 +33,7 @@ function App() {
         <Route path="/role/add" element={<Role_form/>}></Route>
         <Route path="/role/update" element={<Update_role/>}></Route>
         <Route path="/" element={<First/>}></Route>
-        <Route path="/project1/view" element={<View/>}></Route>
+        <Route path="/project/view" element={<View/>}></Route>
         
 
  

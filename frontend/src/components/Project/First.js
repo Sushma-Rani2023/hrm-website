@@ -2,6 +2,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../project page/Header";
 import axios from "../../axios";
+import 'font-awesome/css/font-awesome.min.css';
+import {  } from '@fortawesome/fontawesome-svg-core'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+
+
+
 function Add() {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
@@ -64,13 +70,16 @@ console.log('data',data)
     {
       data.map((data,index) => {
          return (<tr key={index}>
-        <td><Link to="/project1/view" state={{ data: data }}>
+        <td><Link to="/project/view" state={{ data: data }}>
   {data.Projectname}
 </Link></td>
-        <td> <button className="btn btn-outline-secondary" variant="tertiary" size="xs" onClick={() => {
+        <td><div  onClick={() => {
               navigate("/project/update",{state:{EditId:data._id,data:data}});
-            }} >Edit</button>
-        <button className="btn btn-outline-secondary" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
+            }}> <i style={{width:"80px",height:'40px'}} className="fa-solid fa-pencil"/> 
+            
+           
+         <img style={{ maxHeight:"40px",maxWidth:'40px' , marginLeft:"20px"}} onClick={()=>Delete(data._id)} src="/delete.jpg" alt="Del"/> </div> </td>
+        
         </tr>)
 
  

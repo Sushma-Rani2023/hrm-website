@@ -19,6 +19,7 @@ function View() {
       <Header />
 
       <div>
+
         <h6>
           <Link to={"/"}>{data.Projectname}</Link>{" "}
         </h6>
@@ -83,12 +84,24 @@ function View() {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
-    <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div className="collapse navbar-collapse" id="navbarNavAltM <>arkup">
       <div className="navbar-nav">
       <button  className="btn btn-outline-primary" onClick={()=>{setTask((prev) => !prev) ; setRole(false) ; setTeam(false)} }>Task</button>
       <button style={{marginLeft:'10px'}} className="btn btn-outline-primary" onClick={()=>{setTeam((prev) => !prev); setRole(false);setTask(false)} }>Team Member</button>
         <button style={{marginLeft:'10px'}} className="btn btn-outline-primary" onClick={()=>{setRole((prev) => !prev); setTeam(false); setTask(false)}}>Role</button>
-        
+        {/* <div className="dropdown">
+        <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Dropdown Button
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+</div> */}
       </div>
     </div>
   </div>
