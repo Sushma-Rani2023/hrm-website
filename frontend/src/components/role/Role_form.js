@@ -21,7 +21,7 @@ function Client_form() {
    axios.post('engineer/createengineer',role)
    .then( (response) => {
       console.log('creating ',role)
-      navigate("/role")
+      navigate("/project/view" ,{state:{data:role}})
    })
   }
   
