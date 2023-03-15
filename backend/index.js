@@ -7,6 +7,7 @@ const bodyparser = require('body-parser');
 const Router = require('./routes/route');
 const Router1 = require('./routes/Clientroutes');
 const Router2 =require('./routes/engineer');
+const Router4 = require('./routes/Taskroutes');
 //const { default: App } = require('../frontend/src/App');
 
 
@@ -26,6 +27,8 @@ app.use('/project',Router);
 app.use('/Client',Router1);
 
 app.use('/engineer', Router2);
+
+app.use('/task',Router4);
 
 
 
