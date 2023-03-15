@@ -21,7 +21,7 @@ function View() {
       <div>
 
         <h6>
-          <Link to={"/"}>{data.Projectname}</Link>{" "}
+          <Link to={"/"} style={{textDecoration:"none"}}><h2 style={{color:"#1464d4"}}>{data.Projectname}</h2></Link>{" "}
         </h6>
       </div>
       <div  style={{marginTop:'20px',backgroundColor: "#f8f9fa" ,maxHeight:"200px"}}>
@@ -86,22 +86,10 @@ function View() {
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltM <>arkup">
       <div className="navbar-nav">
-      <button  className="btn btn-outline-primary" onClick={()=>{setTask((prev) => !prev) ; setRole(false) ; setTeam(false)} }>Task</button>
-      <button style={{marginLeft:'10px'}} className="btn btn-outline-primary" onClick={()=>{setTeam((prev) => !prev); setRole(false);setTask(false)} }>Team Member</button>
-        <button style={{marginLeft:'10px'}} className="btn btn-outline-primary" onClick={()=>{setRole((prev) => !prev); setTeam(false); setTask(false)}}>Role</button>
-        {/* <div className="dropdown">
-        <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Dropdown Button
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-</div> */}
+      <button  className="btn btn-outline-success" onClick={()=>{setTask((prev) => !prev) ; setRole(false) ; setTeam(false)} }>Task</button>
+      <button style={{marginLeft:'10px'}} className="btn btn-outline-success" onClick={()=>{setTeam((prev) => !prev); setRole(false);setTask(false)} }>Team Member</button>
+        <button style={{marginLeft:'10px'}} className="btn btn-outline-success" onClick={()=>{setRole((prev) => !prev); setTeam(false); setTask(false)}}>Role</button>
+        
       </div>
     </div>
   </div>

@@ -36,10 +36,11 @@ function Add_Role() {
         <div className="col-md-3 col-md-offset-6 pull-right-12" style={{display:'right'}}>
           <button
             type="button"
-            className="btn btn-outline-primary"
+            className="btn btn-outline-success"
             onClick={() => {
               navigate("/role/add");
             }}
+            style={{marginLeft:"50vw", width:"100px"}}
           >
             +
           </button>
