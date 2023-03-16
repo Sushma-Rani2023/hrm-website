@@ -46,7 +46,7 @@ function Client_form(props) {
     <form className="form-horizontal" method="POST"  id="add_new_user_form" onSubmit={handlesubmit}>
      
       <div className="form-group row ">
-        <label for="rolename" className="col-md-3 control-label" >Name</label>
+        <label for="rolename" className="col-md-3 control-label" >Name :</label>
         <div className="col-md-3">
           <input className="form-control" id="rolename" name="Name" onChange={handleform} required />
         </div>
@@ -54,7 +54,7 @@ function Client_form(props) {
 
 
       <div className="form-group row ">
-       <label for="rate" className="col-md-3 control-label" >Rate per Hour</label>
+       <label for="rate" className="col-md-3 control-label" >Rate per Hour :</label>
        <div className="col-md-3">
          <input type="number" className="form-control" id="rate" name="Optional"  onChange={handleform} />
        </div>
@@ -62,7 +62,7 @@ function Client_form(props) {
 
 
       <div className="form-group row">
-        <label for="description" className="col-md-3 control-label" >Description</label>
+        <label for="description" className="col-md-3 control-label" >Description :</label>
         <div className="col-md-10" style={{maxWidth:'450px'}}>
           <textarea className="form-control" id="description" rows={3} maxLength="150"  name="Description" onChange={handleform} required/>
         </div>
