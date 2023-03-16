@@ -19,6 +19,8 @@ function Client_form() {
   
   }
 
+  
+
   const handlesubmit = async (e) => {
    e.preventDefault();
    axios.post('/client/info',client)

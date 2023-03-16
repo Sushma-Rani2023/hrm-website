@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "../project page/Header";
-import axios from "../../axios";
+import Popup from "../Popup";
+import Role_form from './Role_form'
 
-function Add_Role(props) {
+import axios from "../../axios";
+import { faGaugeHigh } from "@fortawesome/free-solid-svg-icons";
+function Add_Role() {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
-  const [showPopup, setShowPopup] = useState(false);
-  console.log('adddd_roleeeeee',props)
-
   const getAds = async () => {
     const res = await axios.get('/engineer/engineerinfo')
     setData(res.data)
@@ -26,13 +25,23 @@ function Add_Role(props) {
         });
     const updated_data=data.filter((item)=>item._id!==editId)
     setData(updated_data)
-    setShowPopup(!showPopup);
 
     
 };
+
+const [modal, setModal] = useState(false);
+const toggle = () => setModal(!modal);
+
+
+  
   
   return (
     <div>
+    
+      
+
+    {modal && <Popup toggle={toggle}><Role_form toggle={toggle} getAds={getAds}/></Popup>}
+    
 
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
@@ -43,7 +52,7 @@ function Add_Role(props) {
             type="button"
             className="btn btn-outline-success"
             onClick={() => {
-              navigate("/role/add",{state:{data:props.data}});
+              setModal(true)
             }}
             style={{marginLeft:"50vw", width:"100px"}}
           >
@@ -72,7 +81,7 @@ function Add_Role(props) {
         <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
               navigate("/role/update",{state:{data:data}});
             }} >Edit</button>
-        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>{Delete(data._id); } }  >Del</button></td>
+        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
  
       }
@@ -80,10 +89,6 @@ function Add_Role(props) {
     } 
     </tbody>
   </table>
-  {/* {
-    showPopup &&
-    <Popup {showPopup:showPopup}/>
-  } */}
 </div>
     </div>
   );

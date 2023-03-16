@@ -33,7 +33,7 @@ function View() {
         }}
       >
         <div  style={{ marginTop: "15px" }}>
-          <p><h8  style={{ color: "black" }}> Project Code </h8>
+          <p><h8  style={{ color: "black" }}> Code </h8>
           </p>
           <p>{data.Projectcode}</p>
         </div>
@@ -53,7 +53,7 @@ function View() {
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
-            <h8 style={{ color: "black" }}> Start Date</h8>
+            <h8 style={{ color: "black" }}>Start Date</h8>
           </p>
           <p>{data.ProjectStartDate}</p>
         </div>
@@ -86,7 +86,11 @@ function View() {
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltM <>arkup">
       <div className="navbar-nav">
+      <div>
+      
       <button  className="btn btn-outline-success" onClick={()=>{setTask((prev) => !prev) ; setRole(false) ; setTeam(false)} }>Task</button>
+     
+      </div>
       <button style={{marginLeft:'10px'}} className="btn btn-outline-success" onClick={()=>{setTeam((prev) => !prev); setRole(false);setTask(false)} }>Team Member</button>
         <button style={{marginLeft:'10px'}} className="btn btn-outline-success" onClick={()=>{setRole((prev) => !prev); setTeam(false); setTask(false)}}>Role</button>
         

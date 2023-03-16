@@ -3,7 +3,7 @@ import {React , useState} from 'react'
 
 import axios from '../../axios'
 
-function Client_form() {
+function Client_form(props) {
   const location=useLocation()
   const navigate= useNavigate();
 
@@ -21,8 +21,11 @@ function Client_form() {
    e.preventDefault();
    axios.post('engineer/createengineer',role)
    .then( (response) => {
-      console.log('creating ',role)
-      navigate("/project/view" ,{state:{data:location.state.data}})
+      //console.log('creating ',role)
+      props.toggle();
+      // navigate({state:{data:location.state.data}})
+      props.getAds()
+
    })
   }
   
