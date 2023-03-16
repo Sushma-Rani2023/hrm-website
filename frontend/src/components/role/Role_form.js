@@ -22,7 +22,10 @@ function Client_form(props) {
    axios.post('engineer/createengineer',role)
    .then( (response) => {
       //console.log('creating ',role)
-      navigate({state:{data:location.state.data}})
+      props.toggle();
+      // navigate({state:{data:location.state.data}})
+      props.getAds()
+
    })
   }
   
@@ -69,7 +72,7 @@ function Client_form(props) {
 
       <div className="form-group row">
         <div className="col-md-offset-3 col-md-3">
-          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" onClick={props.toggle}>Add new Role </button>
+          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Add new Role </button>
         </div>
       </div>
     </form>

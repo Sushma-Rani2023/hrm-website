@@ -32,6 +32,7 @@ function Add_Role() {
 const [modal, setModal] = useState(false);
 const toggle = () => setModal(!modal);
 
+
   
   
   return (
@@ -39,7 +40,7 @@ const toggle = () => setModal(!modal);
     
       
 
-    {modal && <Popup toggle={toggle}><Role_form toggle={toggle}/></Popup>}
+    {modal && <Popup toggle={toggle}><Role_form toggle={toggle} getAds={getAds}/></Popup>}
     
 
       <div className="row form_container">
