@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "../project page/Header";
-import axios from "../../axios";
+import Popup from "../Popup";
+import Role_form from './Role_form'
 
-function Add_Role(props) {
+import axios from "../../axios";
+import { faGaugeHigh } from "@fortawesome/free-solid-svg-icons";
+function Add_Role() {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
-  const [showPopup, setShowPopup] = useState(false);
-  console.log('adddd_roleeeeee',props)
-
   const getAds = async () => {
     const res = await axios.get('/engineer/engineerinfo')
     setData(res.data)
@@ -26,17 +25,22 @@ function Add_Role(props) {
         });
     const updated_data=data.filter((item)=>item._id!==editId)
     setData(updated_data)
-    setShowPopup(!showPopup);
 
     
 };
 
-function myFunction() {
-  alert("Deleted Successfully");
-}
+const [modal, setModal] = useState(false);
+const toggle = () => setModal(!modal);
+
+  
   
   return (
     <div>
+    
+      
+
+    {modal && <Popup toggle={toggle}><Role_form toggle={toggle}/></Popup>}
+    
 
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
@@ -47,7 +51,7 @@ function myFunction() {
             type="button"
             className="btn btn-outline-success"
             onClick={() => {
-              navigate("/role/add",{state:{data:props.data}});
+              setModal(true)
             }}
             style={{marginLeft:"50vw", width:"100px"}}
           >
@@ -73,10 +77,10 @@ function myFunction() {
         <td>{data.Name}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
-        <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
+        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
               navigate("/role/update",{state:{data:data}});
             }} >Edit</button>
-        <button className="btn btn-outline-danger" size="xs" onClick={()=>{Delete(data._id); myFunction()}  }  >Del</button></td>
+        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
  
       }
@@ -84,10 +88,6 @@ function myFunction() {
     } 
     </tbody>
   </table>
-  {/* {
-    showPopup &&
-    <Popup {showPopup:showPopup}/>
-  } */}
 </div>
     </div>
   );
