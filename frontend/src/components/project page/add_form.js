@@ -82,13 +82,18 @@ function Add_form() {
         </div>
       </div>
 
-
       <div className="form-group row">
-        <label for="projectstatus" className="col-md-3 control-label">Project Status</label>
-        <div className="col-md-3">
-          <input className="form-control" id="projectstatus" name="Projectstatus" onChange={handleform} required />
-        </div>
-      </div>
+        <label for="billing" className="col-md-3 control-label">Project Status </label>
+        <select  className='form-select col-md-3'  style={{maxWidth:'255px',marginLeft:'12px'}} name="Billing" onChange={handleform} >
+        <option value="" selected>Choose Here</option>
+        <option value="Not started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+
+        </select>
+
+       </div>
+
  
       <div className="form-group row">
         <label for="projectdescription" className="col-md-3 control-label" >Project Description</label>

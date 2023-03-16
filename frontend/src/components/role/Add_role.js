@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../project page/Header";
-import Popup from "../project page/Popup";
 import axios from "../../axios";
+
 function Add_Role(props) {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
@@ -80,10 +80,10 @@ function Add_Role(props) {
     } 
     </tbody>
   </table>
-  {
+  {/* {
     showPopup &&
-    <Popup/>
-  }
+    <Popup {showPopup:showPopup}/>
+  } */}
 </div>
     </div>
   );
