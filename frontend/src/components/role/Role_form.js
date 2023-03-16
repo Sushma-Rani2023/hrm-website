@@ -1,9 +1,10 @@
-import {useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
 
 import axios from '../../axios'
 
 function Client_form() {
+  const location=useLocation()
   const navigate= useNavigate();
 
   const [role, set] = useState({});
@@ -21,7 +22,7 @@ function Client_form() {
    axios.post('engineer/createengineer',role)
    .then( (response) => {
       console.log('creating ',role)
-      navigate("/project/view" ,{state:{data:role}})
+      navigate("/project/view" ,{state:{data:location.state.data}})
    })
   }
   

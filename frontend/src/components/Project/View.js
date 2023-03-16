@@ -98,7 +98,7 @@ function View() {
     </div>
     {role &&
         <div style={{marginLeft:"20px"}}>
-            <Add_Role/>
+            <Add_Role data={data} />
         </div>
     
     }
