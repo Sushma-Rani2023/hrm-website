@@ -86,7 +86,10 @@ function View() {
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltM <>arkup">
       <div className="navbar-nav">
+      <div>
       <button  className="btn btn-outline-success" onClick={()=>{setTask((prev) => !prev) ; setRole(false) ; setTeam(false)} }>Task</button>
+     
+      </div>
       <button style={{marginLeft:'10px'}} className="btn btn-outline-success" onClick={()=>{setTeam((prev) => !prev); setRole(false);setTask(false)} }>Team Member</button>
         <button style={{marginLeft:'10px'}} className="btn btn-outline-success" onClick={()=>{setRole((prev) => !prev); setTeam(false); setTask(false)}}>Role</button>
         

@@ -30,6 +30,10 @@ function Add_Role(props) {
 
     
 };
+
+function myFunction() {
+  alert("Deleted Successfully");
+}
   
   return (
     <div>
@@ -69,10 +73,10 @@ function Add_Role(props) {
         <td>{data.Name}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
-        <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
+        <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
               navigate("/role/update",{state:{data:data}});
             }} >Edit</button>
-        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>{Delete(data._id); } }  >Del</button></td>
+        <button className="btn btn-outline-danger" size="xs" onClick={()=>{Delete(data._id); myFunction()}  }  >Del</button></td>
         </tr>)
  
       }
