@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../project page/Header";
+import Popup from "../project page/Popup";
 import axios from "../../axios";
-function Add_Role() {
+function Add_Role(props) {
   const navigate = useNavigate();
   const [data , setData] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  console.log('adddd_roleeeeee',props)
+
   const getAds = async () => {
     const res = await axios.get('/engineer/engineerinfo')
     setData(res.data)
@@ -22,6 +26,7 @@ function Add_Role() {
         });
     const updated_data=data.filter((item)=>item._id!==editId)
     setData(updated_data)
+    setShowPopup(!showPopup);
 
     
 };
@@ -38,7 +43,7 @@ function Add_Role() {
             type="button"
             className="btn btn-outline-success"
             onClick={() => {
-              navigate("/role/add");
+              navigate("/role/add",{state:{data:props.data}});
             }}
             style={{marginLeft:"50vw", width:"100px"}}
           >
@@ -67,7 +72,7 @@ function Add_Role() {
         <td> <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={() => {
               navigate("/role/update",{state:{data:data}});
             }} >Edit</button>
-        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
+        <button className="edit-delete-buttons" variant="tertiary" size="xs" onClick={()=>{Delete(data._id); } }  >Del</button></td>
         </tr>)
  
       }
@@ -75,6 +80,10 @@ function Add_Role() {
     } 
     </tbody>
   </table>
+  {
+    showPopup &&
+    <Popup/>
+  }
 </div>
     </div>
   );
