@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Popup from "../Popup";
 import Role_form from './Role_form'
+import { useLocation } from  "react"
 
 import axios from "../../axios";
-import { faGaugeHigh } from "@fortawesome/free-solid-svg-icons";
 function Add_Role() {
   const navigate = useNavigate();
+  // const location = useLocation();
+  // console.log(location.state)
   const [data , setData] = useState([]);
   const getAds = async () => {
     const res = await axios.get('/engineer/engineerinfo')

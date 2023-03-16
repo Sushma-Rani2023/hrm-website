@@ -3,16 +3,20 @@ import { useEffect, useState } from "react";
 import Header from "../project page/Header";
 import axios from "../../axios";
 import Add_Role from "../role/Add_role";
-import Add_Client from "../client page/Add_Client";
+
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import classnames from 'classnames';
 
 function View() {
   const location = useLocation();
   //const [data, setData]=useState(location.state.data);
   const data = location.state.data;
   console.log(data);
-  const [role,setRole]=useState(false)
-  const [task,setTask]=useState(false)
-  const [team,setTeam]=useState(false)
+  const [activeTab, setActiveTab] = useState('1');
+
+const toggle = tab => {
+  if(activeTab !== tab) setActiveTab(tab);
+}
   return (
     <>
     <div>
@@ -72,47 +76,39 @@ function View() {
       </div>
 
       <div style={{
-        marginLeft:"10px",
-          display: "flex",
-          whiteSpace:'100px'
+        marginLeft:"50px",
+
          }}>
       </div>
     </div>
-    <div className="header ">
-<nav className="navbar navbar-expand-lg bg-body-tertiary">
-  <div className="container-fluid">
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarNavAltM <>arkup">
-      <div className="navbar-nav">
-      <div>
-      
-      <button  className="btn btn-outline-success" onClick={()=>{setTask((prev) => !prev) ; setRole(false) ; setTeam(false)} }>Task</button>
-     
-      </div>
-      <button style={{marginLeft:'10px'}} className="btn btn-outline-success" onClick={()=>{setTeam((prev) => !prev); setRole(false);setTask(false)} }>Team Member</button>
-        <button style={{marginLeft:'10px'}} className="btn btn-outline-success" onClick={()=>{setRole((prev) => !prev); setTeam(false); setTask(false)}}>Role</button>
-        
-      </div>
+    <Nav style={{marginTop:'40px'}} tabs>
+  <NavItem>
+    <NavLink
+      className={classnames({ active: activeTab === '1' })}
+      onClick={() => { toggle('1'); }}
+    >
+      Role
+    </NavLink>
+  </NavItem>
+  <NavItem>
+    <NavLink
+      className={classnames({ active: activeTab === '2' })}
+      onClick={() => { toggle('2'); }}
+    >
+      Tab 2
+    </NavLink>
+  </NavItem>
+</Nav>
+<TabContent style={{marginTop:'30px'}} activeTab={activeTab}>
+  <TabPane tabId="1">
+    <Add_Role project_id={data._id }/>
+  </TabPane>
+  <TabPane tabId="2">
+    <p>Tab 2 content goes here.</p>
+  </TabPane>
+</TabContent>
     </div>
-  </div>
-</nav> 
-</div>
-    </div>
-    {role &&
-        <div style={{marginLeft:"20px"}}>
-            <Add_Role data={data} />
-        </div>
     
-    }
-
-    {team &&
-        <div style={{marginLeft:"20px"}}>
-            <Add_Client/>
-        </div>
-    
-    }
     </>
   );
 }
