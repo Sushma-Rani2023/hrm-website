@@ -9,8 +9,8 @@ RouterT.post('/createTeam', createMember);
 
 RouterT.get('/info', getTeam);
 
-RouterT.put('/updateTeam', updateTeam);
+RouterT.put('/updateTeam/:id', updateTeam);
 
-RouterT.delete('/deleted', deleteTeammember);
+RouterT.delete('/deleted/:id', deleteTeammember);
 
 module.exports = RouterT;

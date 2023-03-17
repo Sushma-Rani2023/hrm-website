@@ -24,10 +24,11 @@ const engineercreate = (req,res) => {
 
 
 const getengineerinfo = (req,res) => {
-    const { project_id } = req.params.project_id;
+    const project_id  = req.params.project_id;
+    console.log(project_id);
     if(project_id){
         
-        engineerroles.find(project_id)
+        engineerroles.find({project_id})
         .then(data => {
             if(!data){
                 res.status(404).send({message:'Engineer not found with id' + id})
