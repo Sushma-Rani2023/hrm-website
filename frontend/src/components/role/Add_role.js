@@ -2,13 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Popup from "../Popup";
 import Role_form from './Role_form'
-import { useLocation } from  "react"
+import { useLocation } from  "react";
+
 
 import axios from "../../axios";
-function Add_Role() {
+function Add_Role(props) {
   const navigate = useNavigate();
   // const location = useLocation();
-  // console.log(location.state)
+   console.log(props)
   const [data , setData] = useState([]);
   const getAds = async () => {
     const res = await axios.get('/engineer/engineerinfo')
@@ -42,7 +43,7 @@ const toggle = () => setModal(!modal);
     
       
 
-    {modal && <Popup toggle={toggle}><Role_form toggle={toggle} getAds={getAds}/></Popup>}
+    {modal && <Popup toggle={toggle}><Role_form project_id={props.project_id } toggle={toggle} getAds={getAds}/></Popup>}
     
 
       <div className="row form_container">

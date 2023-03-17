@@ -3,11 +3,11 @@ import {React , useState} from 'react'
 
 import axios from '../../axios'
 
-function Client_form(props) {
+function Role_form(props) {
   const location=useLocation()
   const navigate= useNavigate();
 
-  const [role, set] = useState({});
+  const [role, set] = useState({project_id:props.project_id});
   const handleform = (e) => {
     
      set({
@@ -15,6 +15,7 @@ function Client_form(props) {
       [e.target.name] : e.target.value 
      })
   
+     console.log(role)
   }
 
   const handlesubmit = async (e) => {
@@ -23,6 +24,7 @@ function Client_form(props) {
    .then( (response) => {
       //console.log('creating ',role)
       props.toggle();
+      console.log(role)
       // navigate({state:{data:location.state.data}})
       props.getAds()
 
@@ -88,4 +90,4 @@ function Client_form(props) {
     )
 }
 
-export default Client_form
+export default Role_form
