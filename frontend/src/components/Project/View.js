@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "../project page/Header";
 import axios from "../../axios";
 import Add_Role from "../role/Add_role";
-
+import Add_team from "../teams/Add_team";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
 
@@ -95,7 +95,7 @@ const toggle = tab => {
       className={classnames({ active: activeTab === '2' })}
       onClick={() => { toggle('2'); }}
     >
-      Tab 2
+     Team Members
     </NavLink>
   </NavItem>
 </Nav>
@@ -104,7 +104,8 @@ const toggle = tab => {
     <Add_Role project_id={data._id }/>
   </TabPane>
   <TabPane tabId="2">
-    <p>Tab 2 content goes here.</p>
+  
+    <Add_team ></Add_team>
   </TabPane>
 </TabContent>
     </div>

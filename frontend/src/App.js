@@ -14,6 +14,8 @@ import Update_role from "./components/role/Update_role"
 
 import First from "./components/Project/First"
 import View from "./components/Project/View"
+import Add_team from "./components/teams/Add_team";
+import Team_form from "./components/teams/Team_form";
 
 //import { render } from "@testing-library/react";
 function App() {
@@ -34,6 +36,7 @@ function App() {
         <Route path="/role/update" element={<Update_role/>}></Route>
         <Route path="/" element={<First/>}></Route>
         <Route path="/project/view" element={<View/>}></Route>
+        <Route path="/project/team/form" element={<Team_form/>}></Route>
         
 
  
