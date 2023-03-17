@@ -14,6 +14,7 @@ function Add_Role(props) {
   const getAds = async () => {
     const res = await axios.get('/engineer/engineerinfo')
     setData(res.data)
+    console.log('rolessss',data)
   }
 
   useEffect(() => {

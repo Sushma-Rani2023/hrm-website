@@ -10,7 +10,8 @@ function Add_team() {
   const [data , setData] = useState([]);
   const getAds = async () => {
     const res = await axios.get('/Team/info')
-    setData(res.data)
+    console.log('reeeeeeeeeeeeeeee',res)
+    setData(res.data.Memberdata)
   }
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function Add_team() {
 const [modal, setModal] = useState(false);
 const toggle = () => setModal(!modal);
 
-
+console.log('daataaaaa',data)
   
   
   return (
