@@ -55,7 +55,7 @@ function Role_form(props) {
       </div>
 
 
-      <div className="form-group row ">
+      <div className="form-group row " >
        <label for="rate" className="col-md-3 control-label" >Rate per Hour :</label>
        <div className="col-md-3">
          <input type="number" className="form-control" id="rate" name="Optional"  onChange={handleform} />
