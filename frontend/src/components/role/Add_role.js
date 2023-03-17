@@ -41,12 +41,8 @@ const toggle = () => setModal(!modal);
   
   return (
     <div>
-    
-      
-
     {modal && <Popup toggle={toggle}><Role_form project_id={props.project_id } toggle={toggle} getAds={getAds}/></Popup>}
     
-
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
           Roles
