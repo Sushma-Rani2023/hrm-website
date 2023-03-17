@@ -5,7 +5,8 @@ const engineercreate = (req,res) => {
   const Engineer = new engineerroles({
     Name:req.body.Name,
     Description:req.body.Description,
-    Optional:req.body.Optional
+    Optional:req.body.Optional,
+    project_id: req.body.project_id
   })
   
   Engineer.save()
@@ -23,9 +24,10 @@ const engineercreate = (req,res) => {
 
 
 const getengineerinfo = (req,res) => {
-    if(req.query.id){
-        const id = req.query.id;
-        engineerroles.findById(id)
+    const { project_id } = req.params.project_id;
+    if(project_id){
+        
+        engineerroles.find(project_id)
         .then(data => {
             if(!data){
                 res.status(404).send({message:'Engineer not found with id' + id})

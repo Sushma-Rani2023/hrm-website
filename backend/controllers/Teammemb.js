@@ -26,7 +26,7 @@ const getTeam = (req, res) => {
     if(req.query.id){
       const id = req.query.id;
       Member.findById(id)
-      .then(result => {
+      .then((result) => {
         if(!result){
             res.status(404).send({
               message : "Data not found at this" + id 
@@ -45,6 +45,20 @@ const getTeam = (req, res) => {
             message: "Error Occured in finding data"
         })
       })
+    }
+    else{
+        Member.find()
+        .then(result => {
+            res.status(200).send({
+                Memberdata : result,
+            })
+        })
+        .catch(err => {
+            res.status(500).send({
+                error : err,
+                message : "Error Occurred"
+            })
+        })
     }
 }
 
