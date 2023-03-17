@@ -20,7 +20,7 @@ const Createproject = (req,res,next) => {
      })
 
      .catch(err => {
-        console.log(err);
+        
         res.status(500).json({
             error:err
         })
@@ -53,7 +53,7 @@ const Projectfindbycode = (req,res) => {
             });
         })
         .catch(err =>{
-            console.log(err);
+           
             res.status(500).json({
                 error:err
             })

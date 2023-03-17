@@ -26,8 +26,7 @@ const createMember = (req,res) => {
 const getTeam = (req, res) => {
     const project_id  = req.params.project_id;
     if(project_id){
-      
-      Member.find(project_id)
+      Member.find({project_id})
       .then((result) => {
         if(!result){
             res.status(404).send({

@@ -9,7 +9,11 @@ const Router2 = express.Router();
 
 Router2.post('/createengineer', engineercreate);
 
+Router2.get('/eng' , getengineerinfo);
+
 Router2.get('/engineerinfo/:project_id', getengineerinfo);
+
+Router2.get('/eng' , getengineerinfo);
 
 Router2.put('/updateengineer/:id' , updateengineer);
 

@@ -25,7 +25,7 @@ const engineercreate = (req,res) => {
 
 const getengineerinfo = (req,res) => {
     const project_id  = req.params.project_id;
-    console.log(project_id);
+   
     if(project_id){
         
         engineerroles.find({project_id})
@@ -63,6 +63,7 @@ const updateengineer = async (req,res) =>{
     newengineerinfo.Name = Name|| newengineerinfo.Name;
     newengineerinfo.Description = Description|| newengineerinfo.Description;
     newengineerinfo.Optional = Optional|| newengineerinfo.Optional;
+    
 
     newengineerinfo
     .save()
