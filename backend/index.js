@@ -8,6 +8,7 @@ const Router = require('./routes/route');
 const Router1 = require('./routes/Clientroutes');
 const Router2 =require('./routes/engineer');
 const Router4 = require('./routes/Taskroutes');
+const RouterT = require('./routes/Team');
 //const { default: App } = require('../frontend/src/App');
 
 
@@ -29,6 +30,8 @@ app.use('/Client',Router1);
 app.use('/engineer', Router2);
 
 app.use('/task',Router4);
+
+app.use('/Team',RouterT);
 
 
 
