@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 
 import axios from '../../axios'
 
-function Update_role() {
+function Update_role(props) {
   const navigate= useNavigate();
   const location =useLocation();
 
@@ -30,6 +30,8 @@ function Update_role() {
              console.error('There was an error!', error);
    
     })
+    props.toggle();
+    props.getAds()
    
    }
     return (
@@ -46,12 +48,12 @@ function Update_role() {
    <div className="row" >
   <div className="col-md-12">
 
-  <form className="form-horizontal" method="POST"  id="add_new_user_form" onSubmit={handlesubmit}>
+  <form className="form-horizontal" method="POST"  onSubmit={handlesubmit}>
      
      <div className="form-group row ">
        <label for="rolename" className="col-md-3 control-label" >Name</label>
        <div className="col-md-3">
-         <input className="form-control" id="rolename" name="Name" value={role.Name}  onChange={handleform} required />
+         <input className="form-control" id="rolename" name="Name" value={role.Name}  onChange={handleform}/>
        </div>
      </div>
 

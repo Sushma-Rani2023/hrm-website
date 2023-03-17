@@ -47,8 +47,8 @@ function Role_form(props) {
 
     <form className="form-horizontal" method="POST"  id="add_new_user_form" onSubmit={handlesubmit}>
      
-      <div className="form-group row ">
-        <label for="rolename" className="col-md-3 control-label" >Name :</label>
+      <div className="form-group row-md-4">
+        <label for="rolename" className="col-md-6 control-label" >Name :</label>
         <div className="col-md-3">
           <input className="form-control" id="rolename" name="Name" onChange={handleform} required />
         </div>
