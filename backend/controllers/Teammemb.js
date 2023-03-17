@@ -6,6 +6,7 @@ const createMember = (req,res) => {
         Role:req.body.Role,
         Description:req.body.Description,
         AllocationDate:req.body.AllocationDate,
+        project_id:req.body.project_id
     })
     
     Team.save()
@@ -23,9 +24,10 @@ const createMember = (req,res) => {
 }
 
 const getTeam = (req, res) => {
-    if(req.query.id){
-      const id = req.query.id;
-      Member.findById(id)
+    const project_id  = req.params.project_id;
+    if(project_id){
+      
+      Member.find(project_id)
       .then((result) => {
         if(!result){
             res.status(404).send({

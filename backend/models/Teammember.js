@@ -15,6 +15,9 @@ const teamSchema = new mongoose.Schema({
   },
   AllocationDate:{
     type:String
+  },
+  project_id:{
+    type:String
   }
 })
 

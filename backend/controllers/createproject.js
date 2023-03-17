@@ -13,7 +13,7 @@ const Createproject = (req,res,next) => {
        })
     project.save()
     .then(result =>{
-        console.log(result)
+        
         res.status(200).json({
             newProject : result
         })
