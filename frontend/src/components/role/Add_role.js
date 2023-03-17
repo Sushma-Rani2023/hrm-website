@@ -12,7 +12,7 @@ function Add_Role(props) {
    console.log(props)
   const [data , setData] = useState([]);
   const getAds = async () => {
-    const res = await axios.get('/engineer/engineerinfo')
+    const res = await axios.get(`/engineer/engineerinfo/${props.project_id}`)
     setData(res.data)
     console.log('rolessss',data)
   }

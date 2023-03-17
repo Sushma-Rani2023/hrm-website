@@ -87,15 +87,15 @@ const toggle = tab => {
       className={classnames({ active: activeTab === '1' })}
       onClick={() => { toggle('1'); }}
     >
-      Role
+      <h5>Role</h5>
     </NavLink>
   </NavItem>
-  <NavItem>
+  <NavItem >
     <NavLink
       className={classnames({ active: activeTab === '2' })}
       onClick={() => { toggle('2'); }}
     >
-     Team Members
+    <h5>Team Members</h5>
     </NavLink>
   </NavItem>
 </Nav>

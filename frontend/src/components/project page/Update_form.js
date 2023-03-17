@@ -76,12 +76,18 @@ function Update_form() {
       </div>
 
 
+      
       <div className="form-group row">
-        <label for="projectstatus" className="col-md-3 control-label">Project Status</label>
-        <div className="col-md-3">
-          <input className="form-control" id="projectstatus" value={project.Projectstatus}name="Projectstatus" onChange={handleform}  />
-        </div>
-      </div>
+        <label for="projectstatus" className="col-md-3 control-label">Project Status </label>
+        <select  className='form-select col-md-3'  style={{maxWidth:'255px',marginLeft:'12px'}} name="Projectstatus" onChange={handleform} >
+        <option value={project.Projectstatus} selected>Choose Here</option>
+        <option value="Not started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+
+        </select>
+
+       </div>
  
       <div className="form-group row">
         <label for="projectdescription" className="col-md-3 control-label">Project Description</label>
