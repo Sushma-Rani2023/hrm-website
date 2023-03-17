@@ -12,14 +12,14 @@ const Clientinfo = (req,res) => {
        })
     Client.save()
     .then(result =>{
-        console.log(result)
+       
         res.status(200).json({
             newClient : result
         })
      })
 
      .catch(err => {
-        console.log(err);
+        
         res.status(500).json({
             error:err
         })
@@ -51,7 +51,7 @@ const Clientget = (req,res) => {
             });
         })
         .catch(err =>{
-            console.log(err);
+           
             res.status(500).json({
                 error:err
             })
