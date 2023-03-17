@@ -69,6 +69,7 @@ console.log('daataaaaa',data)
         <th>Description</th>
         <th>Role</th>
         <th>Allocation Date</th>
+        <th>Action</th>
         
       </tr>
     </thead>

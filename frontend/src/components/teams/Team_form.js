@@ -3,7 +3,7 @@ import {React , useState} from 'react'
 
 import axios from '../../axios'
 
-function Team_form() {
+function Team_form(props) {
   const location=useLocation()
   const navigate= useNavigate();
 
@@ -23,9 +23,9 @@ function Team_form() {
    axios.post('Team/createTeam',team)
    .then( (response) => {
       console.log('creating ',team)
-      //props.toggle();
+      props.toggle();
       // navigate({state:{data:location.state.data}})
-      //props.getAds()
+      props.getAds()
 
    })
   }
