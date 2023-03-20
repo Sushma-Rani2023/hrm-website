@@ -31,17 +31,19 @@ function Add_Role(props) {
 
     
 };
+const [updation,setUpdation]=useState(false)
 
 const [modal, setModal] = useState(false);
-const toggle = () => setModal(!modal);
+const toggle1 = () => setModal(!modal);
+const toggle2 =()=>setUpdation(!updation)
 
 
   
   
   return (
     <div>
-    {modal && <Popup toggle={toggle}><Role_form project_id={props.project_id } toggle={toggle} getAds={getAds}/></Popup>}
-    {modal && <Popup toggle={toggle}><Update_roles toggle={toggle} getAds={getAds}/></Popup>}
+    {modal && <Popup toggle={toggle1}><Role_form project_id={props.project_id } toggle={toggle1} getAds={getAds}/></Popup>}
+    {updation && <Popup toggle={toggle2}><Update_roles updation={updation} toggle={toggle2} getAds={getAds}/></Popup>}
     
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
@@ -53,6 +55,7 @@ const toggle = () => setModal(!modal);
             className="btn btn-outline-success"
             onClick={() => {
               setModal(true)
+             
             }}
             style={{marginLeft:"50vw", width:"100px"}}
           >
@@ -79,7 +82,8 @@ const toggle = () => setModal(!modal);
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
         <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
-              setModal(true)
+              // setModal(true)
+              setUpdation(data)
             }} >Edit</button>
         <button className="btn btn-outline-danger" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)

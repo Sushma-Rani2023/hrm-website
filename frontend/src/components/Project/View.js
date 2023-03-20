@@ -101,7 +101,7 @@ const toggle = tab => {
 </Nav>
 <TabContent style={{marginTop:'30px'}} activeTab={activeTab}>
   <TabPane tabId="1">
-    <Add_Role project_id={data._id }/>
+    <Add_Role project_id={data._id }  />
   </TabPane>
   <TabPane tabId="2">
   

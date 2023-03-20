@@ -12,7 +12,7 @@ const Popup = (props) => {
     toggle={props.toggle}
     >
       <ModalHeader>
-      Hello Done
+      
       </ModalHeader>
       <ModalBody> 
       {props.children}
