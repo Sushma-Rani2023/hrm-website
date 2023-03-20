@@ -64,17 +64,17 @@ const getTeam = (req, res) => {
 }
 
 
-const updateTeam = (req,res) => {
+const updateTeam = async (req,res) =>  {
     const {MemberName, Role, Description, AllocationDate} = req.body;
     const id = req.params.id;
-    const updatedteam = Member.findByIdAndUpdate(id);
+    const updatedteam = await Member.findByIdAndUpdate(id);
     
     updatedteam.MemberName = MemberName || updatedteam.MemberName,
     updatedteam.Role = Role || updatedteam.Role,
     updatedteam.Description = Description || updatedteam.Description,
     updatedteam.AllocationDate = AllocationDate || updatedteam.AllocationDate,
     
-    updatedteam.save()
+    await updatedteam.save()
     .then(result => {
         res.status(200).json({
             data : result,

@@ -37,7 +37,7 @@ function Update_team(props) {
    return (
     <div>
     <div className="row main-row_header" style={{fontSize:'1.5rem'}}>
- <p className="col-md-12">Update roles</p>
+ <p className="col-md-12">Update Team Member</p>
 </div>
 
 <br/>
