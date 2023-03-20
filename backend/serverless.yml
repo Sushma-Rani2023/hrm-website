@@ -1,0 +1,27 @@
+service: hrm-dev
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+  
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: "20201221"
+
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: "ANY /{proxy+}" 
+    url:
+      cors: true
+
+
+
+          
+          
