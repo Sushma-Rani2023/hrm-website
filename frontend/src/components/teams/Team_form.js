@@ -48,7 +48,7 @@ function Team_form(props) {
      
       <div className="form-group row ">
         <label for="rolename" className="col-md-3 control-label" >Name :</label>
-        <div className="col-md-3">
+        <div className="col-md-8">
           <input type="text" className="form-control" id="rolename" name="MemberName" onChange={handleform} required />
         </div>
       </div>
@@ -56,7 +56,7 @@ function Team_form(props) {
 
       <div className="form-group row">
         <label for="role" className="col-md-3 control-label" >Role</label>
-        <div className="col-md-10" style={{maxWidth:'450px'}}>
+        <div className="col-md-8" style={{maxWidth:'450px'}}>
           <input type="text" className="form-control" id="role"   name="Role" onChange={handleform}/>
         </div>
       </div>
@@ -66,14 +66,14 @@ function Team_form(props) {
 
       <div className="form-group row">
         <label for="description" className="col-md-3 control-label" >Description :</label>
-        <div className="col-md-10" style={{maxWidth:'450px'}}>
+        <div className="col-md-8" style={{maxWidth:'450px'}}>
           <textarea className="form-control" id="description" rows={3} maxLength="150"  name="Description" onChange={handleform}/>
         </div>
       </div>
 
       <div className="form-group row">
         <label for="date" className="col-md-3 control-label" >Allocation Start Date</label>
-        <div className="col-md-10" style={{maxWidth:'450px'}}>
+        <div className="col-md-8" style={{maxWidth:'450px'}}>
           <input type="date" className="form-control" id="date"   name="AllocationDate" onChange={handleform} required/>
         </div>
       </div>
@@ -82,7 +82,7 @@ function Team_form(props) {
 
       <div className="form-group row">
         <div className="col-md-offset-3 col-md-3">
-          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Add new Team Member </button>
+          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Add member  </button>
         </div>
       </div>
     </form>

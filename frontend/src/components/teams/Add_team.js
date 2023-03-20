@@ -4,6 +4,7 @@ import Popup from "../Popup";
 import Team_form from "./Team_form";
 import { useLocation } from  "react";
 import axios from "../../axios";
+import Update_team from "./Update_team";
 function Add_team() {
   const navigate = useNavigate();
   
@@ -31,7 +32,9 @@ function Add_team() {
 };
 
 const [modal, setModal] = useState(false);
-const toggle = () => setModal(!modal);
+const [updation,setUpdation]=useState(false)
+const toggle1 = () => setModal(!modal);
+const toggle2 = () => setUpdation(!updation);
 
 console.log('daataaaaa',data)
   
@@ -41,7 +44,8 @@ console.log('daataaaaa',data)
     
       
 
-    {modal && <Popup toggle={toggle}><Team_form  toggle={toggle} getAds={getAds}/></Popup>}
+    {modal && <Popup toggle={toggle1}><Team_form  toggle={toggle1} getAds={getAds}/></Popup>}
+    {updation && <Popup toggle={toggle2}><Update_team updation={updation} toggle={toggle2} getAds={getAds}/></Popup>}
     
 
       <div className="row form_container">
@@ -82,7 +86,7 @@ console.log('daataaaaa',data)
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Role}</td>
         <td>{data.AllocationDate}</td>
         <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
-              navigate("/role/update",{state:{data:data}});
+             setUpdation(data)
             }} >Edit</button>
         <button className="btn btn-outline-danger" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
