@@ -11,8 +11,8 @@ Router4.post('/createtask' , createTask);
 
 Router4.get('/taskdetails', gettask);
 
-Router4.put('/updatetask' , updatetask);
+Router4.put('/updatetask/:id' , updatetask);
 
-Router4.delete('/deletetask', deletetask);
+Router4.delete('/deletetask/:id', deletetask);
 
 module.exports = Router4;
