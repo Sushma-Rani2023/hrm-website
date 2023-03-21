@@ -75,7 +75,7 @@ function Task_form(props) {
      <div className="form-group row" >
        <label for="phase" className="control-label col-md-3" >Phase :</label>
        <div className="col-md-8">
-         <input type="string" className="form-control" id="phase" name="TaskPhase"  onChange={handleform} />
+         <input type="string" className="form-control" id="phase" name="Taskphase"  onChange={handleform} />
        </div>
      </div>
 

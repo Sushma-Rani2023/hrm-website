@@ -1,20 +1,43 @@
 import Popup from "../Popup";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "../../axios";
 import Task_form from "./Task_form";
 import { MDBCol, MDBIcon } from "mdbreact";
 
-function Add_task() {
+function Add_task()  {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
+  const [data,setData]=useState([])
 
-  function getAds() {
-    axios.get("/Team/taskdetails");
+  async function getAds()  {
+    console.log('getting')
+    const res=  await axios.get("/task/taskdetails")
+    console.log('ttttttttt',res)
+    
+   console.log('get',res.data.data)
+    setData(res.data.data)
   }
+  useEffect(() => {
+    getAds()
+  }, [])
+
+  function Delete(id) {
+
+    const res= axios.delete(`/task/deletetask/${id}`)
+    res.then(()=>console.log('Deleted Successfully'))
+    setData(data.filter((item)=> data._id !== id))
+    getAds()
+
+
+  }
+  console.log('data is',data)
   const [selected, setSelected] = useState(['Choose Here']);
   const handleSelect = (event) => {
     setSelected(event.target.value);
   };
+  
+
+
   return (
     <div
       className="row form container "
@@ -32,10 +55,10 @@ function Add_task() {
         onClick={() => setModal(true)}
   
       >
-        Add +
+        Create
       </button>
       </div>
-
+{/* 
       <div class="dropdown" style={{width:'200px'}}>
         <button
           class="btn btn-outline-primary "
@@ -97,7 +120,7 @@ function Add_task() {
           </button>
         </div>
 
-      </div>
+      </div> */}
       <MDBCol md="4">
       <div className="input-group md-form form-sm form-1 pl-0">
         <div className="input-group-prepend">
@@ -113,6 +136,44 @@ function Add_task() {
         />
       </div>
     </MDBCol>
+
+    <div  style={{width:'100%',marginTop:'45px'}}>
+  <table className="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Stage</th>
+        <th>Phase</th>
+        <th>Milestone</th>
+        <th>Billing</th>
+        <th>Duration</th>
+        <th>Assignee</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+    {
+      data.map((data,index) => {
+         return (<tr key={index}>
+        <td>{data.Taskname}</td>
+        <td>{data.Taskstage}</td>
+        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
+        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
+        <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
+              // setModal(true)
+              // setUpdation(data)
+            }} >Edit</button>
+        <button className="btn btn-outline-danger" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
+      
+        </tr>)
+ 
+      }
+      )
+    } 
+    </tbody>
+  </table>
+</div>
+
     </div>
   );
 }
