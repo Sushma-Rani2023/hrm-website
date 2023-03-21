@@ -6,7 +6,7 @@ import Add_Role from "../role/Add_role";
 import Add_team from "../teams/Add_team";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
-
+import Add_task from "../task/Add_task"
 function View() {
   const location = useLocation();
   //const [data, setData]=useState(location.state.data);
@@ -98,6 +98,14 @@ const toggle = tab => {
     <h5>Team Members</h5>
     </NavLink>
   </NavItem>
+  <NavItem >
+    <NavLink
+      className={classnames({ active: activeTab === '3' })}
+      onClick={() => { toggle('3'); }}
+    >
+    <h5>Task</h5>
+    </NavLink>
+  </NavItem>
 </Nav>
 <TabContent style={{marginTop:'30px'}} activeTab={activeTab}>
   <TabPane tabId="1">
@@ -106,6 +114,9 @@ const toggle = tab => {
   <TabPane tabId="2">
   
     <Add_team ></Add_team>
+  </TabPane>
+  <TabPane tabId="3">
+    <Add_task/>
   </TabPane>
 </TabContent>
     </div>

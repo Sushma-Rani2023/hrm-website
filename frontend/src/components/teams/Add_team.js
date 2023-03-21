@@ -65,7 +65,7 @@ console.log('daataaaaa',data)
           </button>
         </div>
       </div>
-      <div className="col-md-9" style={{width:'100%',marginTop:'45px'}}>
+      <div  style={{width:'100%',marginTop:'45px'}}>
   <table className="table table-hover">
     <thead>
       <tr>

@@ -11,9 +11,6 @@ const Popup = (props) => {
     isOpen={'true'}
     toggle={props.toggle}
     >
-      <ModalHeader>
-      
-      </ModalHeader>
       <ModalBody> 
       {props.children}
       </ModalBody>

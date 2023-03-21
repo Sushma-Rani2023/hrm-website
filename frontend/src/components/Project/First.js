@@ -36,7 +36,7 @@ function Add() {
     <div>
       <Header />
 
-      <div className="row form_container">
+      <div className="row form_container ">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
           Inzint's project
         </div>
@@ -56,7 +56,7 @@ function Add() {
           </button>
         </div>
       </div>
-      <div className="col-md-9" style={{ width: "100%", marginTop: "45px" }}>
+      <div  style={{ width: "100%", marginTop: "45px" }}>
         <table className="table table-hover">
           <thead>
             <tr>
