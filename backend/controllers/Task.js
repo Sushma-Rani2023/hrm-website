@@ -10,14 +10,15 @@ const createTask = (req, res) => {
         Taskmilestone : req.body.Taskmilestone,
         Billing : req.body.Billing,
         Duration : req.body.Duration,
-        Assignee : req.body.Assignee
+        Assignee : req.body.Assignee,
+        project_id: req.body.project_id
     })
     task.save()
     .then(result => {
         res.json({
             newtask : result,
             message : 'task is created successfully'
-        })
+        })                                                                                                            
     })
     .catch(err => {
         res.json({
@@ -27,9 +28,10 @@ const createTask = (req, res) => {
     })
 }
 
-const gettask = (req, res) => {
-    if(req.query.id){
-        const id = req.query.id;
+const gettask = (req, res) => { 
+    const project_id  = req.params.project_id;    
+    if(project_id){           
+        const id = req.query.id;         
         Task.findById(id)
         .then(result => {
            if(!result){

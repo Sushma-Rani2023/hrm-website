@@ -23,6 +23,13 @@ const TaskSchema = new mongoose.Schema({
     },
     Assignee : {
          type : String
+    },
+    Taskicon :{
+        type :  String
+    },
+    project_id:
+    {
+        type : String
     }
 })
 
