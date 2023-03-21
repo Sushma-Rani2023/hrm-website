@@ -4,11 +4,11 @@ const Task = require('../models/Taskmodel');
 
 const createTask = (req, res) => {
     const task = new Task({
-        Taskname : req.body.Task,
+        Taskname : req.body.Taskname,
         Taskstage : req.body.Taskstage,
         Taskphase : req.body.Taskphase,
         Taskmilestone : req.body.Taskmilestone,
-        Billing : req.body.billing,
+        Billing : req.body.Billing,
         Duration : req.body.Duration,
         Assignee : req.body.Assignee
     })
