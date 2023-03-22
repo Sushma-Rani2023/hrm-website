@@ -9,7 +9,9 @@ const Router4 = express.Router();
 
 Router4.post('/createtask' , createTask);
 
-Router4.get('/taskdetails', gettask);
+Router4.get('/taskdetails/:project_id', gettask);
+
+Router4.get('/infotask',gettask);
 
 Router4.put('/updatetask/:id' , updatetask);
 

@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const TaskSchema = new mongoose.Schema({
     Taskname:{
         type : String,
-        unique : true
     },
     Taskstage: {
       type: String,
@@ -18,7 +17,10 @@ const TaskSchema = new mongoose.Schema({
     Billing : {
         type : String
     },
-    Duration : {
+    StartDate : {
+        type : String
+    },
+    EndDate : {
         type : String
     },
     Assignee : {

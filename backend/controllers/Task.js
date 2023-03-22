@@ -9,8 +9,10 @@ const createTask = (req, res) => {
         Taskphase : req.body.Taskphase,
         Taskmilestone : req.body.Taskmilestone,
         Billing : req.body.Billing,
-        Duration : req.body.Duration,
+        StartDate : req.body.StartDate,
+        EndDate : req.body.EndDate,
         Assignee : req.body.Assignee,
+        Taskicon : req.body.Taskicon,
         project_id: req.body.project_id
     })
     task.save()
@@ -31,8 +33,8 @@ const createTask = (req, res) => {
 const gettask = (req, res) => { 
     const project_id  = req.params.project_id;    
     if(project_id){           
-        const id = req.query.id;         
-        Task.findById(id)
+                
+        Task.find({project_id})
         .then(result => {
            if(!result){
             res.status(404).send({message:"Task Data not found at id" + id})
@@ -64,7 +66,7 @@ const gettask = (req, res) => {
 }
 
 const updatetask = (req,res) => {
-   const {Taskname, Taskstage, Taskphase, Taskmilestone, Billing, Duration, Assignee} = req.body;
+   const {Taskname, Taskstage, Taskphase, Taskmilestone, Billing, StartDate, EndDate, Assignee} = req.body;
    const id = req.query.id;
    const task =  Task.findByIdAndUpdate(id);
    
@@ -73,7 +75,8 @@ const updatetask = (req,res) => {
    task.Taskphase = Taskphase || task.Taskphase,
    task.Taskmilestone = Taskmilestone || task.Taskmilestone,
    task.Billing = Billing || task.Billing,
-   task.Duration = Duration || task.Duration,
+   task.StartDate = StartDate || task.StartDate,
+   task.EndDate = EndDate || task.EndDate,
    task.Assignee= Assignee || task.Assignee
 
 task

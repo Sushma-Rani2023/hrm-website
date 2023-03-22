@@ -7,7 +7,7 @@ const RouterT = express.Router();
 
 RouterT.post('/createTeam', createMember);
 
-RouterT.get('/info', getTeam);
+RouterT.get('/info/:project_id', getTeam);
 
 RouterT.put('/updateTeam/:id', updateTeam);
 
