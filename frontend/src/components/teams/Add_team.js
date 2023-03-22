@@ -5,7 +5,7 @@ import Team_form from "./Team_form";
 import { useLocation } from  "react";
 import axios from "../../axios";
 import Update_team from "./Update_team";
-function Add_team() {
+function Add_team(props) {
   const navigate = useNavigate();
   
   const [data , setData] = useState([]);
@@ -44,7 +44,7 @@ console.log('daataaaaa',data)
     
       
 
-    {modal && <Popup toggle={toggle1}><Team_form  toggle={toggle1} getAds={getAds}/></Popup>}
+    {modal && <Popup toggle={toggle1}><Team_form  toggle={toggle1} getAds={getAds} project_id={props.project_id}/></Popup>}
     {updation && <Popup toggle={toggle2}><Update_team updation={updation} toggle={toggle2} getAds={getAds}/></Popup>}
     
 

@@ -1,6 +1,11 @@
 import React from "react";
-
+import axios from "../../axios";
 function Header() {
+
+  async function login(){
+    const res= await axios.get("/login")
+    console.log('doinggg')
+  }
   return (
 	<div className="header border">
 <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -13,7 +18,7 @@ function Header() {
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav">
         <a className="nav-link"  href="#">Calender</a>
-        <a className="nav-link active" href="/">Project</a>
+        <a className="nav-link active" onClick={()=>(login)}>Project</a>
         <a className="nav-link" href="/client">Client</a>
       </div>
     </div>

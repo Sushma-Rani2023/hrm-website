@@ -113,10 +113,10 @@ const toggle = tab => {
   </TabPane>
   <TabPane tabId="2">
   
-    <Add_team ></Add_team>
+    <Add_team project_id={data._id}></Add_team>
   </TabPane>
   <TabPane tabId="3">
-    <Add_task/>
+    <Add_task project_id={data._id}/>
   </TabPane>
 </TabContent>
     </div>
