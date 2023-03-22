@@ -33,7 +33,6 @@ const createTask = (req, res) => {
 const gettask = (req, res) => { 
     const project_id  = req.params.project_id;    
     if(project_id){           
-                
         Task.find({project_id})
         .then(result => {
            if(!result){

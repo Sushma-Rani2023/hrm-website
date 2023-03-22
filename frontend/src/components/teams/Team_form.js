@@ -7,7 +7,7 @@ function Team_form(props) {
   const location=useLocation()
   const navigate= useNavigate();
 
-  const [team, set] = useState([]);
+  const [team, set] = useState({project_id:props.project_id});
   const handleform = (e) => {
     
      set({
