@@ -1,20 +1,25 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { React, useState } from "react";
-
 import axios from "../../axios";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
 function Task_form(props) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
   const location = useLocation();
   const navigate = useNavigate();
   const [selected, setSelected] = useState("Choose");
   const [task, set] = useState({ project_id: props.project_id });
-  const handleSelect = (e) => {
-    console.log(e)
-    setSelected(e.target.value);
-    set({...task,
-      [e.target.name]: e.target.value})
-      console.log(task)
-
+  const handleSelect = (name, value) => {
+    set({ ...task, [name]: value });
+    console.log(task);
+    setSelected(value);
   };
   const handleform = (e) => {
     set({
@@ -113,7 +118,6 @@ function Task_form(props) {
                   </div>
                 </div>
 
-
                 <div className="form-group row">
                   <label for="status" className="col-md-3 control-label">
                     Stage
@@ -129,7 +133,7 @@ function Task_form(props) {
                     onChange={handleform}
                   >
                     <option value="" selected>
-                      Choose 
+                      Choose
                     </option>
                     <option value="Not started">Not Started</option>
                     <option value="In Progress">In Progress</option>
@@ -137,7 +141,6 @@ function Task_form(props) {
                   </select>
                 </div>
 
-                
                 <div className="form-group row">
                   <label for="billing" className="col-md-3 control-label">
                     {" "}
@@ -155,142 +158,91 @@ function Task_form(props) {
                     required
                   >
                     <option value="" selected>
-                      Choose 
+                      Choose
                     </option>
                     <option value="Billable">Billable</option>
                     <option value="Non-Billable">Non-Billable</option>
                   </select>
                 </div>
 
-                <div className="form-group row">
+                <div className="form-group row" style={{ display: "flex" }}>
                   <label for="billing" className="col-md-3 control-label">
                     {" "}
-                    Task 
+                    Task
                   </label>
-                  {/* <select
-                    className=" form-select col-md-3"
-                    style={{
-                      marginLeft: "10px",
-                      height: "37px",
-                      width: "255px",
-                    }}
-                    name="Billing"
-                    onChange={handleform}
-                    required
-                  >
-                    <option value="" selected>
-                      Choose Task type
-                    </option>
-                    <option value="Epic">
-                    <i
-                        className="fa-sharp fa-solid fa-circle"
-                        style={{ color: "#00cc6a", marginRight: "12px" ,height:'12px',width:'12px'}}
-                        aria-hidden="true"
-                      />
-                      Epiv
-        
-                    </option>
-                    
-                    <option value="Non-Billable">Non-Billable</option>
-                  </select> */}
-                  <div
-                  class="dropdown  "
-                  style={{ width: "480px", marginRight: "50px" }}
-                >
-                  <button
-                    class="form-control  form-select" 
-                    type="button"
-                    id="dropdown"
-                    data-bs-toggle="dropdown"
-                    
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    onSelect={handleSelect}
-                    
-                  >
-                    <span style={{display:"flex",flex:'1' ,color:'black'}}> {selected}</span>
-                  </button>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenu2"
-                    style={{ width: "470px",marginLeft:'10px' }}
-                  >
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Epic"}
-                      name="Taskicon"
-                    >
-                      <i
-                        className="fa-sharp fa-solid fa-circle"
-                        aria-hidden="true"
-                        style={{ color: "#00cc6a", marginRight: "12px" }}
-                      ></i>
-                     Epic
-                    </button>
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Story"}
-                      name="Taskicon"
-                      
 
-                      
+                  <Dropdown
+                    isOpen={dropdownOpen}
+                    toggle={toggle}
+                    style={{ width: "65%" }}
+                  >
+                    <DropdownToggle
+                      className="form-control"
+                      style={{backgroundcolor: "transparent",color: "black",bordercolor: "#dee2e6",display: "flex",
+    justifycontent: "space-between",
+    alignitems: "center"
+}}
+                      caret
                     >
-                      <i
-                        className="fa-sharp fa-solid fa-square"
-                        aria-hidden="true"
-                        style={{ color: "red", marginRight: "12px" }}
-                      ></i>
-                      Story
-                    </button>
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Task"}
-                      name="Taskicon"
-                    >
-                      <i
-                        className="fa-solid fa-square-check"
-                        aria-hidden="true"
-                        style={{ color: "yellow", marginRight: "12px" }}
-                      ></i>
-                      Task
-                    </button>
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Phase"}
-                      name="Taskicon"
-                    >
-                      <i
-                        className="fa-sharp fa-regular fa-money-bill"
-                        aria-hidden="true"
-                        style={{ color: "violet", marginRight: "12px" }}
-                      ></i>
-                      Phase
-                    </button>
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Milestone"}
-                      name="Taskicon"
-                    >
-                      <i
-                        className="fa-sharp fa-regular fa-credit-card"
-                        aria-hidden="true"
-                        style={{ color: "brown", marginRight: "12px" }}
-                      ></i>
-                      Milestone
-                    </button>
-                  </div>
-                </div> 
+                        {selected}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem
+                        onClick={() => handleSelect("Taskicon", "Epic")}
+                      >
+                        <i
+                          className="fa-sharp fa-regular fa-credit-card"
+                          aria-hidden="true"
+                          style={{ color: "brown", marginRight: "12px" }}
+                        ></i>
+                        Foo Action
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => handleSelect("Taskicon", "Story")}
+                      >
+                        <i
+                          className="fa-sharp fa-solid fa-square"
+                          aria-hidden="true"
+                          style={{ color: "red", marginRight: "12px" }}
+                        ></i>
+                        Story
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => handleSelect("Taskicon", "Task")}
+                      >
+                        <i
+                          className="fa-solid fa-square-check"
+                          aria-hidden="true"
+                          style={{ color: "yellow", marginRight: "12px" }}
+                        ></i>
+                        Task
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => handleSelect("Taskicon", "Phase")}
+                      >
+                        <i
+                          className="fa-sharp fa-regular fa-money-bill"
+                          aria-hidden="true"
+                          style={{ color: "violet", marginRight: "12px" }}
+                        ></i>
+                        Phase
+                      </DropdownItem>
 
+                      <DropdownItem
+                        onClick={() => handleSelect("Taskicon", "Milestone")}
+                      >
+                        <i
+                          className="fa-sharp fa-regular fa-credit-card"
+                          aria-hidden="true"
+                          style={{ color: "brown", marginRight: "12px" }}
+                        ></i>
+                        Milestone
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+
+                  
+                
                 </div>
 
                 <div class="form-group">
@@ -326,96 +278,6 @@ function Task_form(props) {
                   </div>
                 </div>
 
-                
-                 {/* <div
-                  class="dropdown  "
-                  style={{ width: "200px", marginRight: "50px" }}
-                >
-                  <button
-                    class="form-control "
-                    type="button"
-                    id="dropdown"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    onSelect={handleSelect}
-                  >
-                    {selected}
-                  </button>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenu2"
-                    style={{ width: "25px" }}
-                  >
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Epic"}
-                    >
-                      <i
-                        className="fa-sharp fa-solid fa-circle"
-                        aria-hidden="true"
-                        style={{ color: "#00cc6a", marginRight: "12px" }}
-                      ></i>
-                     Epic
-                    </button>
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Story"}
-                    >
-                      <i
-                        className="fa-sharp fa-solid fa-square"
-                        aria-hidden="true"
-                        style={{ color: "red", marginRight: "12px" }}
-                      ></i>
-                      Story
-                    </button>
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Task"}
-                    >
-                      <i
-                        className="fa-solid fa-square-check"
-                        aria-hidden="true"
-                        style={{ color: "yellow", marginRight: "12px" }}
-                      ></i>
-                      Task
-                    </button>
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Phase"}
-                    >
-                      <i
-                        className="fa-sharp fa-regular fa-money-bill"
-                        aria-hidden="true"
-                        style={{ color: "violet", marginRight: "12px" }}
-                      ></i>
-                      Phase
-                    </button>
-                    <button
-                      class="dropdown-item"
-                      type="button"
-                      onClick={handleSelect}
-                      value={"Milestone"}
-                    >
-                      <i
-                        className="fa-sharp fa-regular fa-credit-card"
-                        aria-hidden="true"
-                        style={{ color: "brown", marginRight: "12px" }}
-                      ></i>
-                      Milestone
-                    </button>
-                  </div>
-                </div>  */}
-
-                
                 <div className="form-group ">
                   <div className="col-md-offset-3 col-md-3">
                     <button

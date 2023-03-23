@@ -4,11 +4,13 @@ import axios from "../../axios";
 import Task_form from "./Task_form";
 import { MDBCol, MDBIcon } from "mdbreact";
 import Taskicon from "./Taskicon";
+import { UncontrolledDropdown,Button,DropdownToggle,DropdownItem,DropdownMenu } from "reactstrap";
 function Add_task(props) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [data, setData] = useState([]);
   const [userInput, setUserInput] = useState([]);
+  const [status,setStatus]=useState([])
 
   async function getAds() {
     const res = await axios.get(`/task/taskdetails/${props.project_id}`);
@@ -34,6 +36,7 @@ function Add_task(props) {
   function Find_task(e) {
     setUserInput(e.target.value);
   }
+
 
   //  function Find_task(e){
   //   setData(data.filter((item)=> e.target.value===item.Taskname))
@@ -84,10 +87,30 @@ function Add_task(props) {
         </div>
       </MDBCol>
 
+      <UncontrolledDropdown group style={{width:"100px"}}>
+  <Button color="primary">
+    Filter
+  </Button>
+  <DropdownToggle
+    caret
+    color="primary"
+  />
+  <DropdownMenu>
+    <DropdownItem onClick={()=>setStatus(true)} >
+      Status
+    </DropdownItem>
+    <DropdownItem>
+      Assignee
+    </DropdownItem>
+    
+  </DropdownMenu>
+</UncontrolledDropdown>
+
       <div style={{ width: "100%", marginTop: "45px" }}>
         <table className="table table-hover">
           <thead>
             <tr>
+            <th>Taskicon</th>
               <th>Name</th>
               <th>Stage</th>
               <th>Phase</th>
@@ -95,7 +118,7 @@ function Add_task(props) {
               <th>Billing</th>
               <th>Duration</th>
               <th>Assignee</th>
-              <th>Taskicon</th>
+              
               <th>Action</th>
             </tr>
           </thead>
@@ -108,9 +131,13 @@ function Add_task(props) {
                   return true;
                 }
               })
+              
               .map((data, index) => {
                 return (
                   <tr key={index}>
+                  <td>
+                      <Taskicon type={data.Taskicon} />
+                    </td>
                     <td>{data.Taskname}</td>
                     <td>{data.Taskstage}</td>
                     <td>{data.Taskphase}</td>
@@ -118,9 +145,7 @@ function Add_task(props) {
                     <td>{data.Billing}</td>
                     <td>{data.Duration}</td>
                     <td>{data.Assignee}</td>
-                    <td>
-                      <Taskicon type={data.Taskicon} />
-                    </td>
+                    
 
                     {/* <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td> */}

@@ -10,9 +10,9 @@ function Add_team(props) {
   
   const [data , setData] = useState([]);
   const getAds = async () => {
-    const res = await axios.get('/Team/info')
+    const res = await axios.get(`/Team/info/${props.project_id}`)
     console.log('reeeeeeeeeeeeeeee',res)
-    setData(res.data.Memberdata)
+    setData(res.data.data)
   }
 
   useEffect(() => {
