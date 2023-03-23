@@ -11,7 +11,8 @@ function Add_task(props) {
   const [data, setData] = useState([]);
   const [userInput, setUserInput] = useState([]);
   const [status,setStatus]=useState([])
-
+  const [assignee,setAssginee]=useState([])
+  
   async function getAds() {
     const res = await axios.get(`/task/taskdetails/${props.project_id}`);
 
@@ -42,7 +43,7 @@ function Add_task(props) {
   //   setData(data.filter((item)=> e.target.value===item.Taskname))
 
   //   getAds(),
-
+console.log(data)
   return (
     <div
       className="row form container "
@@ -89,19 +90,52 @@ function Add_task(props) {
 
       <UncontrolledDropdown group style={{width:"100px"}}>
   <Button color="primary">
-    Filter
+    Status
   </Button>
   <DropdownToggle
     caret
     color="primary"
   />
   <DropdownMenu>
-    <DropdownItem onClick={()=>setStatus(true)} >
-      Status
+  <DropdownItem onClick={()=>setStatus(false)}  >
+      All
     </DropdownItem>
-    <DropdownItem>
-      Assignee
+    <DropdownItem onClick={()=>setStatus("Not started")}  >
+      Not Started
     </DropdownItem>
+    <DropdownItem onClick={()=>setStatus("In Progress")}>
+      In Progress
+    </DropdownItem>
+    <DropdownItem onClick={()=>setStatus("Completed")}>
+    Completed
+    </DropdownItem>
+    
+  </DropdownMenu>
+</UncontrolledDropdown>
+
+<UncontrolledDropdown group style={{width:"100px",marginLeft:'50px'}}>
+  <Button color="primary">
+    Assignee
+  </Button>
+  <DropdownToggle
+    caret
+    color="primary"
+  />
+  <DropdownMenu>
+  <DropdownItem onClick={()=>setAssginee(false)}>
+    All
+    </DropdownItem>
+    {
+      data.map((item)=>{
+        return(
+        <DropdownItem onClick={()=>{setAssginee(item.Assignee) ; console.log('hii')}}>
+    {item.Assignee}
+    </DropdownItem>
+        )
+
+
+      })
+    }
     
   </DropdownMenu>
 </UncontrolledDropdown>
@@ -127,6 +161,20 @@ function Add_task(props) {
               .filter((item) => {
                 if(userInput){
                 return item.Taskname.includes(userInput);
+                }else{
+                  return true;
+                }
+              })
+              .filter((item) => {
+                if(status){
+                return item.Taskstage.includes(status);
+                }else{
+                  return true;
+                }
+              })
+              .filter((item) => {
+                if(assignee){
+                return item.Assignee.includes(assignee);
                 }else{
                   return true;
                 }

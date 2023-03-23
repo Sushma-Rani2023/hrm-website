@@ -178,13 +178,17 @@ function Task_form(props) {
                   >
                     <DropdownToggle
                       className="form-control"
-                      style={{backgroundcolor: "transparent",color: "black",bordercolor: "#dee2e6",display: "flex",
-    justifycontent: "space-between",
-    alignitems: "center"
-}}
+                      style={{
+                        backgroundcolor: "transparent",
+                        color: "black",
+                        bordercolor: "#ced4da",
+                        display: "flex",
+                        justifycontent: "space-between",
+                        alignitems: "center",
+                      }}
                       caret
                     >
-                        {selected}
+                      {selected}
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem
@@ -195,7 +199,7 @@ function Task_form(props) {
                           aria-hidden="true"
                           style={{ color: "brown", marginRight: "12px" }}
                         ></i>
-                        Foo Action
+                       Epic
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => handleSelect("Taskicon", "Story")}
@@ -240,9 +244,6 @@ function Task_form(props) {
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
-
-                  
-                
                 </div>
 
                 <div class="form-group">
@@ -255,7 +256,7 @@ function Task_form(props) {
                         <input
                           type="date"
                           className="form-control"
-                          name="Duration"
+                          name="StartDate"
                           onChange={handleform}
                           required
                         />
@@ -270,7 +271,7 @@ function Task_form(props) {
                           <input
                             type="date"
                             className="form-control"
-                            name="Duration"
+                            name="EndDate"
                           />
                         </div>
                       </div>
