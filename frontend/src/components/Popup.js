@@ -1,6 +1,6 @@
 import {React , useState} from 'react'
 
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody} from 'reactstrap';
 
 
 const Popup = (props) => {
