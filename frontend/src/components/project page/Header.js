@@ -1,11 +1,9 @@
 import React from "react";
-import axios from "../../axios";
-function Header() {
+import { Link } from "react-router-dom";
 
-  async function login(){
-    const res= await axios.get("/login")
-    console.log('doinggg')
-  }
+
+
+function Header() {
   return (
 	<div className="header border">
 <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -18,7 +16,7 @@ function Header() {
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav">
         <a className="nav-link"  href="#">Calender</a>
-        <a className="nav-link active" onClick={()=>(login)}>Project</a>
+        <Link className="nav-link active" to = {{pathname: "//localhost:3000/dev/login"}} target="_blank">Project</Link>
         <a className="nav-link" href="/client">Client</a>
       </div>
     </div>
