@@ -150,7 +150,8 @@ console.log(data)
               <th>Phase</th>
               <th>Milestone</th>
               <th>Billing</th>
-              <th>Duration</th>
+              <th>StartDate</th>
+              <th>EndDate</th>
               <th>Assignee</th>
               
               <th>Action</th>
@@ -191,7 +192,8 @@ console.log(data)
                     <td>{data.Taskphase}</td>
                     <td>{data.Taskmilestone}</td>
                     <td>{data.Billing}</td>
-                    <td>{data.Duration}</td>
+                    <td>{data.StartDate}</td>
+                    <td>{data.EndDate}</td>
                     <td>{data.Assignee}</td>
                     
 
