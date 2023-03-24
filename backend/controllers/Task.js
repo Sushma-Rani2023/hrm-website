@@ -64,10 +64,11 @@ const gettask = (req, res) => {
     }
 }
 
-const updatetask = (req,res) => {
+const updatetask = async (req,res) => {
+    console.log('hello')
    const {Taskname, Taskstage, Taskphase, Taskmilestone, Billing, StartDate, EndDate, Assignee} = req.body;
-   const id = req.query.id;
-   const task =  Task.findByIdAndUpdate(id);
+   const id = req.params.id;
+   const task = await Task.findByIdAndUpdate(id);
    
    task.Taskname = Taskname || task.Taskname,
    task.Taskstage = Taskstage || task.Taskstage,
@@ -78,8 +79,7 @@ const updatetask = (req,res) => {
    task.EndDate = EndDate || task.EndDate,
    task.Assignee= Assignee || task.Assignee
 
-task
-.save()
+task.save()
 .then(result => {
     res.json({
         data : result,
