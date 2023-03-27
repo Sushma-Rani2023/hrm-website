@@ -9,6 +9,8 @@ import {
 } from "reactstrap";
 
 function Task_Form(props) {
+  {console.log("hiiiiiiiiiiii");}
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -21,14 +23,16 @@ function Task_Form(props) {
     console.log(task);
     setSelected(value);
   };
+
   const handleform = (e) => {
+    console.log("task", task);
     set({
       ...task,
       [e.target.name]: e.target.value,
     });
   };
 
-  
+  console.log("task", task);
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +48,7 @@ function Task_Form(props) {
 
   return (
     <div>
-      {}
+      {console.log("Task", task)}
       <div className="row main-row_header" style={{ fontSize: "1.5rem" }}>
         <p className="col-md-12">Details of new Task</p>
       </div>
@@ -181,9 +185,9 @@ function Task_Form(props) {
                     <DropdownToggle
                       className="form-control"
                       style={{
-                    backgroundColor:'transparent',
+                        backgroundColor: "transparent",
                         color: "black",
-                        borderColor:"#ced4da",
+                        borderColor: "#ced4da",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
@@ -201,7 +205,7 @@ function Task_Form(props) {
                           aria-hidden="true"
                           style={{ color: "brown", marginRight: "12px" }}
                         ></i>
-                       Epic
+                        Epic
                       </DropdownItem>
                       <DropdownItem
                         onClick={() => handleSelect("Taskicon", "Story")}
@@ -267,13 +271,13 @@ function Task_Form(props) {
 
                     <div class="col-md-5">
                       <div class="input-group" style={{ marginTop: "10px" }}>
-                        {" "}
                         End Date
                         <div class="input-group">
                           <input
                             type="date"
                             className="form-control"
                             name="EndDate"
+                            min={task.StartDate}
                             onChange={handleform}
                           />
                         </div>

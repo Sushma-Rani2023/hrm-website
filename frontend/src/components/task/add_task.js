@@ -1,7 +1,7 @@
 import Popup from "../Popup";
 import { useState, useEffect } from "react";
 import axios from "../../axios";
-import Task_Form from "./Task_Form";
+import Task_Form from "./Task_form";
 import { MDBCol, MDBIcon } from "mdbreact";
 import Taskicon from "./Taskicon";
 import Update_Task from "./Update_Task"
