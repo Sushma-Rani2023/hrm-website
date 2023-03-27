@@ -1,17 +1,20 @@
 import Popup from "../Popup";
 import { useState, useEffect } from "react";
 import axios from "../../axios";
-import Task_form from "./Task_form";
+import Task_Form from "./Task_Form";
 import { MDBCol, MDBIcon } from "mdbreact";
 import Taskicon from "./Taskicon";
+import Update_Task from "./Update_Task"
 import { UncontrolledDropdown,Button,DropdownToggle,DropdownItem,DropdownMenu } from "reactstrap";
 function Add_task(props) {
   const [modal, setModal] = useState(false);
+  const [updation,setUpdation]=useState(false)
   const toggle = () => setModal(!modal);
+  const toggle2 =()=> setUpdation(!updation)
   const [data, setData] = useState([]);
-  const [userInput, setUserInput] = useState([]);
-  const [status,setStatus]=useState([])
-  const [assignee,setAssginee]=useState([])
+  const [userInput, setUserInput] = useState(false);
+  const [status,setStatus]=useState(false)
+  const [assignee,setAssginee]=useState(false)
   
   async function getAds() {
     const res = await axios.get(`/task/taskdetails/${props.project_id}`);
@@ -47,20 +50,21 @@ console.log(data)
   return (
     <div
       className="row form container "
-      style={{ display: "flex", minWidth: "100%" }}
+      style={{ display: "flex", minWidth: "105%" }}
     >
       {modal && (
         <Popup toggle={toggle}>
-          <Task_form
-            toggle={toggle}
-            getAds={getAds}
+          <Task_Form toggle={toggle} getAds={getAds}
             project_id={props.project_id}
           />
         </Popup>
       )}
+      { updation &&
+        <Popup toggle={toggle2}> <Update_Task toggle2={toggle2} getAds={getAds} updation={updation}/></Popup>
+      }
       <div style={{ width: "100px" }}>
         <button
-          class="btn btn-outline-danger "
+          class="btn btn-info "
           type="button"
           onClick={() => setModal(true)}
         >
@@ -83,18 +87,19 @@ console.log(data)
             placeholder="Search"
             aria-label="Search"
             name="search"
+            
             onChange={Find_task}
           />
         </div>
       </MDBCol>
 
       <UncontrolledDropdown group style={{width:"100px"}}>
-  <Button color="primary">
+  <Button className="btn btn-info" >
     Status
   </Button>
   <DropdownToggle
     caret
-    color="primary"
+    className="btn btn-info"
   />
   <DropdownMenu>
   <DropdownItem onClick={()=>setStatus(false)}  >
@@ -114,12 +119,12 @@ console.log(data)
 </UncontrolledDropdown>
 
 <UncontrolledDropdown group style={{width:"100px",marginLeft:'50px'}}>
-  <Button color="primary">
+  <Button className="btn btn-info">
     Assignee
   </Button>
   <DropdownToggle
     caret
-    color="primary"
+    className="btn btn-info"
   />
   <DropdownMenu>
   <DropdownItem onClick={()=>setAssginee(false)}>
@@ -144,14 +149,14 @@ console.log(data)
         <table className="table table-hover">
           <thead>
             <tr>
-            <th>Taskicon</th>
+            <th>Task Icon</th>
               <th>Name</th>
               <th>Stage</th>
               <th>Phase</th>
               <th>Milestone</th>
               <th>Billing</th>
-              <th>StartDate</th>
-              <th>EndDate</th>
+              <th>Start Date</th>
+              <th>End Date</th>
               <th>Assignee</th>
               
               <th>Action</th>
@@ -205,8 +210,8 @@ console.log(data)
                         className="btn btn-outline-success"
                         size="xs"
                         onClick={() => {
-                          // setModal(true)
-                          // setUpdation(data)
+                      
+                           setUpdation(data)
                         }}
                       >
                         Edit

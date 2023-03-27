@@ -2,18 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Popup from "../Popup";
 import Role_form from './Role_form'
-import { useLocation } from  "react";
 import Update_roles from "../role/Update_role"
 import axios from "../../axios";
 function Add_Role(props) {
-  const navigate = useNavigate();
-  // const location = useLocation();
-   console.log(props)
   const [data , setData] = useState([]);
   const getAds = async () => {
     const res = await axios.get(`/engineer/engineerinfo/${props.project_id}`)
     setData(res.data)
-    console.log('rolessss',data)
+   
   }
 
   useEffect(() => {
@@ -46,10 +42,8 @@ const toggle2 =()=>setUpdation(!updation)
     {updation && <Popup toggle={toggle2}><Update_roles updation={updation} toggle={toggle2} getAds={getAds}/></Popup>}
     
       <div className="row form_container">
-        <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
-          Roles
-        </div>
-        <div className="col-md-3 col-md-offset-6 pull-right-12" style={{display:'right'}}>
+        
+        <div className="col-md-3 col-md-offset-6 " >
           <button
             type="button"
             className="btn btn-outline-success"
@@ -57,7 +51,7 @@ const toggle2 =()=>setUpdation(!updation)
               setModal(true)
              
             }}
-            style={{marginLeft:"50vw", width:"100px"}}
+            style={{marginLeft:"10px", width:"100px"}}
           >
             +
           </button>
@@ -82,7 +76,7 @@ const toggle2 =()=>setUpdation(!updation)
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
         <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
-              // setModal(true)
+           
               setUpdation(data)
             }} >Edit</button>
         <button className="btn btn-outline-danger" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>

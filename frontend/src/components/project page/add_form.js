@@ -104,7 +104,7 @@ function Add_form() {
 
       <div className="form-group row">
         <div className="col-md-offset-3 col-md-3">
-          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Add new project</button>
+          <button type="submit" id="add_new_user_btn" className="btn btn-success  single-click" >Add new project</button>
         </div>
       </div>
     </form>

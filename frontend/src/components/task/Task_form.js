@@ -8,7 +8,7 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-function Task_form(props) {
+function Task_Form(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -27,6 +27,8 @@ function Task_form(props) {
       [e.target.name]: e.target.value,
     });
   };
+
+  
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -120,7 +122,7 @@ function Task_form(props) {
 
                 <div className="form-group row">
                   <label for="status" className="col-md-3 control-label">
-                    Stage
+                    Status
                   </label>
                   <select
                     className="form-select "
@@ -179,12 +181,12 @@ function Task_form(props) {
                     <DropdownToggle
                       className="form-control"
                       style={{
-                        backgroundcolor: "transparent",
+                    backgroundColor:'transparent',
                         color: "black",
-                        bordercolor: "#ced4da",
+                        borderColor:"#ced4da",
                         display: "flex",
-                        justifycontent: "space-between",
-                        alignitems: "center",
+                        justifyContent: "space-between",
+                        alignItems: "center",
                       }}
                       caret
                     >
@@ -272,6 +274,7 @@ function Task_form(props) {
                             type="date"
                             className="form-control"
                             name="EndDate"
+                            onChange={handleform}
                           />
                         </div>
                       </div>
@@ -284,7 +287,7 @@ function Task_form(props) {
                     <button
                       type="submit"
                       id="add_new_user_btn"
-                      className="btn btn-success pull-right single-click"
+                      className="btn btn-success single-click"
                     >
                       Add new Task{" "}
                     </button>
@@ -299,4 +302,4 @@ function Task_form(props) {
   );
 }
 
-export default Task_form;
+export default Task_Form;

@@ -36,10 +36,10 @@ function Add_Client() {
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
           Inzint's Client 
         </div>
-        <div className="col-md-3 col-md-offset-6 pull-right-12" style={{display:'right'}}>
+        <div className="col-md-12 " style={{display:'right'}}>
           <button
             type="button"
-            className="btn btn-outline-primary"
+            className="btn btn-info float-right"
             onClick={() => {
               navigate("/client/add");
             }}
@@ -48,7 +48,7 @@ function Add_Client() {
           </button>
         </div>
       </div>
-      <div className="col-md-9" style={{width:'100%',marginTop:'45px'}}>
+      <div className="col-md-13" style={{marginTop:'45px'}}>
   <table className="table table-hover">
     <thead>
       <tr>
@@ -71,10 +71,10 @@ function Add_Client() {
         <td>{data.Currencyselector}</td>
         <td>{data.Billing}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
-        <td> <button className="btn btn-outline-secondary" size="xs" onClick={() => {
+        <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
               navigate("/Client/update",{state:{data:data}});
             }} >Edit</button>
-        <button className="btn btn-outline-secondary" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
+        <button className="btn btn-outline-danger" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
         </tr>)
  
       }

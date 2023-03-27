@@ -1,7 +1,7 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useLocation} from "react-router-dom";
+import {  useState } from "react";
 import Header from "../project page/Header";
-import axios from "../../axios";
+
 import Add_Role from "../role/Add_role";
 import Add_team from "../teams/Add_team";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
@@ -9,9 +9,8 @@ import classnames from 'classnames';
 import Add_task from "../task/Add_task"
 function View() {
   const location = useLocation();
-  //const [data, setData]=useState(location.state.data);
+  
   const data = location.state.data;
-  console.log(data);
   const [activeTab, setActiveTab] = useState('1');
 
 const toggle = tab => {
@@ -37,27 +36,27 @@ const toggle = tab => {
         }}
       >
         <div  style={{ marginTop: "15px" }}>
-          <p><h8  style={{ color: "black" }}> Code </h8>
+          <p><h5  style={{ color: "black" }}> Code </h5>
           </p>
           <p>{data.Projectcode}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
             {" "}
-            <h8 style={{ color: "black" }}> Status </h8>
+            <h5 style={{ color: "black" }}> Status </h5>
           </p>
           <p>{data.Projectstatus}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
             {" "}
-            <h8 style={{ color: "black" }}>Manager</h8>
+            <h5 style={{ color: "black" }}>Manager</h5>
           </p>
           <p>{data.Projectmanager}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
-            <h8 style={{ color: "black" }}>Start Date</h8>
+            <h5 style={{ color: "black" }}>Start Date</h5>
           </p>
           <p>{data.ProjectStartDate}</p>
         </div>
@@ -69,7 +68,7 @@ const toggle = tab => {
           }}
         >
           <p>
-            <h8 style={{ color: "black" }}> Description </h8>
+            <h5 style={{ color: "black" }}> Description </h5>
           </p>
           <p>{data.description}</p>
         </div>

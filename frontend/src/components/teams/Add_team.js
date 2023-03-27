@@ -1,17 +1,15 @@
-import { useNavigate } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import Popup from "../Popup";
 import Team_form from "./Team_form";
-import { useLocation } from  "react";
+
 import axios from "../../axios";
 import Update_team from "./Update_team";
 function Add_team(props) {
-  const navigate = useNavigate();
-  
+ 
   const [data , setData] = useState([]);
   const getAds = async () => {
     const res = await axios.get(`/Team/info/${props.project_id}`)
-    console.log('reeeeeeeeeeeeeeee',res)
     setData(res.data.data)
   }
 
@@ -36,7 +34,6 @@ const [updation,setUpdation]=useState(false)
 const toggle1 = () => setModal(!modal);
 const toggle2 = () => setUpdation(!updation);
 
-console.log('daataaaaa',data)
   
   
   return (
@@ -49,17 +46,15 @@ console.log('daataaaaa',data)
     
 
       <div className="row form_container">
-        <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
-         Team Members
-        </div>
-        <div className="col-md-3 col-md-offset-6 pull-right-12" style={{display:'right'}}>
+        
+        <div className="col-md-3 col-md-offset-6 " >
           <button
             type="button"
             className="btn btn-outline-success"
             onClick={() => {
               setModal(true)
             }}
-            style={{marginLeft:"50vw", width:"100px"}}
+            style={{ width:"100px"}}
           >
             +
           </button>

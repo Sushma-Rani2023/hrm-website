@@ -4,14 +4,12 @@ import Header from "../project page/Header";
 import axios from "../../axios";
 import "font-awesome/css/font-awesome.min.css";
 import {} from "@fortawesome/fontawesome-svg-core";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 function Add() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const getAds = async () => {
     const res = await axios.get("/project/description");
-    console.log(res.data.projectData);
     setData(res.data.projectData);
   };
 
@@ -30,7 +28,7 @@ function Add() {
     setData(updated_data);
   }
 
-  console.log("data", data);
+  
 
   return (
     <div>
@@ -46,11 +44,11 @@ function Add() {
         >
           <button
             type="button"
-            className="btn btn-outline-success"
+            className="btn btn-info"
             onClick={() => {
               navigate("/project/add");
             }}
-            style={{ marginLeft: "50vw", width: "140px" }}
+            style={{ marginLeft: "50vw", width: "113px" }}
           >
             Add Project
           </button>
