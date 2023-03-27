@@ -51,7 +51,7 @@ app.use(passport.session());
 passport.use(
   new SamlStrategy(
     {
-      entryPoint:"https://login.microsoftonline.com/383cc6fe-545e-4fab-8276-0c78ac6258f7/saml2",
+      entryPoint: "https://login.microsoftonline.com/383cc6fe-545e-4fab-8276-0c78ac6258f7/saml2",
       issuer: "a7ce44f1-a25e-45d2-83eb-3aec6772f292",
       cert: "-----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkuHF+O5SlXegIQrhwOEF lMYmpo3j+xTG2Md7zIcBp3HMPuWavq3Bwi7o9A0NI7tjBUldM8XZVQh2JgNpz65I nA4NKd4/t8r+paUV2D2Pq4QGo9zeozFQMbO6JcWSk+3JfAmWO49P0K4ZUAntNzaD /2S8t6mqjNCzLMNTvZdobiUAP1rPvhKyXHN1WyyzEfMdJMi5wvnXJH88UzQlojg7 j4OjvxYGSTBh90bGIUxRJt7opJrV2iaXMrfOXQ6R8ziZTDFgVckNHqFW8KWU9i4S Gn+iN5l4s0ph3PvIe97xyGa4mNLRt865dFsuZ5hA/i0vsOIZStEvj+n7n+7r79ca XQIDAQAB -----END PUBLIC KEY-----",
       callbackUrl: "http://localhost:3000/sso/callback",
@@ -81,10 +81,24 @@ app.get(
   "/login",
   passport.authenticate("saml"),
 );
-
-
 app.post('/sso/callback', (req, res) => {
   res.redirect('http://localhost:3001');
+});
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error logging out");
+    } else {
+      res.clearCookie("connect.sid");
+      res.redirect(
+        `https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=${encodeURIComponent(
+          "http://localhost:3000"
+        )}`
+      );
+    }
+  });
 });
 
 
