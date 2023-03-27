@@ -16,7 +16,7 @@ function Header() {
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav">
         <a className="nav-link"  href="#">Calender</a>
-        <Link className="nav-link active" to = {{pathname: "//localhost:3000/dev/login"}} target="_blank">Project</Link>
+        <Link className="nav-link active" to = {{pathname: "//localhost:3000/login"}} target="_blank">Project</Link>
         <a className="nav-link" href="/client">Client</a>
       </div>
     </div>
