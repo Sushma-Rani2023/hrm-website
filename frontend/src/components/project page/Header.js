@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LogoutButton from "../logout";
 
 
 
@@ -17,6 +18,7 @@ function Header() {
       <div className="navbar-nav">
         <a className="nav-link"  href="#">Calender</a>
         <Link className="nav-link active" to = {{pathname: "//localhost:3000/login"}} target="_blank">Project</Link>
+        <LogoutButton/>
         <a className="nav-link" href="/client">Client</a>
       </div>
     </div>
