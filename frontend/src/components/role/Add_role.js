@@ -4,6 +4,10 @@ import Popup from "../Popup";
 import Role_form from './Role_form'
 import Update_roles from "../role/Update_role"
 import axios from "../../axios";
+import "font-awesome/css/font-awesome.min.css";
+import {} from "@fortawesome/fontawesome-svg-core";
+
+
 function Add_Role(props) {
   const [data , setData] = useState([]);
   const getAds = async () => {
@@ -58,14 +62,15 @@ const toggle2 =()=>setUpdation(!updation)
         </div>
       </div>
       <div  style={{width:'100%',marginTop:'45px'}}>
-  <table className="table table-hover">
+  <table className="table table-hover" >
     <thead>
       <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Rate per Hour</th>
-        <th>Action</th>
-        
+        <th>Rateper Hour</th>
+        <th>Edit</th>
+        <th>Delete</th>
+
       </tr>
     </thead>
     <tbody>
@@ -73,13 +78,15 @@ const toggle2 =()=>setUpdation(!updation)
       data.map((data,index) => {
          return (<tr key={index}>
         <td>{data.Name}</td>
-        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
-        <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td>
-        <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
+        <td style={{maxWidth:'150px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
+        <td >{data.Optional}</td>
+        <td  > <i className="fa-solid fa-pencil" size="xs" onClick={() => {
            
               setUpdation(data)
-            }} >Edit</button>
-        <button className="btn btn-outline-danger" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
+            }} ></i>
+            </td>
+            <td>
+        <i className="fa-solid fa-trash" size="xs" onClick={()=>Delete(data._id)} ></i> </td>
         </tr>)
  
       }

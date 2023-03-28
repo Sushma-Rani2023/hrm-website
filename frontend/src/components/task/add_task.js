@@ -158,8 +158,8 @@ console.log(data)
               <th>Start Date</th>
               <th>End Date</th>
               <th>Assignee</th>
-              
-              <th>Action</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -206,23 +206,25 @@ console.log(data)
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Optional}</td> */}
                     <td>
                       {" "}
-                      <button
-                        className="btn btn-outline-success"
+                      <i
+                        className="fa-solid fa-pencil"
                         size="xs"
                         onClick={() => {
                       
                            setUpdation(data)
                         }}
                       >
-                        Edit
-                      </button>
-                      <button
-                        className="btn btn-outline-danger"
+                        
+                      </i>
+                      </td>
+                      <td>
+                      <i
+                        className="fa-solid fa-trash"
                         size="xs"
                         onClick={() => Delete(data._id)}
                       >
-                        Del
-                      </button>
+                       
+                      </i>
                     </td>
                   </tr>
                 );

@@ -18,7 +18,8 @@ function Header() {
       <div className="navbar-nav">
         <a className="nav-link"  href="#">Calender</a>
         <Link className="nav-link active" to = {{pathname: "//localhost:3000/login"}} target="_blank">Project</Link>
-        <LogoutButton/>
+
+        <LogoutButton/>
         <a className="nav-link" href="/client">Client</a>
       </div>
     </div>

@@ -68,7 +68,8 @@ const toggle2 = () => setUpdation(!updation);
         <th>Description</th>
         <th>Role</th>
         <th>Allocation Date</th>
-        <th>Action</th>
+        <th>Edit</th>
+        <th>Delete</th>
         
       </tr>
     </thead>
@@ -80,10 +81,11 @@ const toggle2 = () => setUpdation(!updation);
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Description}</td>
         <td style={{maxWidth:'200px',height:'60px',wordWrap:'break-word'}}>{data.Role}</td>
         <td>{data.AllocationDate}</td>
-        <td> <button className="btn btn-outline-success" size="xs" onClick={() => {
+        <td> <i className="fa-solid fa-pencil" size="xs" onClick={() => {
              setUpdation(data)
-            }} >Edit</button>
-        <button className="btn btn-outline-danger" size="xs" onClick={()=>Delete(data._id)} >Del</button></td>
+            }} ></i>
+            </td>
+        <td><i className="fa-solid fa-trash" size="xs" onClick={()=>Delete(data._id)} ></i></td>
         </tr>)
  
       }
