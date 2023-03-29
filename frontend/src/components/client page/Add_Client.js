@@ -80,22 +80,22 @@ function Add_Client() {
                   </td>
                   <td>
                     {" "}
-                    <button
-                      className="btn btn-outline-success"
+                    <i
+                      className="fa-solid fa-pencil"
                       size="xs"
                       onClick={() => {
                         navigate("/Client/update", { state: { data: data } });
                       }}
                     >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn-outline-danger"
+                      &nbsp;&nbsp;&nbsp;
+                    </i>
+                    <i
+                      className="fa-solid fa-trash"
                       size="xs"
                       onClick={() => Delete(data._id)}
                     >
-                      Del
-                    </button>
+                     
+                    </i>
                   </td>
                 </tr>
               );

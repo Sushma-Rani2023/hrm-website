@@ -24,7 +24,7 @@ const toggle = tab => {
       <div>
 
         <h6>
-          <Link to={"/"} style={{textDecoration:"none"}}><h2 style={{color:"#1464d4"}}>{data.Projectname}</h2></Link>{" "}
+          <Link to={"/"} style={{textDecoration:"none" , color:'#61686B'}}><h1 >{data.Projectname}</h1></Link>{" "}
         </h6>
       </div>
       <div  style={{marginTop:'20px',backgroundColor: "#f8f9fa" ,maxHeight:"200px"}}>
@@ -36,27 +36,27 @@ const toggle = tab => {
         }}
       >
         <div  style={{ marginTop: "15px" }}>
-          <p><h4  style={{ color: "black" }}> Code </h4>
+          <p><h4 > Code </h4>
           </p>
           <p>{data.Projectcode}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
             {" "}
-            <h4 style={{ color: "black" }}> Status </h4>
+            <h4 > Status </h4>
           </p>
           <p>{data.Projectstatus}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
             {" "}
-            <h4 style={{ color: "black" }}>Manager</h4>
+            <h4 >Manager</h4>
           </p>
           <p>{data.Projectmanager}</p>
         </div>
         <div style={{ marginTop: "15px" }}>
           <p>
-            <h4 style={{ color: "black" }}>Start Date</h4>
+            <h4 >Start Date</h4>
           </p>
           <p>{data.ProjectStartDate}</p>
         </div>
@@ -68,7 +68,7 @@ const toggle = tab => {
           }}
         >
           <p>
-            <h4 style={{ color: "black" }}> Description </h4>
+            <h4 > Description </h4>
           </p>
           <p>{data.description}</p>
         </div>

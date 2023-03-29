@@ -67,10 +67,9 @@ const toggle2 =()=>setUpdation(!updation)
       <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Rateper Hour</th>
-        <th>Edit</th>
-        <th>Delete</th>
-
+        <th>Rate per Hour</th>
+        <th>Action</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -84,8 +83,7 @@ const toggle2 =()=>setUpdation(!updation)
            
               setUpdation(data)
             }} ></i>
-            </td>
-            <td>
+            &nbsp;&nbsp;&nbsp;
         <i className="fa-solid fa-trash" size="xs" onClick={()=>Delete(data._id)} ></i> </td>
         </tr>)
  

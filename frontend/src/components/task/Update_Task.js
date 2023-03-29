@@ -136,13 +136,9 @@ function Update_role(props) {
                   <label for="status" className="col-md-3 control-label">
                     Status
                   </label>
+                  <div className='col-md-8'>
                   <select
                     className="form-select "
-                    style={{
-                      marginLeft: "10px",
-                      height: "37px",
-                      width: "470px",
-                    }}
                     name="Taskstage"
                     defaultValue={props.updation.Taskstage}
                     onChange={handleform}
@@ -154,20 +150,18 @@ function Update_role(props) {
                     <option value="In Progress">In Progress</option>
                     <option value="Completed">Completed</option>
                   </select>
+                  </div>
                 </div>
 
                 <div className="form-group row">
                   <label for="billing" className="col-md-3 control-label">
-                    {" "}
+          
                     Billing
                   </label>
+                  <div className='col-md-8'>
                   <select
                     className=" form-select "
-                    style={{
-                      marginLeft: "10px",
-                      height: "37px",
-                      width: "470px",
-                    }}
+        
                     name="Billing"
                     onChange={handleform}
                     defaultValue={props.updation.Billing}
@@ -179,6 +173,7 @@ function Update_role(props) {
                     <option value="Billable">Billable</option>
                     <option value="Non-Billable">Non-Billable</option>
                   </select>
+                  </div>
                 </div>
 
                 <div className="form-group row" style={{ display: "flex" }}>
@@ -186,11 +181,11 @@ function Update_role(props) {
                     {" "}
                     Task
                   </label>
-
+                 <div className='col-md-8'>
                   <Dropdown
                     isOpen={dropdownOpen}
                     toggle={toggle}
-                    style={{ width: "65%" }}
+                    
                   >
                     <DropdownToggle
                       className="form-control"
@@ -211,9 +206,9 @@ function Update_role(props) {
                         onClick={() => handleSelect("Taskicon", "Epic")}
                       >
                         <i
-                          className="fa-sharp fa-regular fa-credit-card"
+                          className="fas fa-bolt"
                           aria-hidden="true"
-                          style={{ color: "brown", marginRight: "12px" }}
+                          style={{ color: "yellow", marginRight: "12px" }}
                         ></i>
                        Epic
                       </DropdownItem>
@@ -233,7 +228,7 @@ function Update_role(props) {
                         <i
                           className="fa-solid fa-square-check"
                           aria-hidden="true"
-                          style={{ color: "yellow", marginRight: "12px" }}
+                          style={{ color: "blue", marginRight: "12px" }}
                         ></i>
                         Task
                       </DropdownItem>
@@ -241,7 +236,7 @@ function Update_role(props) {
                         onClick={() => handleSelect("Taskicon", "Phase")}
                       >
                         <i
-                          className="fa-sharp fa-regular fa-money-bill"
+                          className="fa-solid fa-circle"
                           aria-hidden="true"
                           style={{ color: "violet", marginRight: "12px" }}
                         ></i>
@@ -252,53 +247,47 @@ function Update_role(props) {
                         onClick={() => handleSelect("Taskicon", "Milestone")}
                       >
                         <i
-                          className="fa-sharp fa-regular fa-credit-card"
+                          className="fab fa-ethereum"
                           aria-hidden="true"
-                          style={{ color: "brown", marginRight: "12px" }}
+                          style={{ color: "green", marginRight: "12px" }}
                         ></i>
                         Milestone
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
-                </div>
-
-                <div class="form-group">
-                  {/* <label for="from" class="control-label">Duration:</label> */}
-                  <div class="row" style={{ marginTop: "10px" }}>
-                    <div class="col-md-5" style={{ marginTop: "5px" }}>
-                      {" "}
-                      Start Date
-                      <div class="input-group">
-                        <input
-                          type="date"
-                          className="form-control"
-                          name="StartDate"
-                          onChange={handleform}
-                          defaultValue={props.updation.StartDate}
-                        />
-                      </div>
-                    </div>
-
-                    <div class="col-md-5">
-                      <div class="input-group" style={{ marginTop: "10px" }}>
-                        {" "}
-                        End Date
-                        <div class="input-group">
-                          <input
-                            type="date"
-                            className="form-control"
-                            name="EndDate"
-                            defaultValue={props.updation.EndDate}
-                            onChange={handleform}
-                          />
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
-                <div className="form-group ">
-                  <div className="col-md-offset-3 col-md-3">
+
+                <div class="row">
+                  <div class="col-md-5">
+                    <label for="start-date">Start Date</label>
+                    <input
+                      type="date"
+                      id="start-date"
+                      class="form-control"
+                      name="StartDate"
+                      onChange={handleform}
+                      defaultValue={props.updation.StartDate}
+                      required
+                    />
+                  </div>
+                  <div class="col-md-5" style={{ marginLeft: "58px" }}>
+                    <label for="end-date">End Date</label>
+                    <input
+                      type="date"
+                      id="end-date"
+                      name="EndDate"
+                      class="form-control"
+                      min={task.StartDate}
+                      defaultValue={props.updation.EndDate}
+                      onChange={handleform}
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-group " style={{marginTop:'10px'}}>
+                  <div >
                     <button
                       type="submit"
                       id="add_new_user_btn"

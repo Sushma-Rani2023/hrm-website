@@ -22,7 +22,7 @@ function LogoutButton() {
 
 
 
-    return <button onClick={handleLogout}>Logout {user}</button>;
+    return <button  className="btn btn-info" onClick={handleLogout}>Logout {user}</button>;
 }
 
 

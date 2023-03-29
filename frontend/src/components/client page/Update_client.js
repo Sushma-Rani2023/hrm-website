@@ -50,53 +50,55 @@ function Update_Client() {
      
       <div className="form-group row ">
         <label for="clientname" className="col-md-3 control-label" >Client Name</label>
-        <div className="col-md-3">
+        <div className="col-md-5">
           <input className="form-control" id="clientname" value={client.Clientname} name="Clientname"  onChange={handleform}  />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="clientcode" className="col-md-3 control-label">Client code</label>
-        <div className="col-md-3">
+        <div className="col-md-5">
           <input className="form-control" id="clientcode" name="Clientcode" value={client.Clientcode} onChange={handleform} />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="clientmanager" className="col-md-3 control-label">Client Manager</label>
-        <div className="col-md-3">
+        <div className="col-md-5">
           <input className="form-control" id="clientmanager" name="Clientmanager" value={client.Clientmanager} onChange={handleform} />
         </div>
       </div>
 
       <div className="form-group row">
         <label for="currencyselector" className="col-md-3 control-label">Currency </label>
-        <SelectCurrency className='form-select ' style={{maxWidth:'255px',marginLeft:'275px'}} value={client.Currencyselector} name="Currencyselector" onChange={handleform} />
-
+        <div  className="col-md-5">
+        <SelectCurrency className='form-select '  value={client.Currencyselector} name="Currencyselector" onChange={handleform} />
+</div>
       </div>
 
 
       <div className="form-group row">
         <label for="billing" className="col-md-3 control-label">Billing </label>
-       <select  name='Billing' onChange={handleform} className='form-select ' style={{maxWidth:'255px',marginLeft:'12px'}} >
+        <div className="col-md-5">
+       <select  name='Billing' onChange={handleform} className='form-select '  >
        <option value={client.Billing} selected>Choose Here...</option>
            <option value="Hourly Cost">Hourly Cost</option>
            <option value="Fixed Cost">Fixed Cost</option>
        </select>
-
+</div>
        </div>
     
  
       <div className="form-group row">
-        <label for="description" className="col-md-3 control-label" > Optional</label>
-        <div className="col-md-10" style={{maxWidth:'450px'}}>
+        <label for="description" className="col-md-3 control-label" > Description</label>
+        <div className="col-md-5" >
           <textarea className="form-control" id="description" maxLength='200' rows={3} value={client.Optional} name="Optional" onChange={handleform}/>
         </div>
       </div>
 
       <div className="form-group row">
-        <div className="col-md-offset-3 col-md-3">
-          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Update Client </button>
+        <div >
+          <button type="submit" id="add_new_user_btn" className="btn btn-success single-click" >Update Client </button>
         </div>
       </div>
     </form>

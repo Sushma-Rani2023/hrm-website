@@ -55,11 +55,11 @@ function Add() {
         </div>
       </div>
       <div  style={{ width: "100%", marginTop: "45px" }}>
-        <table className="table table-hover">
+        <table className="table table-hover" >
           <thead>
             <tr>
               <th>Project Name</th>
-              <th>Project Action</th>
+              <th className="align-right">Project Action</th>
             </tr>
           </thead>
           <tbody>
@@ -75,7 +75,24 @@ function Add() {
                       <h4>{data.Projectname}</h4>
                     </Link>
                   </td>
-                  <td>
+
+                  <td className="align-right" >
+                  
+                    <i className="fa-solid fa-pencil" onClick={() => {
+                          navigate("/project/update", {
+                            state: { EditId: data._id, data: data },
+                          });
+                        }} > 
+                    </i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   
+                    
+
+                    <i className="fa-solid fa-trash" onClick={() => Delete(data._id)} > 
+                    </i>
+                    </td>
+
+                 
+                  {/* <td>
                     {" "}
                     <div style={{display:"flex",alignItems:"center"}}>
                       <div
@@ -104,7 +121,7 @@ function Add() {
                         />
                       </div>
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}

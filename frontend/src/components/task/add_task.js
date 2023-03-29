@@ -50,7 +50,7 @@ console.log(data)
   return (
     <div
       className="row form container "
-      style={{ display: "flex", minWidth: "105%" }}
+      style={{ display: "flex",justifyContent:'space-between'}}
     >
       {modal && (
         <Popup toggle={toggle}>
@@ -62,7 +62,9 @@ console.log(data)
       { updation &&
         <Popup toggle={toggle2}> <Update_Task toggle2={toggle2} getAds={getAds} updation={updation}/></Popup>
       }
-      <div style={{ width: "100px" }}>
+      <div style={{display:'flex',width:'100%'}}>
+      <div style={{width:'50%',display:'flex',justifyContent:'space-between'}}>
+      < >
         <button
           class="btn btn-info "
           type="button"
@@ -70,8 +72,8 @@ console.log(data)
         >
           Create
         </button>
-      </div>
-      <MDBCol md="4">
+      </>
+      <MDBCol md="18">
         <div className="input-group md-form form-sm form-1 pl-0">
           <div className="input-group-prepend">
             <span
@@ -92,8 +94,10 @@ console.log(data)
           />
         </div>
       </MDBCol>
+      </div>
+      <div  style={{display:'flex',justifyContent:'flex-end', width:'50%'}}>
 
-      <UncontrolledDropdown group style={{width:"100px"}}>
+      <UncontrolledDropdown group >
   <Button className="btn btn-info" >
     Status
   </Button>
@@ -118,7 +122,7 @@ console.log(data)
   </DropdownMenu>
 </UncontrolledDropdown>
 
-<UncontrolledDropdown group style={{width:"100px",marginLeft:'50px'}}>
+<UncontrolledDropdown group >
   <Button className="btn btn-info">
     Assignee
   </Button>
@@ -144,6 +148,9 @@ console.log(data)
     
   </DropdownMenu>
 </UncontrolledDropdown>
+</div>
+
+</div>
 
       <div style={{ width: "100%", marginTop: "45px" }}>
         <table className="table table-hover">
@@ -158,8 +165,8 @@ console.log(data)
               <th>Start Date</th>
               <th>End Date</th>
               <th>Assignee</th>
-              <th>Edit</th>
-              <th>Delete</th>
+              <th>Action</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -216,8 +223,7 @@ console.log(data)
                       >
                         
                       </i>
-                      </td>
-                      <td>
+                      &nbsp;&nbsp;&nbsp;
                       <i
                         className="fa-solid fa-trash"
                         size="xs"

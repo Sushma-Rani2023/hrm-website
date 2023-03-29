@@ -15,12 +15,22 @@ function Header() {
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div className="navbar-nav">
-        <a className="nav-link"  href="#">Calender</a>
-        <Link className="nav-link active" to = {{pathname: "//localhost:3000/login"}} target="_blank">Project</Link>
-
-        <LogoutButton/>
-        <a className="nav-link" href="/client">Client</a>
+      <div class="collapse navbar-collapse " id="navbarNav" style={{display:'flex',justifyContent:'space-between'}}>
+      <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Project</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/client">Client</a>
+      </li>
+     
+     
+    </ul>
+    <div class="nav-item">
+        <form class="form-inline my-2 my-lg-0 justify-content-end">
+          <LogoutButton/>
+        </form>
+      </div>
       </div>
     </div>
   </div>

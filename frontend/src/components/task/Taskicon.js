@@ -7,7 +7,7 @@ const Taskicon = (prompt) => {
         {prompt.type==='Epic' && <i
                         className="fa-sharp fa-solid fa-circle"
                         aria-hidden="true"
-                        style={{ color: "#00cc6a", marginRight: "12px" }}
+                        style={{ color: "yellow", marginRight: "12px" }}
                       ></i>}
         {prompt.type==='Story' && <i
                         className="fa-sharp fa-solid fa-square"
@@ -17,18 +17,18 @@ const Taskicon = (prompt) => {
         {prompt.type==='Task' && <i
                         className="fa-solid fa-square-check"
                         aria-hidden="true"
-                        style={{ color: "yellow", marginRight: "12px" }}
+                        style={{ color: "blue", marginRight: "12px" }}
                       ></i>}
         {prompt.type==='Phase' && <i
-                        className="fa-sharp fa-regular fa-money-bill"
+                        className="fa-sharp fa-regular fa-circle"
                         aria-hidden="true"
                         style={{ color: "violet", marginRight: "12px" }}
                       ></i>}
 
         {prompt.type==='Milestone' && <i
-                        className="fa-sharp fa-regular fa-credit-card"
+                        className="fab fa-ethereum"
                         aria-hidden="true"
-                        style={{ color: "brown", marginRight: "12px" }}
+                        style={{ color: "green", marginRight: "12px" }}
                       ></i>}
     </div>
   )

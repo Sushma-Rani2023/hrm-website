@@ -68,8 +68,8 @@ const toggle2 = () => setUpdation(!updation);
         <th>Description</th>
         <th>Role</th>
         <th>Allocation Date</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>Action</th>
+        
         
       </tr>
     </thead>
@@ -84,8 +84,8 @@ const toggle2 = () => setUpdation(!updation);
         <td> <i className="fa-solid fa-pencil" size="xs" onClick={() => {
              setUpdation(data)
             }} ></i>
-            </td>
-        <td><i className="fa-solid fa-trash" size="xs" onClick={()=>Delete(data._id)} ></i></td>
+           &nbsp;&nbsp;&nbsp;
+        <i className="fa-solid fa-trash" size="xs" onClick={()=>Delete(data._id)} ></i></td>
         </tr>)
  
       }

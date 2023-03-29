@@ -69,7 +69,7 @@ function Update_role(props) {
 
      <div className="form-group row">
        <label for="description" className="col-md-3 control-label" >Description</label>
-       <div className="col-md-8" style={{maxWidth:'450px'}}>
+       <div className="col-md-8" >
          <textarea className="form-control" id="description" rows={3} maxLength="150"  defaultValue={props.updation.Description} name="Description" onChange={handleform}/>
        </div>
      </div>
@@ -77,8 +77,8 @@ function Update_role(props) {
      
 
      <div className="form-group row">
-       <div className="col-md-offset-3 col-md-3">
-         <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Update Role </button>
+       <div>
+         <button type="submit" id="add_new_user_btn" className="btn btn-success single-click" >Update Role </button>
        </div>
      </div>
    </form>

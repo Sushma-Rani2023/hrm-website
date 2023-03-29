@@ -68,7 +68,7 @@ function Role_form(props) {
 
       <div className="form-group row ">
         <label for="description" className="  control-label col-md-3" >Description :</label>
-        <div className="col-md-8" style={{maxWidth:'450px'}}>
+        <div className="col-md-8" >
           <textarea className="form-control" id="description" rows={3} maxLength="150"  name="Description" onChange={handleform} required/>
         </div>
       </div>
@@ -76,8 +76,8 @@ function Role_form(props) {
       
 
       <div className="form-group ">
-        <div className="col-md-offset-3 col-md-3">
-          <button type="submit" id="add_new_user_btn" className="btn btn-success pull-right single-click" >Add new Role </button>
+        <div  >
+          <button type="submit" id="add_new_user_btn" className="btn btn-success  single-click" >Add new Role </button>
         </div>
       </div>
       </div>
