@@ -36,14 +36,17 @@ passport.deserializeUser((microsoftId, done) => {
             done(err);
         });
 });
+const kree = process.env._clientid
+console.log(kree);
 
 const microsoftStrategy = new MicrosoftStrategy({
-    clientID: 'a7ce44f1-a25e-45d2-83eb-3aec6772f292',
-    clientSecret: '0DG8Q~-SE4FIPoOecdbUsY1eIpouNTwIguzdQaw9',
-    callbackURL: "http://localhost:3000/login/auth/microsoft/callback",
+    clientID: process.env._clientid,
+    clientSecret: process.env._clientsecreat,
+    callbackURL: process.env._callbackurl,
     scope: ['user.read'],
 
-}, async (accessToken, refreshToken, profile, done) => {
+}, 
+async (accessToken, refreshToken, profile, done) => {
     console.log(profile);
     const microsoftId = profile.id;
     const existingUser = await User.findOne({ microsoftId }).lean();
@@ -76,7 +79,7 @@ authRouter.get('/auth/microsoft/callback',
     (req, res) => { 
         const user = req.user
         const userData = { userId: user._id, fullName: user.fullName, email: user.email };
-        const secretKey = 'qwerty';
+        const secretKey = process.env.KEY;
         const expired = { expiresIn: '1h' };
         const token = jwt.sign(userData, secretKey, expired);
         console.log(token);
