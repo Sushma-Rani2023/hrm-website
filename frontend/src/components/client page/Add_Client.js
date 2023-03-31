@@ -57,7 +57,7 @@ function Add_Client() {
               <th>Currency Selector</th>
               <th>Billing</th>
               <th>Optional</th>
-              <th>Client Action</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

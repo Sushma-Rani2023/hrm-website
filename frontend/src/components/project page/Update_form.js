@@ -55,7 +55,7 @@ function Update_form() {
       </div>
 
       <div className="form-group row">
-        <label for="projectcode" className="col-md-3 control-label">Project code</label>
+        <label for="projectcode" className="col-md-3 control-label">Project Code</label>
         <div className="col-md-3">
           <input className="form-control" id="projectcode" value={project.Projectcode} name="Projectcode" onChange={handleform}  />
         </div>
@@ -69,7 +69,7 @@ function Update_form() {
       </div>
 
       <div className="form-group row">
-        <label for="projectstartdate" className="col-md-3 control-label">Project start date</label>
+        <label for="projectstartdate" className="col-md-3 control-label">Project Start Date</label>
         <div className="col-md-3">
           <input  type='date' className="form-control" id="projectstartdate" value={project.ProjectStartDate} name="ProjectStartDate" onChange={handleform}  />
         </div>

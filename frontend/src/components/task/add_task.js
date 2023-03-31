@@ -63,17 +63,18 @@ console.log(data)
         <Popup toggle={toggle2}> <Update_Task toggle2={toggle2} getAds={getAds} updation={updation}/></Popup>
       }
       <div style={{display:'flex',width:'100%'}}>
-      <div style={{width:'50%',display:'flex',justifyContent:'space-between'}}>
+      <div style={{width:'70%',display:'flex'}}>
       < >
         <button
           class="btn btn-info "
           type="button"
+          style={{width:'100px',marginRight:'60px'}}
           onClick={() => setModal(true)}
         >
           Create
         </button>
       </>
-      <MDBCol md="18">
+      <MDBCol md="22">
         <div className="input-group md-form form-sm form-1 pl-0">
           <div className="input-group-prepend">
             <span
@@ -89,16 +90,17 @@ console.log(data)
             placeholder="Search"
             aria-label="Search"
             name="search"
+            style={{width:'330px'}}
             
             onChange={Find_task}
           />
         </div>
       </MDBCol>
       </div>
-      <div  style={{display:'flex',justifyContent:'flex-end', width:'50%'}}>
+      <div  style={{display:'flex',justifyContent:'flex-end', width:'30%'}}>
 
-      <UncontrolledDropdown group >
-  <Button className="btn btn-info" >
+      <UncontrolledDropdown group style={{marginRight:'100px'}} >
+  <Button className="btn btn-info " >
     Status
   </Button>
   <DropdownToggle
@@ -165,7 +167,7 @@ console.log(data)
               <th>Start Date</th>
               <th>End Date</th>
               <th>Assignee</th>
-              <th>Action</th>
+              <th>Actions</th>
               
             </tr>
           </thead>
