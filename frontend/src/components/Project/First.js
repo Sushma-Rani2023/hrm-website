@@ -39,16 +39,16 @@ function Add() {
           Inzint's project
         </div>
         <div
-          className="col-md-3 col-md-offset-6 pull-right-12"
+          className="col-md-12 "
           style={{ display: "right" }}
         >
           <button
             type="button"
-            className="btn btn-info"
+            className="btn btn-info float-right"
             onClick={() => {
               navigate("/project/add");
             }}
-            style={{ marginLeft: "50vw", width: "113px" }}
+            // style={{ marginLeft: "50vw", width: "113px" }}
           >
             Add Project
           </button>
@@ -59,7 +59,7 @@ function Add() {
           <thead>
             <tr>
               <th>Project Name</th>
-              <th className="align-right">Project Action</th>
+              <th className="align-right">Project Actions</th>
             </tr>
           </thead>
           <tbody>

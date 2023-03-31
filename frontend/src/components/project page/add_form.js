@@ -76,7 +76,7 @@ function Add_form() {
       </div>
 
       <div className="form-group row">
-        <label for="projectstartdate" className="col-md-3 control-label">Project start date</label>
+        <label for="projectstartdate" className="col-md-3 control-label">Project Start date</label>
         <div className="col-md-3">
           <input  type='date' className="form-control" id="projectstartdate" name="ProjectStartDate" onChange={handleform} required />
         </div>

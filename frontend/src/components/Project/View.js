@@ -27,7 +27,7 @@ const toggle = tab => {
           <Link to={"/"} style={{textDecoration:"none" , color:'#61686B'}}><h1 >{data.Projectname}</h1></Link>{" "}
         </h6>
       </div>
-      <div  style={{marginTop:'20px',backgroundColor: "#f8f9fa" ,maxHeight:"200px"}}>
+      <div  style={{marginTop:'20px',backgroundColor: "#f8f9fa" }}>
       <div
         style={{
           display: "flex",

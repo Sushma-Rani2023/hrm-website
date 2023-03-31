@@ -222,7 +222,7 @@ function Task_Form(props) {
                           onClick={() => handleSelect("Taskicon", "Phase")}
                         >
                           <i
-                            className="fa-solid fa-regular fa-circle"
+                            className="fa-solid  fa-circle"
                             aria-hidden="true"
                             style={{ color: "violet", marginRight: "12px" }}
                           ></i>

@@ -5,7 +5,7 @@ const Taskicon = (prompt) => {
   return (
     <div>
         {prompt.type==='Epic' && <i
-                        className="fa-sharp fa-solid fa-circle"
+                        className="fas fa-bolt"
                         aria-hidden="true"
                         style={{ color: "yellow", marginRight: "12px" }}
                       ></i>}
@@ -20,7 +20,7 @@ const Taskicon = (prompt) => {
                         style={{ color: "blue", marginRight: "12px" }}
                       ></i>}
         {prompt.type==='Phase' && <i
-                        className="fa-sharp fa-regular fa-circle"
+                        className="fa-solid  fa-circle"
                         aria-hidden="true"
                         style={{ color: "violet", marginRight: "12px" }}
                       ></i>}

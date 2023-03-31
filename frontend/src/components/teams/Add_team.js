@@ -50,11 +50,11 @@ const toggle2 = () => setUpdation(!updation);
         <div className="col-md-3 col-md-offset-6 " >
           <button
             type="button"
-            className="btn btn-outline-success"
+            className="btn btn-info"
             onClick={() => {
               setModal(true)
             }}
-            style={{ width:"100px"}}
+            style={{width:"100px"}}
           >
             +
           </button>
@@ -68,7 +68,7 @@ const toggle2 = () => setUpdation(!updation);
         <th>Description</th>
         <th>Role</th>
         <th>Allocation Date</th>
-        <th>Action</th>
+        <th>Actions</th>
         
         
       </tr>
