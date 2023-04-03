@@ -7,16 +7,18 @@ const {engineercreate,
 
 const Router2 = express.Router();
 
-Router2.post('/createengineer', engineercreate);
+const authentication = require('../middleware/Authentication')
 
-Router2.get('/eng' , getengineerinfo);
+Router2.post('/createengineer',authentication, engineercreate);
 
-Router2.get('/engineerinfo/:project_id', getengineerinfo);
+Router2.get('/eng' ,authentication, getengineerinfo);
 
-Router2.get('/eng' , getengineerinfo);
+Router2.get('/engineerinfo/:project_id',authentication, getengineerinfo);
 
-Router2.put('/updateengineer/:id' , updateengineer);
+Router2.get('/eng' ,authentication, getengineerinfo);
 
-Router2.delete('/deleteengineer/:id' , deleteengineer);
+Router2.put('/updateengineer/:id' ,authentication, updateengineer);
+
+Router2.delete('/deleteengineer/:id' ,authentication, deleteengineer);
 
 module.exports = Router2;
