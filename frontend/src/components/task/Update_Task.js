@@ -8,7 +8,7 @@ import {
     DropdownItem,
   } from "reactstrap";
   
-
+import { getCookie } from '../../axios';
 
 import axios from '../../axios'
 
@@ -37,7 +37,20 @@ function Update_role(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/task/updatetask/${task._id}`,task )
+    axios.put(`/task/updatetask/${task._id}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          },task )
          .then(response => {console.log('Updated successful',task); props.toggle2();
          console.log('updated role is',task)
          props.getAds();}

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 
 
 import axios from '../../axios'
-
+import { getCookie } from '../../axios'
 function Update_team(props) {
   const [team, set] = useState(props.updation);
   console.log('roleeeees is',team,props.updation)
@@ -20,7 +20,20 @@ function Update_team(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/Team/updateTeam/${team._id}`,team)
+    axios.put(`/Team/updateTeam/${team._id}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          },team)
          .then(response => {console.log('Updated successful',team); props.toggle();
          console.log('updated role is',team)
          props.getAds();}

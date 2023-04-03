@@ -7,7 +7,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-
+import { getCookie } from "../../axios";
 function Task_Form(props) {
   
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -36,7 +36,20 @@ function Task_Form(props) {
   const handlesubmit = async (e) => {
     e.preventDefault();
     console.log(task);
-    axios.post("task/createtask", task).then((response) => {
+    axios.post("task/createtask", 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          }, task).then((response) => {
       //console.log('creating ',role)
       props.toggle();
       console.log(task);

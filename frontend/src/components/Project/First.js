@@ -4,12 +4,25 @@ import Header from "../project page/Header";
 import axios from "../../axios";
 import "font-awesome/css/font-awesome.min.css";
 import {} from "@fortawesome/fontawesome-svg-core";
-
+import { getCookie } from "../../axios";
 function Add() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const getAds = async () => {
-    const res = await axios.get("/project/description");
+    const res = await axios.get("/project/description", 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          });
     setData(res.data.projectData);
   };
 
@@ -19,7 +32,20 @@ function Add() {
 
   function Delete(editId) {
     axios
-      .delete(`/project/deleteproject/${editId}`)
+      .delete(`/project/deleteproject/${editId}`, 
+      {
+        headers: {
+        "Content-Type": "application/json",
+        
+        
+        
+        Authorization: `Bearer ${getCookie("token")}`,
+        
+        
+        
+        },
+        
+            })
       .then((response) => console.log("Delete successful"))
       .catch((error) => {
         console.error("There was an error!", error);

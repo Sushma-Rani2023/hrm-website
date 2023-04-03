@@ -94,7 +94,7 @@ const toggle = tab => {
       className={classnames({ active: activeTab === '2' })}
       onClick={() => { toggle('2'); }}
     >
-    <h5>Team Members</h5>
+    <h5>Task</h5>
     </NavLink>
   </NavItem>
   <NavItem >
@@ -102,21 +102,23 @@ const toggle = tab => {
       className={classnames({ active: activeTab === '3' })}
       onClick={() => { toggle('3'); }}
     >
-    <h5>Task</h5>
+    <h5>Team Members</h5>
     </NavLink>
   </NavItem>
+  
 </Nav>
 <TabContent style={{marginTop:'30px'}} activeTab={activeTab}>
   <TabPane tabId="1">
     <Add_Role project_id={data._id }  />
   </TabPane>
   <TabPane tabId="2">
+    <Add_task project_id={data._id} />
+  </TabPane>
+  <TabPane tabId="3">
   
     <Add_team project_id={data._id}></Add_team>
   </TabPane>
-  <TabPane tabId="3">
-    <Add_task project_id={data._id} />
-  </TabPane>
+  
 </TabContent>
     </div>
     

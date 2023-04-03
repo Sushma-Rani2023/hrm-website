@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
 import { useLocation } from 'react-router-dom'
-
+import { getCookie } from '../../axios'
 
 
 import axios from '../../axios'
@@ -24,7 +24,20 @@ function Update_role(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/engineer/updateengineer/${role._id}`,role)
+    axios.put(`/engineer/updateengineer/${role._id}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          },role)
          .then(response => {console.log('Updated successful',role); props.toggle();
          console.log('updated role is',role)
          props.getAds();}

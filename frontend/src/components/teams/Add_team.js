@@ -2,14 +2,27 @@
 import { useEffect, useState } from "react";
 import Popup from "../Popup";
 import Team_form from "./Team_form";
-
+import { getCookie } from "../../axios";
 import axios from "../../axios";
 import Update_team from "./Update_team";
 function Add_team(props) {
  
   const [data , setData] = useState([]);
   const getAds = async () => {
-    const res = await axios.get(`/Team/info/${props.project_id}`)
+    const res = await axios.get(`/Team/info/${props.project_id}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          })
     setData(res.data.data)
   }
 
@@ -18,7 +31,20 @@ function Add_team(props) {
   }, [])
 
   function Delete (editId){
-    axios.delete(`/Team//deleted/${editId}`)
+    axios.delete(`/Team//deleted/${editId}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          })
         .then(response => console.log('Delete successful'))
         .catch(error => {
             console.error('There was an error!', error);

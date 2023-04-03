@@ -6,12 +6,25 @@ import Update_roles from "../role/Update_role"
 import axios from "../../axios";
 import "font-awesome/css/font-awesome.min.css";
 import {} from "@fortawesome/fontawesome-svg-core";
-
+import { getCookie } from "../../axios";
 
 function Add_Role(props) {
   const [data , setData] = useState([]);
   const getAds = async () => {
-    const res = await axios.get(`/engineer/engineerinfo/${props.project_id}`)
+    const res = await axios.get(`/engineer/engineerinfo/${props.project_id}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          })
     setData(res.data)
    
   }
@@ -21,7 +34,20 @@ function Add_Role(props) {
   }, [])
 
   function Delete (editId){
-    axios.delete(`/engineer/deleteengineer/${editId}`)
+    axios.delete(`/engineer/deleteengineer/${editId}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          })
         .then(response => console.log('Delete successful'))
         .catch(error => {
             console.error('There was an error!', error);
