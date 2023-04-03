@@ -7,12 +7,14 @@ const {Clientinfo,
     updateClient,
     deleteClient} = require('../controllers/ClientDetails');
 
-Router1.post('/info' , Clientinfo);
+const authentication = require('../middleware/Authentication')
 
-Router1.get('/Clientdetails', Clientget);
+Router1.post('/info' ,authentication, Clientinfo);
 
-Router1.put('/updateclient/:id', updateClient);
+Router1.get('/Clientdetails',authentication, Clientget);
 
-Router1.delete('/deleted/:id', deleteClient);
+Router1.put('/updateclient/:id',authentication, updateClient);
+
+Router1.delete('/deleted/:id',authentication, deleteClient);
 
 module.exports = Router1;
