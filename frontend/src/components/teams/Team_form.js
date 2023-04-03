@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
-
+import { getCookie } from '../../axios'
 import axios from '../../axios'
 
 function Team_form(props) {
@@ -20,7 +20,20 @@ function Team_form(props) {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('Team/createTeam',team)
+   axios.post('Team/createTeam', 
+   {
+     headers: {
+     "Content-Type": "application/json",
+     
+     
+     
+     Authorization: `Bearer ${getCookie("token")}`,
+     
+     
+     
+     },
+     
+         },team)
    .then( (response) => {
       console.log('creating ',team)
       props.toggle();

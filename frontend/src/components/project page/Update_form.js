@@ -3,6 +3,7 @@ import Header from './Header'
 import {React ,useEffect, useState} from 'react' 
 import axios from '../../axios'
 import {useLocation} from 'react-router-dom'
+import { getCookie } from '../../axios'
 function Update_form() {
 
   const location =useLocation()
@@ -21,7 +22,20 @@ function Update_form() {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.put(`/project/updateproject/${location.state.EditId}`,project)
+   axios.put(`/project/updateproject/${location.state.EditId}`, 
+   {
+     headers: {
+     "Content-Type": "application/json",
+     
+     
+     
+     Authorization: `Bearer ${getCookie("token")}`,
+     
+     
+     
+     },
+     
+         },project)
         .then(response => {console.log('Updated successful'
         )
         navigate("/")})

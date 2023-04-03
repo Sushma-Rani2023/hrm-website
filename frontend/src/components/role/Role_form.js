@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
-
+import { getCookie } from '../../axios'
 import axios from '../../axios'
 
 function Role_form(props) {
@@ -20,7 +20,20 @@ function Role_form(props) {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('engineer/createengineer',role)
+   axios.post('engineer/createengineer', 
+   {
+     headers: {
+     "Content-Type": "application/json",
+     
+     
+     
+     Authorization: `Bearer ${getCookie("token")}`,
+     
+     
+     
+     },
+     
+         },role)
    .then( (response) => {
       //console.log('creating ',role)
       props.toggle();

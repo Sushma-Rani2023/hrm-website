@@ -2,7 +2,7 @@
 import {useNavigate} from 'react-router-dom'
 import Header from './Header'
 import {React , useState} from 'react' 
-
+import { getCookie } from '../../axios'
 import axios from '../../axios'
 
 function Add_form() {
@@ -21,7 +21,20 @@ function Add_form() {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('/project/createproject',project)
+   axios.post('/project/createproject', 
+   {
+     headers: {
+     "Content-Type": "application/json",
+     
+     
+     
+     Authorization: `Bearer ${getCookie("token")}`,
+     
+     
+     
+     },
+     
+         },project)
    .then( (response) => {
       console.log('creating project',response.data,project)
       navigate("/")

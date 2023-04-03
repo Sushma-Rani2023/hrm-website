@@ -5,6 +5,7 @@ import Task_Form from "./Task_form";
 import { MDBCol, MDBIcon } from "mdbreact";
 import Taskicon from "./Taskicon";
 import Update_Task from "./Update_Task"
+import { getCookie } from "../../axios";
 import { UncontrolledDropdown,Button,DropdownToggle,DropdownItem,DropdownMenu } from "reactstrap";
 function Add_task(props) {
   const [modal, setModal] = useState(false);
@@ -17,7 +18,20 @@ function Add_task(props) {
   const [assignee,setAssginee]=useState(false)
   
   async function getAds() {
-    const res = await axios.get(`/task/taskdetails/${props.project_id}`);
+    const res = await axios.get(`/task/taskdetails/${props.project_id}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          });
 
     setData(res.data);
   }
@@ -26,7 +40,20 @@ function Add_task(props) {
   }, []);
 
   function Delete(id) {
-    const res = axios.delete(`/task/deletetask/${id}`);
+    const res = axios.delete(`/task/deletetask/${id}`, 
+    {
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${getCookie("token")}`,
+      
+      
+      
+      },
+      
+          });
     res.then(() => console.log("Deleted Successfully"));
     setData(data.filter((item) => data._id !== id));
     getAds();
