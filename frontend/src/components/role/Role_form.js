@@ -20,7 +20,7 @@ function Role_form(props) {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('engineer/createengineer', 
+   axios.post('engineer/createengineer',role,
    {
      headers: {
      "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function Role_form(props) {
      
      },
      
-         },role)
+         })
    .then( (response) => {
       //console.log('creating ',role)
       props.toggle();

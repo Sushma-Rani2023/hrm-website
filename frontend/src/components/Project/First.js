@@ -22,7 +22,7 @@ function Add() {
       
       },
       
-          });
+      });
     setData(res.data.projectData);
   };
 

@@ -20,7 +20,7 @@ function Update_team(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/Team/updateTeam/${team._id}`, 
+    axios.put(`/Team/updateTeam/${team._id}`,team, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function Update_team(props) {
       
       },
       
-          },team)
+          })
          .then(response => {console.log('Updated successful',team); props.toggle();
          console.log('updated role is',team)
          props.getAds();}

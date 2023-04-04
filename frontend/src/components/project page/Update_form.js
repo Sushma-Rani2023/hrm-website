@@ -22,7 +22,8 @@ function Update_form() {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.put(`/project/updateproject/${location.state.EditId}`, 
+   await axios.put(`/project/updateproject/${location.state.EditId}`, 
+   project,
    {
      headers: {
      "Content-Type": "application/json",
@@ -35,7 +36,7 @@ function Update_form() {
      
      },
      
-         },project)
+     })
         .then(response => {console.log('Updated successful'
         )
         navigate("/")})

@@ -20,7 +20,7 @@ function Team_form(props) {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('Team/createTeam', 
+   axios.post('Team/createTeam',team, 
    {
      headers: {
      "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function Team_form(props) {
      
      },
      
-         },team)
+         })
    .then( (response) => {
       console.log('creating ',team)
       props.toggle();

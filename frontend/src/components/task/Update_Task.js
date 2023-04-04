@@ -37,7 +37,7 @@ function Update_role(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/task/updatetask/${task._id}`, 
+    axios.put(`/task/updatetask/${task._id}`,task, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function Update_role(props) {
       
       },
       
-          },task )
+          } )
          .then(response => {console.log('Updated successful',task); props.toggle2();
          console.log('updated role is',task)
          props.getAds();}
