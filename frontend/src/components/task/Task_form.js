@@ -36,7 +36,7 @@ function Task_Form(props) {
   const handlesubmit = async (e) => {
     e.preventDefault();
     console.log(task);
-    axios.post("task/createtask", 
+    axios.post("task/createtask", task, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -49,7 +49,7 @@ function Task_Form(props) {
       
       },
       
-          }, task).then((response) => {
+          }).then((response) => {
       //console.log('creating ',role)
       props.toggle();
       console.log(task);

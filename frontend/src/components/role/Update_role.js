@@ -24,7 +24,7 @@ function Update_role(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/engineer/updateengineer/${role._id}`, 
+    axios.put(`/engineer/updateengineer/${role._id}`,role, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -37,7 +37,7 @@ function Update_role(props) {
       
       },
       
-          },role)
+       })
          .then(response => {console.log('Updated successful',role); props.toggle();
          console.log('updated role is',role)
          props.getAds();}
