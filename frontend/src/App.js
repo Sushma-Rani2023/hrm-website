@@ -18,6 +18,13 @@ function App() {
     getCookie("token") ? true : false
   );
 
+  function LoginPage() {
+    useEffect(() => {
+      window.location.href = "https://nmk33dgsdl.execute-api.us-east-1.amazonaws.com/dev/login/auth/microsoft";
+    }, []);
+    return <h1>Login Page</h1>;
+  }
+
   return (
     <>
       <div className="main-container">
@@ -102,11 +109,6 @@ function PrivateRoute({ authenticated, element, ...rest }) {
 //     />
 //   );
 // }
-function LoginPage() {
-  useEffect(() => {
-    window.location.href = "http://localhost:3000/login/auth/microsoft";
-  }, []);
-  return <h1>Login Page</h1>;
-}
+
 
 export default App;
