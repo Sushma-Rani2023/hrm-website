@@ -1,6 +1,5 @@
 import {useLocation, useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
-import { getCookie } from '../../axios'
 import axios from '../../axios'
 
 function Role_form(props) {
@@ -27,7 +26,7 @@ function Role_form(props) {
      
      
      
-     Authorization: `Bearer ${getCookie("token")}`,
+     Authorization: `Bearer ${localStorage.getItem("token")}`,
      
      
      

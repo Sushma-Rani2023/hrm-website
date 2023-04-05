@@ -4,7 +4,7 @@ import Header from "../project page/Header";
 import axios from "../../axios";
 import "font-awesome/css/font-awesome.min.css";
 import {} from "@fortawesome/fontawesome-svg-core";
-import { getCookie } from "../../axios";
+import { gettoken } from "../../axios";
 function Add() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -16,7 +16,7 @@ function Add() {
       
       
       
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       
       
       
@@ -39,13 +39,13 @@ function Add() {
         
         
         
-        Authorization: `Bearer ${getCookie("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         
         
         
         },
         
-            })
+         })
       .then((response) => console.log("Delete successful"))
       .catch((error) => {
         console.error("There was an error!", error);

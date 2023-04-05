@@ -2,7 +2,7 @@
 import {useNavigate} from 'react-router-dom'
 import Header from './Header'
 import {React , useState} from 'react' 
-import { getCookie } from '../../axios'
+
 import axios from '../../axios'
 
 function Add_form() {
@@ -28,7 +28,7 @@ function Add_form() {
      
      
      
-     Authorization: `Bearer ${getCookie("token")}`,
+     Authorization: `Bearer ${localStorage.getItem("token")}`,
      
      
      

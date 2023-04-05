@@ -16,7 +16,7 @@ function Add_team(props) {
       
       
       
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       
       
       
@@ -38,7 +38,7 @@ function Add_team(props) {
       
       
       
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       
       
       

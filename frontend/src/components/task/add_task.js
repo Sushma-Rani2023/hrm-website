@@ -25,7 +25,7 @@ function Add_task(props) {
       
       
       
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       
       
       
@@ -47,7 +47,7 @@ function Add_task(props) {
       
       
       
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       
       
       

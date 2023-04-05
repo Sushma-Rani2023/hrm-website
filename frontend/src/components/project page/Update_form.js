@@ -3,7 +3,7 @@ import Header from './Header'
 import {React ,useEffect, useState} from 'react' 
 import axios from '../../axios'
 import {useLocation} from 'react-router-dom'
-import { getCookie } from '../../axios'
+
 function Update_form() {
 
   const location =useLocation()
@@ -30,7 +30,7 @@ function Update_form() {
      
      
      
-     Authorization: `Bearer ${getCookie("token")}`,
+     Authorization: `Bearer ${localStorage.getItem("token")}`,
      
      
      

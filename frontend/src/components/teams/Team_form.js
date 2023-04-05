@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
-import { getCookie } from '../../axios'
+
 import axios from '../../axios'
 
 function Team_form(props) {
@@ -27,7 +27,7 @@ function Team_form(props) {
      
      
      
-     Authorization: `Bearer ${getCookie("token")}`,
+     Authorization: `Bearer ${localStorage.getItem("token")}`,
      
      
      

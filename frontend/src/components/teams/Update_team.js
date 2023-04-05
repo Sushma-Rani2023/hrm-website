@@ -27,7 +27,7 @@ function Update_team(props) {
       
       
       
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       
       
       

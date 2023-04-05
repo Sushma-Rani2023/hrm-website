@@ -6,7 +6,7 @@ import Update_roles from "../role/Update_role"
 import axios from "../../axios";
 import "font-awesome/css/font-awesome.min.css";
 import {} from "@fortawesome/fontawesome-svg-core";
-import { getCookie } from "../../axios";
+
 
 function Add_Role(props) {
   const [data , setData] = useState([]);
@@ -18,7 +18,7 @@ function Add_Role(props) {
       
       
       
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       
       
       
@@ -41,7 +41,7 @@ function Add_Role(props) {
       
       
       
-      Authorization: `Bearer ${getCookie("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       
       
       

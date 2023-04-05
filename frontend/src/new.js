@@ -11,124 +11,48 @@ import First from "./components/Project/First";
 import View from "./components/Project/View";
 import Team_form from "./components/teams/Team_form";
 import { getCookie } from "./axios";
-import { useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 
-function App() {
-  const [authenticated, setAuthenticated] = useState(getCookie('token') ? true:false
-  );
+async function App() {
+  useEffect(() => {
+    if ( !getCookie("token")) {
+      window.location.href =
+        "https://nmk33dgsdl.execute-api.us-east-1.amazonaws.com/dev/login/auth/microsoft";
+    }
+  }, []);
 
   return (
     <>
       <div className="main-container">
         <BrowserRouter>
           <Routes>
-            <Route
-              path="/"
-              element={authenticated ? <First /> : <LoginPage />}
-            />
+            <Route path="/" element={<First />} />
 
-            <Route
+            <Route path="/project/add" element={<Add_form />} />
 
-  path="/project/add"
-  element={<PrivateRoute
-    authenticated={authenticated}
-    component={Add_form}
-  />}
-/>
-            
-            <Route path="/project/update" element={<PrivateRoute
-              
-              authenticated={authenticated}
-              component={Update_form }
-            />}></Route>
-            
-            <Route  path="/client" element={<PrivateRoute
-             
-              authenticated={authenticated}
-              component={Add_client }
-            />}></Route>
-            
-            <Route  path="/client/add" element={<PrivateRoute
-             
-              authenticated={authenticated}
-              component={Client_form}
-            />}></Route>
-            
-            <Route  path="/client/update" element={<PrivateRoute
-             
-              authenticated={authenticated}
-              component={Update_client }
-            />}></Route>
-            
-            <Route  path="/role" element={<PrivateRoute
-             
-              authenticated={authenticated}
-              component={Add_Role }
-            />}></Route>
-            
-            <Route path="/role/add" element={<PrivateRoute
-             
-              authenticated={authenticated}
-              component={Role_form }
-            />}></Route>
-            
-            <Route path="/role/update" element={<PrivateRoute
-             
-              authenticated={authenticated}
-              component={Update_role}
-            />}></Route>
-            
-            <Route  path="/" element={<PrivateRoute
-             
-              authenticated={authenticated}
-              component={First}
-            />}></Route>
-            <Route  path="/project/view" element={<PrivateRoute
-             
-             authenticated={authenticated}
-             component={View }
-           />}></Route>
-     
-            <Route  path="/project/team/form" element={<PrivateRoute
-             
-              authenticated={authenticated}
-              component={Team_form}
-            />}></Route>
-            
+            <Route path="/project/update" element={<Update_form />} />
+
+            <Route path="/client" element={<Add_client />}></Route>
+
+            <Route path="/client/add" element={<Client_form />}></Route>
+
+            <Route path="/client/update" element={<Update_client />}></Route>
+
+            <Route path="/role" element={<Add_Role />}></Route>
+
+            <Route path="/role/add" element={<Role_form />}></Route>
+
+            <Route path="/role/update" element={<Update_role />}></Route>
+
+            <Route path="/" element={<First />}></Route>
+            <Route path="/project/view" element={<View />}></Route>
+
+            <Route path="/project/team/form" element={<Team_form />}></Route>
           </Routes>
-          
-            
-          
         </BrowserRouter>
       </div>
     </>
   );
 }
-
-// function PrivateRoute({ authenticated, element, ...rest }) {
-//   return (
-//     <Route
-//       {...rest}
-//       element={authenticated ? element : <Navigate to="/login" />}
-//     />
-//   );
-// }
-
-function PrivateRoute({ authenticated, component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        authenticated ? <Component {...props} /> : <Navigate to="/login" />
-      }
-    />
-  );
-}
-function LoginPage() {
-  useEffect(()=>{window.location.href = "http://localhost:3000/login/auth/microsoft"},[]
-  )
-  return <h1>Login Page</h1>;
-}
-
 
 export default App;
