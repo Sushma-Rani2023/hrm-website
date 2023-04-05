@@ -15,7 +15,7 @@ authRouter.use(
         resave: false,
         saveUninitialized: true,
         cookie: {
-            secure: true,
+            secure: false,
             maxAge: 3600000, // 1 hour
         },
     })
@@ -80,9 +80,10 @@ authRouter.get('/auth/microsoft/callback',
         const expired = { expiresIn: '1h' };
         const token = jwt.sign(userData, secretKey, expired);
         console.log(token);
-        res.cookie("token" , token )
+       // res.cookie("token" , token )
 
-        res.redirect('http://localhost:3001/');
+
+        res.redirect('http://localhost:3001/?token=' + token);
     });
 
 
