@@ -22,7 +22,6 @@ export function gettoken(){
   const location= window.location
   const query=new URLSearchParams(location.search);
   const token =query.get('token')
-  alert(token)
   return token;
 
 }
