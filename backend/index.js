@@ -15,22 +15,54 @@ const authRouter = require('./middleware/passport')
 
 connectDB();
 
-app.use(express.json({ extended: false }));
+// app.use(function(req, res, next) {
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001/");
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   next();
+// });
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3001'
+}));
+
+app.use(express.json({ extended: false }));
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
 
-app.use(
-  cors({
-    origin: "https://login.microsoftonline.com",
-    credentials: true,
-  })
-);
 
-app.use('/project', Router);
+// const allowedOrigins = ['http://localhost:3001', 'https://nmk33dgsdl.execute-api.us-east-1.amazonaws.com'];
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// }));
+
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+// const corsOptions ={
+//   origin:'*', 
+//   credentials:true,           
+//   optionSuccessStatus:200,
+// }
+
+// app.use(cors(corsOptions))
+
+app.use('/login', authRouter);
+
+app.use('/project',  Router);
 
 app.use('/Client', Router1);
 
@@ -40,7 +72,7 @@ app.use('/task', Router4);
 
 app.use('/Team', RouterT);
 
-app.use('/login',authRouter);
+
 
 module.exports.handler = serverless(app);
 

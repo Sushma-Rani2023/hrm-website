@@ -72,14 +72,16 @@ authRouter.get('/auth/microsoft',
 
 authRouter.get('/auth/microsoft/callback',
 
-    passport.authenticate('microsoft', { failureRedirect: '/login' }),
+    passport.authenticate('microsoft', { failureRedirect: '/login2' }),
     (req, res) => { 
         const user = req.user
         const userData = { userId: user._id, fullName: user.fullName, email: user.email };
         const secretKey = process.env.KEY;
         const expired = { expiresIn: '1h' };
         const token = jwt.sign(userData, secretKey, expired);
+        console.log(token);
         res.cookie("token" , token )
+
         res.redirect('http://localhost:3001/');
     });
 

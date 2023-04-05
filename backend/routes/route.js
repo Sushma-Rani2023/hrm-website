@@ -10,7 +10,7 @@ const Router = express.Router();
 
 Router.post('/createproject',authentication, Createproject);
 
-Router.get('/description/' ,authentication, Projectfindbycode);
+Router.get('/description' ,authentication, Projectfindbycode);
 
 
 

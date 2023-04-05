@@ -1,6 +1,5 @@
 const CreateProject = require('../models/Createprojectmodel')
 
-
 const Createproject = (req,res,next) => {
     
     const project = new CreateProject({

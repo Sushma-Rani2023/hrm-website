@@ -1,5 +1,6 @@
 const ClientDetails = require('../models/Clientmodel');
 
+
 const Clientinfo = (req,res) => {
     
     const Client = new ClientDetails({
@@ -94,6 +95,7 @@ const updateClient = async (req, res) => {
     .then(data => {
         if(!data){
             res.status(404).send({message:`cannot dalete with id ${id} Maybe id is wrong`})
+            return 
         }
         else{
             res.send({
