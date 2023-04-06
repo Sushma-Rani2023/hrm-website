@@ -23,7 +23,19 @@ function Client_form() {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('/client/info',client)
+   axios.post('/client/info',{
+    headers: {
+    "Content-Type": "application/json",
+    
+    
+    
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    
+    
+    
+    },
+    
+  },client)
    .then( (response) => {
       console.log('creating ',client)
       navigate("/client")

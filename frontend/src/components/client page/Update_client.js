@@ -23,7 +23,19 @@ function Update_Client() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/client/updateclient/${client._id}`,client)
+    axios.put(`/client/updateclient/${client._id}`,{
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      
+      
+      
+      },
+      
+    },client)
          .then(response => {console.log('Updated successful')
          navigate("/client")})
          .catch(error => {

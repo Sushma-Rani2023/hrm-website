@@ -6,7 +6,19 @@ function Add_Client() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const getAds = async () => {
-    const res = await axios.get("/client/Clientdetails");
+    const res = await axios.get("/client/Clientdetails",{
+      headers: {
+      "Content-Type": "application/json",
+      
+      
+      
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      
+      
+      
+      },
+      
+    },);
     setData(res.data.ClientData);
 
     console.log(data);
@@ -18,7 +30,19 @@ function Add_Client() {
 
   function Delete(editId) {
     axios
-      .delete(`/client/deleted/${editId}`)
+      .delete(`/client/deleted/${editId}`,{
+        headers: {
+        "Content-Type": "application/json",
+        
+        
+        
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        
+        
+        
+        },
+        
+      },)
       .then((response) => console.log("Delete successful"))
       .catch((error) => {
         console.error("There was an error!", error);
