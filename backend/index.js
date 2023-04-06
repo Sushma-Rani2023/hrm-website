@@ -24,7 +24,7 @@ connectDB();
 // });
 
 app.use(cors({
-  origin: 'http://localhost:3001'
+  origin: process.env._fronturl
 }));
 
 app.use(express.json({ extended: false }));
@@ -47,7 +47,7 @@ app.use(bodyparser.json());
 
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
+  res.header('Access-Control-Allow-Origin', process.env._fronturl);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
