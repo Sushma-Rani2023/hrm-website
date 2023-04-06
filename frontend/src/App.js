@@ -29,29 +29,15 @@ import { useEffect } from "react";
 function App() {
   // dotenv.config()
   const location = window.location;
-  useEffect( () =>  {
-    // if (location.pathname === "/") {
-    //   console.log('first if')
-    //   if (!localStorage.getItem("token")) {
-    //     window.location.href = `${process.env.REACT_APP_BASE_URL}/login/auth/microsoft`;
-    //   } else {
-    //     const token = gettoken();
-
-    //     if (token) {
-    //       localStorage.setItem("token", token);
-    //     }
-    //   }
-    // }
-    if (location.pathname === "/" && !localStorage.getItem("token")) {
+  useEffect(() => {
+    if (location.pathname === "/") {
       const token = gettoken();
-  
       if (token) {
-         localStorage.setItem("token", token);
+        localStorage.setItem("token", token);
       }
-    }
-
-    if (!localStorage.getItem("token")) {
-      window.location.href = `${process.env.REACT_APP_BASE_URL}/login/auth/microsoft`;
+      if (!token && !localStorage.getItem("token")) {
+        window.location.href = `${process.env.REACT_APP_BASE_URL}/login/auth/microsoft`;
+      }
     }
   }, []);
   return (

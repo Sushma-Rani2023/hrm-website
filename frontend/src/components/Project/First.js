@@ -28,7 +28,10 @@ function Add() {
   };
 
   useEffect(() => {
-    getAds();
+    if(localStorage.getItem('token')){
+      getAds();
+
+    }
   }, []);
 
   function Delete(editId) {
