@@ -9,6 +9,7 @@ function Add() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const getAds = async () => {
+    const token=localStorage.getItem("token")
     const res = await axios.get("/project/description", 
     {
       headers: {
@@ -16,7 +17,7 @@ function Add() {
       
       
       
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
       
       
       

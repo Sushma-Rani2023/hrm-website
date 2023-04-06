@@ -23,7 +23,7 @@ function Client_form() {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('/client/info',{
+   axios.post('/client/info',client,{
     headers: {
     "Content-Type": "application/json",
     
@@ -35,7 +35,7 @@ function Client_form() {
     
     },
     
-  },client)
+  })
    .then( (response) => {
       console.log('creating ',client)
       navigate("/client")
