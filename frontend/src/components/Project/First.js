@@ -31,6 +31,8 @@ function Add() {
     if(localStorage.getItem('token')){
       getAds();
 
+    }else{
+      setTimeout(()=>{getAds()},1000)
     }
   }, []);
 
