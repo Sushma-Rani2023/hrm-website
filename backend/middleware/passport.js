@@ -83,7 +83,7 @@ authRouter.get('/auth/microsoft/callback',
        // res.cookie("token" , token )
 
 
-        res.redirect('http://localhost:3001/?token=' + token);
+        res.redirect(process.env._fronturl + '/?token=' + token);
     });
 
 
