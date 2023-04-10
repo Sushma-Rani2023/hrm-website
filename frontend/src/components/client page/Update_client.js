@@ -23,7 +23,7 @@ function Update_Client() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/client/updateclient/${client._id}`,{
+    axios.put(`/client/updateclient/${client._id}`,client,{
       headers: {
       "Content-Type": "application/json",
       
@@ -35,7 +35,7 @@ function Update_Client() {
       
       },
       
-    },client)
+    })
          .then(response => {console.log('Updated successful')
          navigate("/client")})
          .catch(error => {
