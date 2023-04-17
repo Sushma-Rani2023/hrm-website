@@ -4,32 +4,49 @@ import Header from "../project page/Header";
 import axios from "../../axios";
 import "font-awesome/css/font-awesome.min.css";
 import {} from "@fortawesome/fontawesome-svg-core";
-import { gettoken } from "../../axios";
+import { Loader } from "../Loader";
+
 function Add() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [loader,setLoader]=useState(true)
+  const[user,setUser]=useState()
+
+  async function getUser(){
+    const token=localStorage.getItem("token")
+   await axios.get("/user/getuser",{
+      headers: {
+        "Content-Type": "application/json",  
+        Authorization: `Bearer ${token}`,
+         
+        },
+    }).then((res)=>{;setUser(res.data.userdata)})
+    .catch((err)=>console.log(err))
+
+console.log(user)
+  }
   const getAds = async () => {
     const token=localStorage.getItem("token")
-    const res = await axios.get("/project/description", 
+    await axios.get("/project/description", 
     {
       headers: {
-      "Content-Type": "application/json",
-      
-      
-      
+      "Content-Type": "application/json",  
       Authorization: `Bearer ${token}`,
-      
-      
-      
+       
       },
       
-      });
-    setData(res.data.projectData);
+      }).then((result)=>{setLoader(false);setData(result.data.projectData)})
+      .catch((error)=>console.log(error))
+
+  
+  
+     
   };
 
   useEffect(() => {
     if(localStorage.getItem('token')){
       getAds();
+      getUser();
 
     }else{
       setTimeout(()=>{getAds()},1000)
@@ -63,7 +80,9 @@ function Add() {
   
 
   return (
+    
     <div>
+    
       <Header />
 
       <div className="row form_container ">
@@ -78,7 +97,7 @@ function Add() {
             type="button"
             className="btn btn-info float-right"
             onClick={() => {
-              navigate("/project/add");
+              navigate("/project/add",{state:{userdata:user}});
             }}
             // style={{ marginLeft: "50vw", width: "113px" }}
           >
@@ -87,6 +106,11 @@ function Add() {
         </div>
       </div>
       <div  style={{ width: "100%", marginTop: "45px" }}>
+      {
+      loader &&
+      <Loader/>
+    }
+    {!loader &&
         <table className="table table-hover" >
           <thead>
             <tr>
@@ -124,41 +148,13 @@ function Add() {
                     </td>
 
                  
-                  {/* <td>
-                    {" "}
-                    <div style={{display:"flex",alignItems:"center"}}>
-                      <div
-                        onClick={() => {
-                          navigate("/project/update", {
-                            state: { EditId: data._id, data: data },
-                          });
-                        }}
-                      >
-                        {" "}
-                        <i
-                          style={{ width: "80px", height: "40px" ,marginTop:'22px'}}
-                          className="fa-solid fa-pencil"
-                        />
-                      </div>
-                      <div>
-                        <img
-                          style={{
-                            maxHeight: "30px",
-                            maxWidth: "40px",
-                            marginLeft: "20px",
-                          }}
-                          onClick={() => Delete(data._id)}
-                          src="/delete.jpg"
-                          alt="Del"
-                        />
-                      </div>
-                    </div>
-                  </td> */}
+                  
                 </tr>
               );
             })}
           </tbody>
         </table>
+    }
       </div>
     </div>
   );

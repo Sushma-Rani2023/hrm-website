@@ -8,6 +8,7 @@ const Router1 = require('./routes/Clientroutes');
 const Router2 = require('./routes/engineer');
 const Router4 = require('./routes/Taskroutes');
 const RouterT = require('./routes/Team');
+const Router5=require("./routes/userroute")
 const app = express();
 const serverless = require('serverless-http')
 const authRouter = require('./middleware/passport')
@@ -72,6 +73,7 @@ app.use('/task', Router4);
 
 app.use('/Team', RouterT);
 
+app.use("/user",Router5)
 
 
 module.exports.handler = serverless(app);

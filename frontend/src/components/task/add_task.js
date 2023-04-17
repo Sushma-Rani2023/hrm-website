@@ -5,7 +5,7 @@ import Task_Form from "./Task_form";
 import { MDBCol, MDBIcon } from "mdbreact";
 import Taskicon from "./Taskicon";
 import Update_Task from "./Update_Task"
-import { getCookie } from "../../axios";
+import { Loader } from "../Loader";
 import { UncontrolledDropdown,Button,DropdownToggle,DropdownItem,DropdownMenu } from "reactstrap";
 function Add_task(props) {
   const [modal, setModal] = useState(false);
@@ -16,7 +16,7 @@ function Add_task(props) {
   const [userInput, setUserInput] = useState(false);
   const [status,setStatus]=useState(false)
   const [assignee,setAssginee]=useState(false)
-  
+  const [loader,setLoader]=useState(true)
   async function getAds() {
     const res = await axios.get(`/task/taskdetails/${props.project_id}`, 
     {
@@ -31,9 +31,9 @@ function Add_task(props) {
       
       },
       
-          });
+          }).then((res)=>{setLoader(false);setData(res.data)})
 
-    setData(res.data);
+  
   }
   useEffect(() => {
     getAds();
@@ -75,10 +75,13 @@ function Add_task(props) {
   //   getAds(),
 console.log(data)
   return (
+    
     <div
+
       className="row form container "
       style={{ display: "flex",justifyContent:'space-between'}}
     >
+    
       {modal && (
         <Popup toggle={toggle}>
           <Task_Form toggle={toggle} getAds={getAds}
@@ -89,6 +92,8 @@ console.log(data)
       { updation &&
         <Popup toggle={toggle2}> <Update_Task toggle2={toggle2} getAds={getAds} updation={updation}/></Popup>
       }
+      
+
       <div style={{display:'flex',width:'100%'}}>
       <div style={{width:'70%',display:'flex'}}>
       < >
@@ -180,8 +185,15 @@ console.log(data)
 </div>
 
 </div>
+{
+      loader&&
+      <Loader/>
+    }
+{
 
+!loader&&
       <div style={{ width: "100%", marginTop: "45px" }}>
+      
         <table className="table table-hover">
           <thead>
             <tr>
@@ -266,7 +278,9 @@ console.log(data)
               })}
           </tbody>
         </table>
+      
       </div>
+}
     </div>
   );
 }

@@ -3,10 +3,10 @@ import { useLocation } from "react-router-dom";
 
 function LogoutButton() {
   function eraseCookie(name) {
-    console.log("deletingg");
+   ;
     localStorage.removeItem("token")
   }
-  console.log("log outtttttttt");
+ ;
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const user = JSON.parse(searchParams.get("user"));

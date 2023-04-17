@@ -65,7 +65,7 @@ function Add_form() {
               onSubmit={handlesubmit}
             >
               <div className="form-group row ">
-                <label for="projectname" className="col-md-3 control-label">
+                <label htmlFor="projectname" className="col-md-3 control-label">
                   Project Name
                 </label>
                 <div className="col-md-3">
@@ -80,7 +80,7 @@ function Add_form() {
               </div>
 
               <div className="form-group row">
-                <label for="projectcode" className="col-md-3 control-label">
+                <label htmlFor="projectcode" className="col-md-3 control-label">
                   Project code
                 </label>
                 <div className="col-md-3">
@@ -95,7 +95,7 @@ function Add_form() {
               </div>
 
               <div className="form-group row">
-                <label for="projectmanager" className="col-md-3 control-label">
+                <label htmlFor="projectmanager" className="col-md-3 control-label">
                   Project Manager
                 </label>
                 <div className="col-md-3">
@@ -111,7 +111,7 @@ function Add_form() {
 
               <div className="form-group row">
                 <label
-                  for="projectstartdate"
+                  htmlFor="projectstartdate"
                   className="col-md-3 control-label"
                 >
                   Project Start date
@@ -129,7 +129,7 @@ function Add_form() {
               </div>
 
               <div className="form-group row">
-                <label for="billing" className="col-md-3 control-label">
+                <label htmlFor="billing" className="col-md-3 control-label">
                   Project Status{" "}
                 </label>
                 <select
@@ -149,7 +149,7 @@ function Add_form() {
 
               <div className="form-group row">
                 <label
-                  for="projectdescription"
+                  htmlFor="projectdescription"
                   className="col-md-3 control-label"
                 >
                   Project Description

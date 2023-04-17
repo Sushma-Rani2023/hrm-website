@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../project page/Header";
 import axios from "../../axios";
+import { Loader } from "../Loader";
 function Add_Client() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [loader,setLoader]=useState(true)
   const getAds = async () => {
-    const res = await axios.get("/client/Clientdetails",{
+    await axios.get("/client/Clientdetails",{
       headers: {
       "Content-Type": "application/json",
       
@@ -18,10 +20,10 @@ function Add_Client() {
       
       },
       
-    },);
-    setData(res.data.ClientData);
+    },).then((res)=>{setLoader(false);setData(res.data.ClientData)});
+    ;
 
-    console.log(data);
+   
   };
 
   useEffect(() => {
@@ -72,6 +74,11 @@ function Add_Client() {
         </div>
       </div>
       <div className="col-md-13" style={{ marginTop: "45px" }}>
+      {
+        loader&&
+        <Loader/>
+      }
+      {!loader&&
         <table className="table table-hover">
           <thead>
             <tr>
@@ -126,6 +133,7 @@ function Add_Client() {
             })}
           </tbody>
         </table>
+      }
       </div>
     </div>
   );

@@ -78,7 +78,7 @@ function Task_Form(props) {
             >
               <div className="modal-body">
                 <div className="form-group row">
-                  <label for="name" className="col-md-3 control-label ">
+                  <label htmlFor="name" className="col-md-3 control-label ">
                     Name :
                   </label>
                   <div className="col-md-8">
@@ -92,7 +92,7 @@ function Task_Form(props) {
                   </div>
                 </div>
                 <div className="form-group row">
-                  <label for="phase" className="control-label col-md-3">
+                  <label htmlFor="phase" className="control-label col-md-3">
                     Phase :
                   </label>
                   <div className="col-md-8">
@@ -107,7 +107,7 @@ function Task_Form(props) {
                 </div>
 
                 <div className="form-group row">
-                  <label for="stone" className="control-label col-md-3">
+                  <label htmlFor="stone" className="control-label col-md-3">
                     Milestone :
                   </label>
                   <div className="col-md-8">
@@ -122,7 +122,7 @@ function Task_Form(props) {
                 </div>
 
                 <div className="form-group row">
-                  <label for="ass" className="control-label col-md-3">
+                  <label htmlFor="ass" className="control-label col-md-3">
                     Assignee :
                   </label>
                   <div className="col-md-8">
@@ -137,7 +137,7 @@ function Task_Form(props) {
                 </div>
 
                 <div className="form-group row">
-                  <label for="status" className="col-md-3 control-label">
+                  <label htmlFor="status" className="col-md-3 control-label">
                     Status
                   </label>
                   <div className="col-md-8">
@@ -157,7 +157,7 @@ function Task_Form(props) {
                 </div>
 
                 <div className="form-group row">
-                  <label for="billing" className="col-md-3 control-label">
+                  <label htmlFor="billing" className="col-md-3 control-label">
                     {" "}
                     Billing
                   </label>
@@ -178,7 +178,7 @@ function Task_Form(props) {
                 </div>
 
                 <div className="form-group row" style={{ display: "flex" }}>
-                  <label for="billing" className="col-md-3 control-label">
+                  <label htmlFor="billing" className="col-md-3 control-label">
                     {" "}
                     Task
                   </label>
@@ -259,7 +259,7 @@ function Task_Form(props) {
 
                 <div class="row">
                   <div class="col-md-5">
-                    <label for="start-date">Start Date</label>
+                    <label htmlFor="start-date">Start Date</label>
                     <input
                       type="date"
                       id="start-date"
@@ -270,7 +270,7 @@ function Task_Form(props) {
                     />
                   </div>
                   <div class="col-md-5" style={{ marginLeft: "58px" }}>
-                    <label for="end-date">End Date</label>
+                    <label htmlFor="end-date">End Date</label>
                     <input
                       type="date"
                       id="end-date"

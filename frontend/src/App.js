@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 // import dotenv from "dotenv"
 import Add_form from "./components/project page/Add_form";
 
@@ -22,13 +22,19 @@ import View from "./components/Project/View";
 
 import Team_form from "./components/teams/Team_form";
 
-import { gettoken } from "./axios";
+import axios, { gettoken } from "./axios";
 
 import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 function App() {
   // dotenv.config()
   const location = window.location;
+
+  // const login = async () => {
+  //       window.location.href = `${process.env.REACT_APP_BASE_URL}/login/auth/microsoft`;
+  // };
+
   useEffect(() => {
     if (location.pathname === "/") {
       const token = gettoken();

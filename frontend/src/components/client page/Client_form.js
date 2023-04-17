@@ -59,28 +59,28 @@ function Client_form() {
     <form className="form-horizontal" method="POST" zzs id="add_new_user_form" onSubmit={handlesubmit}>
      
       <div className="form-group row ">
-        <label for="clientname" className="col-md-3 control-label" >Client Name</label>
+        <label htmlFor="clientname" className="col-md-3 control-label" >Client Name</label>
         <div className="col-md-5">
           <input className="form-control" id="clientname" name="Clientname"  onChange={handleform} required />
         </div>
       </div>
 
       <div className="form-group row">
-        <label for="clientcode" className="col-md-3 control-label">Client code</label>
+        <label htmlFor="clientcode" className="col-md-3 control-label">Client code</label>
         <div className="col-md-5">
           <input className="form-control" id="clientcode" name="Clientcode"  onChange={handleform} required />
         </div>
       </div>
 
       <div className="form-group row">
-        <label for="clientmanager" className="col-md-3 control-label">Client Manager</label>
+        <label htmlFor="clientmanager" className="col-md-3 control-label">Client Manager</label>
         <div className="col-md-5">
           <input className="form-control" id="clientmanager" name="Clientmanager" onChange={handleform} required />
         </div>
       </div>
 
       <div className="form-group row">
-        <label for="currencyselector" className="col-md-3 control-label">Currency </label>
+        <label htmlFor="currencyselector" className="col-md-3 control-label">Currency </label>
     <div className="col-md-5">
         <SelectCurrency className='form-select'  value={'USD'} name="Currencyselector" onChange={handleform} />
 
@@ -92,7 +92,7 @@ function Client_form() {
 
 
       <div className="form-group row">
-        <label for="billing" className="col-md-3 control-label">Billing </label>
+        <label htmlFor="billing" className="col-md-3 control-label">Billing </label>
         <div className="col-md-5">
         <select  className='form-select' name="Billing" onChange={handleform} >
         <option value="" selected>Choose Here</option>
@@ -106,7 +106,7 @@ function Client_form() {
     
  
       <div className="form-group row">
-        <label for="description" className="col-md-3 control-label" >Description</label>
+        <label htmlFor="description" className="col-md-3 control-label" >Description</label>
         <div className="col-md-5" >
           <textarea className="form-control" id="description" rows={3} maxLength='200' name="Optional" onChange={handleform}/>
         </div>
