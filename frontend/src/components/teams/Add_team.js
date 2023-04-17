@@ -1,13 +1,13 @@
-
+import { Loader } from "../Loader";
 import { useEffect, useState } from "react";
 import Popup from "../Popup";
 import Team_form from "./Team_form";
-import { getCookie } from "../../axios";
 import axios from "../../axios";
 import Update_team from "./Update_team";
 function Add_team(props) {
  
   const [data , setData] = useState([]);
+  const[loader,setLoader]=useState(true)
   const getAds = async () => {
     const res = await axios.get(`/Team/info/${props.project_id}`, 
     {
@@ -22,8 +22,8 @@ function Add_team(props) {
       
       },
       
-          })
-    setData(res.data.data)
+          }).then((res)=>{setLoader(false);setData(res.data.data)})
+   
   }
 
   useEffect(() => {
@@ -87,6 +87,11 @@ const toggle2 = () => setUpdation(!updation);
         </div>
       </div>
       <div  style={{width:'100%',marginTop:'45px'}}>
+      {
+        loader&&
+        <Loader/>
+      }
+      {!loader &&
   <table className="table table-hover">
     <thead>
       <tr>
@@ -119,6 +124,7 @@ const toggle2 = () => setUpdation(!updation);
     } 
     </tbody>
   </table>
+      }
 </div>
     </div>
   );

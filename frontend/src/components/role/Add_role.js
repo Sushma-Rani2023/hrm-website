@@ -6,10 +6,12 @@ import Update_roles from "../role/Update_role"
 import axios from "../../axios";
 import "font-awesome/css/font-awesome.min.css";
 import {} from "@fortawesome/fontawesome-svg-core";
+import { Loader } from "../Loader";
 
 
 function Add_Role(props) {
   const [data , setData] = useState([]);
+  const [loader,setLoader]=useState(true)
   const getAds = async () => {
     const res = await axios.get(`/engineer/engineerinfo/${props.project_id}`, 
     {
@@ -24,8 +26,8 @@ function Add_Role(props) {
       
       },
       
-          })
-    setData(res.data)
+          }).then((res)=>{setLoader(false);setData(res.data)})
+   
    
   }
 
@@ -88,6 +90,12 @@ const toggle2 =()=>setUpdation(!updation)
         </div>
       </div>
       <div  style={{width:'100%',marginTop:'45px'}}>
+      {
+        loader&&
+        <Loader/>
+      }
+      {
+        !loader&&
   <table className="table table-hover" >
     <thead>
       <tr>
@@ -118,6 +126,7 @@ const toggle2 =()=>setUpdation(!updation)
     } 
     </tbody>
   </table>
+      }
 </div>
     </div>
   );

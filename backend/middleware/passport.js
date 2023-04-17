@@ -82,7 +82,6 @@ authRouter.get('/auth/microsoft/callback',
         console.log(token);
        // res.cookie("token" , token )
 
-
         res.redirect(process.env._fronturl + '/?token=' + token);
     });
 

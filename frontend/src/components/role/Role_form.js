@@ -61,7 +61,7 @@ function Role_form(props) {
     <div className='modal-body'>
      
       <div className="form-group row">
-        <label for="rolename" className="col-md-3 control-label " >Name :</label>
+        <label htmlFor="rolename" className="col-md-3 control-label " >Name :</label>
         <div className="col-md-8">
           <input className="form-control " id="rolename" name="Name" onChange={handleform} required />
         </div>
@@ -69,7 +69,7 @@ function Role_form(props) {
 
 
       <div className="form-group row" >
-       <label for="rate" className="control-label col-md-3" >Rate per Hour :</label>
+       <label htmlFor="rate" className="control-label col-md-3" >Rate per Hour :</label>
        <div className="col-md-8">
          <input type="number" className="form-control" id="rate" name="Optional"  onChange={handleform} />
        </div>
@@ -79,7 +79,7 @@ function Role_form(props) {
 
 
       <div className="form-group row ">
-        <label for="description" className="  control-label col-md-3" >Description :</label>
+        <label htmlFor="description" className="  control-label col-md-3" >Description :</label>
         <div className="col-md-8" >
           <textarea className="form-control" id="description" rows={3} maxLength="150"  name="Description" onChange={handleform} required/>
         </div>
