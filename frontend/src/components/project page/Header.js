@@ -27,6 +27,9 @@ function Header() {
       <li class="nav-item">
         <a class="nav-link" href="/client">Client</a>
       </li>
+      <li>
+        <a class="nav-link" href="/team">Team</a>
+      </li>
      
      
     </ul>

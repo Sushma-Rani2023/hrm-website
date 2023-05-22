@@ -21,6 +21,7 @@ import First from "./components/Project/First";
 import View from "./components/Project/View";
 
 import Team_form from "./components/teams/Team_form";
+import Team from "./components/use/Team";
 
 import axios, { gettoken } from "./axios";
 
@@ -74,6 +75,7 @@ function App() {
             <Route path="/project/view" element={<View />}></Route>
 
             <Route path="/project/team/form" element={<Team_form />}></Route>
+            <Route path="/team" element={<Team/>}></Route>
           </Routes>
         </BrowserRouter>
       </div>

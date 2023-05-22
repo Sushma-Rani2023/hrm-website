@@ -6,6 +6,7 @@ export default axios.create({
 }); 
 
 export function gettoken(){
+  console.log('axios',process.env.REACT_APP_BASE_URL)
   const location= window.location
   const query=new URLSearchParams(location.search);
   const token =query.get('token')

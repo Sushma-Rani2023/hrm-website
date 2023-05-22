@@ -10,21 +10,9 @@ function Add() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loader,setLoader]=useState(true)
-  const[user,setUser]=useState()
+  
 
-  async function getUser(){
-    const token=localStorage.getItem("token")
-   await axios.get("/user/getuser",{
-      headers: {
-        "Content-Type": "application/json",  
-        Authorization: `Bearer ${token}`,
-         
-        },
-    }).then((res)=>{;setUser(res.data.userdata)})
-    .catch((err)=>console.log(err))
-
-console.log(user)
-  }
+  
   const getAds = async () => {
     const token=localStorage.getItem("token")
     await axios.get("/project/description", 
@@ -46,8 +34,7 @@ console.log(user)
   useEffect(() => {
     if(localStorage.getItem('token')){
       getAds();
-      getUser();
-
+    
     }else{
       setTimeout(()=>{getAds()},1000)
     }
@@ -97,7 +84,7 @@ console.log(user)
             type="button"
             className="btn btn-info float-right"
             onClick={() => {
-              navigate("/project/add",{state:{userdata:user}});
+              navigate("/project/add");
             }}
             // style={{ marginLeft: "50vw", width: "113px" }}
           >

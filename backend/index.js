@@ -16,14 +16,6 @@ const authRouter = require('./middleware/passport')
 
 connectDB();
 
-// app.use(function(req, res, next) {
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001/");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   next();
-// });
-
 app.use(cors({
   origin: process.env._fronturl
 }));
@@ -33,18 +25,6 @@ app.use(express.json({ extended: false }));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
-
-
-// const allowedOrigins = ['http://localhost:3001', 'https://nmk33dgsdl.execute-api.us-east-1.amazonaws.com'];
-// app.use(cors({
-//   origin: function(origin, callback) {
-//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   }
-// }));
 
 
 app.use((req, res, next) => {
@@ -82,8 +62,8 @@ module.exports.handler = serverless(app);
 
 
 
-/* const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`);
-}); */
+})
