@@ -60,7 +60,7 @@ function Task_Form(props) {
 
   return (
     <div>
-      {console.log("Task", task)}
+    
       <div className="row main-row_header" style={{ fontSize: "1.5rem" }}>
         <p className="col-md-12">Details of new Task</p>
       </div>

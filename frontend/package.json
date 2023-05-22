@@ -19,6 +19,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
+    "react-select": "^5.7.3",
     "react-select-currency": "^1.0.7",
     "reactjs-popup": "^2.0.5",
     "reactstrap": "^9.1.6",
