@@ -6,16 +6,15 @@ import Select from "react-select";
 const Update = (props) => {
   const [update, setUpdate] = useState(props.updateuser);
   const [select, setSelected] = useState();
-  const array = [];
-  console.log(update);
   const handleSubmit = async (e) => {
     const token = localStorage.getItem("token");
-    if (select.length) {
-      for (var i = 0; i < select.length; i++) {
-        array.push(select[i]["value"]);
-      }
-      update["skills"] = array;
-    }
+    // if (select.length) {
+    //   for (var i = 0; i < select.length; i++) {
+    //     array.push(select[i]["value"]);
+    //   }
+    //   update["skills"] = array;
+    // }
+    update['skills']=select
 
     e.preventDefault()
     await axios.put(`/user/updateuser/${update._id}`, update, {
@@ -65,6 +64,7 @@ const Update = (props) => {
                   id="address"
                   name="address"
                   onChange={handleChange}
+                  defaultValue={props.updateuser.address}
                 />
               </div>
             </div>
@@ -79,6 +79,7 @@ const Update = (props) => {
                   id="phoneno"
                   name="phoneNo"
                   onChange={handleChange}
+                  defaultValue={props.updateuser.phoneNo}
                 />
               </div>
             </div>
@@ -92,6 +93,7 @@ const Update = (props) => {
                   id="emergencno"
                   name="emergencyNo"
                   onChange={handleChange}
+                  defaultValue={props.updateuser.emergencyNo}
                 />
               </div>
             </div>
@@ -105,6 +107,7 @@ const Update = (props) => {
                   options={option}
                   isMulti
                   onChange={handleselect}
+                  defaultValue={props.updateuser.skills}
                   name="skills"
                 />
               </div>
