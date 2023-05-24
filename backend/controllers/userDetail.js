@@ -18,14 +18,14 @@ const getUser=(req,res)=>{
 
 
 const updateUser= async(req,res)=>{
-    const {skills ,phoneNo,emergencyNo,address}=req.body
+    const {skills ,phoneNo,emergencyNo,Address}=req.body
     const id=req.params.id
     const user=await User.findById(id);
 
     user.skills=skills
     user.phoneNo=phoneNo
     user.emergencyNo=emergencyNo
-    user.address=address
+    user.Address=Address
 
     user.save()
     .then(result=>{

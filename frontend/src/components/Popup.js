@@ -1,4 +1,4 @@
-import {React , useState} from 'react'
+import {React} from 'react'
 
 import { Modal, ModalBody} from 'reactstrap';
 
@@ -11,6 +11,7 @@ const Popup = (props) => {
     isOpen={'true'}
     toggle={props.toggle}
     >
+
       <ModalBody> 
       {props.children}
       </ModalBody>

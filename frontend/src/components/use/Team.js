@@ -79,9 +79,9 @@ console.log(user)
           <td className='align-right'>
           <i className="fa-solid fa-pencil"  onClick={()=>{setShow(true) ;setUpdateuser(data)}}> 
                     </i>&nbsp;&nbsp;&nbsp;
-        <i className="fa-solid fa-trash" size="xs" onClick={()=>Delete(data._id)} ></i></td>
+        <i className="fa-solid fa-trash" size="xs" onClick={()=>{Delete(data._id);alert("Delete Succesfully")}} ></i></td>
         
-          
+       
 
           </tr>
         )
