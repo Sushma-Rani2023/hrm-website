@@ -5,10 +5,16 @@ const userAuthSchema = new mongoose.Schema({
   email: String,
   microsoftId: String,
   phoneNo:Number,
-  address: String,
   emergencyNo:Number,
   skills:Array,
+  Address:{
+    address:String,
+    city:String,
+    state:String,
+    zip:Number
   
+    
+  }
 
 });
 
