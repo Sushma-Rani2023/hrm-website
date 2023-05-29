@@ -21,7 +21,7 @@ const updateUser= async(req,res)=>{
     const {skills ,phoneNo,emergencyNo,Address}=req.body
     const id=req.params.id
     const user=await User.findById(id);
-
+   console.log(skills,Address)
     user.skills=skills
     user.phoneNo=phoneNo
     user.emergencyNo=emergencyNo

@@ -3,17 +3,22 @@ import axios from "../../axios";
 import { useState } from "react";
 import { option } from "./data";
 import Select from "react-select";
+import { state_arr } from "./data";
+import { city_arr } from "./data";
+
 const Update = (props) => {
   const [update, setUpdate] = useState(props.updateuser);
   const [select, setSelected] = useState();
-  const [Address,setAddress]=useState(props?.updateuser?.Address)
-  const handleSubmit = async (e) => {
+  // const [city,setCity]=useState(props?.updateuser?.Address?.city)
+  const [stateindex, setStateindex] = useState([]);
+  const city_a = city_arr();
 
+  const [Address, setAddress] = useState(props?.updateuser?.Address);
+  const handleSubmit = async (e) => {
     const token = localStorage.getItem("token");
-    
-   
+    update["Address"]=Address
     alert("Update Successfully");
-    console.log("ipdateing object is",update)
+    console.log("ipdateing object is", update);
     e.preventDefault();
     await axios
       .put(`/user/updateuser/${update._id}`, update, {
@@ -32,16 +37,22 @@ const Update = (props) => {
     props.toggle();
   };
 
-  const handleaddress=(e)=>{
+  const handleState = (e) => {
+    console.log("event is", e, e.target.value,);
+    setAddress({ ...Address, [e.target.name]: e.target.value });
 
-    setAddress({...Address,[e.target.name]:e.target.value})
-    update['Address']=Address
-
-  }
+    var city_arr = city_a[ e.target.selectedIndex].split("|")
+    setStateindex(city_arr || []);
+  };
+  const handleaddress = (e) => {
+    console.log(e.target.name,e.target.value)
+    setAddress({ ...Address, [e.target.name]: e.target.value });
+    console.log(Address)
+    
+  };
   const handleselect = (selectedOptions) => {
-    setSelected(selectedOptions);
-    console.log(selectedOptions, select);
-    update["skills"] = select;
+
+    update["skills"] = selectedOptions;
   };
   const handleChange = (e) => {
     setUpdate({
@@ -77,51 +88,66 @@ const Update = (props) => {
                   id="address"
                   name="address"
                   onChange={handleaddress}
-                 
                   defaultValue={props?.updateuser?.Address?.address}
                   type="text"
                   placeholder="Address"
                   maxLength={150}
                   required
-                  
                 />
               </div>
             </div>
+
             <div className="form-row">
               <div className="col-md-5 mb-3">
-                <label for="validationTooltip03">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationTooltip03"
-                  placeholder="City"
-                  onChange={handleaddress}
-                  required
-                  name="city"
-               
-                  defaultValue={props?.updateuser?.Address?.city}
-                />
-                <div className="invalid-tooltip">
-                  Please provide a valid city.
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
                 <label for="validationTooltip04">State</label>
-                <input
-                  type="text"
-                  onChange={handleaddress}
-                  className="form-control"
-                  id="validationTooltip04"
-                  placeholder="State"
+                <select
+                  onChange={handleState}
                   name="state"
-                  required
                   defaultValue={props?.updateuser?.Address?.state}
-                 
-                />
+                  required
+                  className="form-control"
+                >
+                  <option> {props.updateuser?.Address?.state || "Select State"}</option>
+                  {state_arr.map((stat, index) => {
+                    return (
+                      <option value={stat} key={index}>
+                        {" "}
+                        {stat}
+                      </option>
+                    );
+                  })}
+                </select>
                 <div className="invalid-tooltip">
                   Please provide a valid state.
                 </div>
               </div>
+
+              <div className="col-md-3 mb-3">
+                <label for="validationTooltip03">City</label>
+                <select
+                  onChange={handleaddress}
+                  name="city"
+                  defaultValue={props?.updateuser?.Address?.city}
+                  className="form-control"
+                  required
+                >
+                  <option>{props.updateuser?.Address?.city || "Select City"}</option>
+
+                 
+                  {stateindex.map((city, index) => {
+                    return (
+                      <option value={city} key={index}>
+                        {" "}
+                        {city}
+                      </option>
+                    );
+                  })}
+                </select>
+                <div className="invalid-tooltip">
+                  Please provide a valid city.
+                </div>
+              </div>
+
               <div className="col-md-3 mb-3">
                 <label>Zip</label>
                 <input
@@ -131,8 +157,7 @@ const Update = (props) => {
                   placeholder="Zip"
                   name="zip"
                   required
-                 defaultValue={props?.updateuser?.Address?.zip}
-                  
+                  value={Address?.zip}
                 />
                 <div className="invalid-tooltip">
                   Please provide a valid zip.
@@ -151,7 +176,6 @@ const Update = (props) => {
                   name="phoneNo"
                   placeholder="Phone No."
                   defaultValue={props.updateuser?.phoneNo}
-                  
                   id="phoneNo"
                   maxlength="10"
                   onChange={handleChange}
@@ -170,7 +194,6 @@ const Update = (props) => {
                   placeholder="Emergency No."
                   onChange={handleChange}
                   defaultValue={props.updateuser?.emergencyNo}
-                  
                   type="tel"
                   maxLength="10"
                 />
@@ -188,7 +211,6 @@ const Update = (props) => {
                   placeholder="Skills"
                   onChange={handleselect}
                   defaultValue={props.updateuser?.skills}
-                  
                   name="skills"
                 />
               </div>
