@@ -9,7 +9,6 @@ import { city_arr } from "./data";
 const Update = (props) => {
   const [update, setUpdate] = useState(props.updateuser);
   const [select, setSelected] = useState();
-<<<<<<< HEAD
   // const [city,setCity]=useState(props?.updateuser?.Address?.city)
   const [stateindex, setStateindex] = useState([]);
   const city_a = city_arr();
@@ -17,19 +16,9 @@ const Update = (props) => {
   const [Address, setAddress] = useState(props?.updateuser?.Address);
   const handleSubmit = async (e) => {
     const token = localStorage.getItem("token");
-    update["Address"]=Address
+    update["Address"] = Address;
     alert("Update Successfully");
     console.log("ipdateing object is", update);
-=======
-  const [Address,setAddress]=useState(props?.updateuser?.Address)
-  const handleSubmit = async (e) => {
-
-    const token = localStorage.getItem("token");
-    
-   
-    alert("Update Successfully");
-    console.log("ipdateing object is",update)
->>>>>>> master
     e.preventDefault();
     await axios
       .put(`/user/updateuser/${update._id}`, update, {
@@ -48,35 +37,20 @@ const Update = (props) => {
     props.toggle();
   };
 
-<<<<<<< HEAD
   const handleState = (e) => {
-    console.log("event is", e, e.target.value,);
+    console.log("event is", e, e.target.value);
     setAddress({ ...Address, [e.target.name]: e.target.value });
 
-    var city_arr = city_a[ e.target.selectedIndex].split("|")
+    var city_arr = city_a[e.target.selectedIndex].split("|");
     setStateindex(city_arr || []);
   };
   const handleaddress = (e) => {
-    console.log(e.target.name,e.target.value)
+    console.log(e.target.name, e.target.value);
     setAddress({ ...Address, [e.target.name]: e.target.value });
-    console.log(Address)
-    
+    console.log(Address);
   };
   const handleselect = (selectedOptions) => {
-
     update["skills"] = selectedOptions;
-=======
-  const handleaddress=(e)=>{
-
-    setAddress({...Address,[e.target.name]:e.target.value})
-    update['Address']=Address
-
-  }
-  const handleselect = (selectedOptions) => {
-    setSelected(selectedOptions);
-    console.log(selectedOptions, select);
-    update["skills"] = select;
->>>>>>> master
   };
   const handleChange = (e) => {
     setUpdate({
@@ -112,72 +86,12 @@ const Update = (props) => {
                   id="address"
                   name="address"
                   onChange={handleaddress}
-<<<<<<< HEAD
-=======
-                 
->>>>>>> master
                   defaultValue={props?.updateuser?.Address?.address}
                   type="text"
                   placeholder="Address"
                   maxLength={150}
                   required
-<<<<<<< HEAD
-=======
-                  
->>>>>>> master
                 />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="col-md-5 mb-3">
-                <label for="validationTooltip03">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="validationTooltip03"
-                  placeholder="City"
-                  onChange={handleaddress}
-                  required
-                  name="city"
-               
-                  defaultValue={props?.updateuser?.Address?.city}
-                />
-                <div className="invalid-tooltip">
-                  Please provide a valid city.
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
-                <label for="validationTooltip04">State</label>
-                <input
-                  type="text"
-                  onChange={handleaddress}
-                  className="form-control"
-                  id="validationTooltip04"
-                  placeholder="State"
-                  name="state"
-                  required
-                  defaultValue={props?.updateuser?.Address?.state}
-                 
-                />
-                <div className="invalid-tooltip">
-                  Please provide a valid state.
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
-                <label>Zip</label>
-                <input
-                  type="number"
-                  onChange={handleaddress}
-                  className="form-control"
-                  placeholder="Zip"
-                  name="zip"
-                  required
-                 defaultValue={props?.updateuser?.Address?.zip}
-                  
-                />
-                <div className="invalid-tooltip">
-                  Please provide a valid zip.
-                </div>
               </div>
             </div>
 
@@ -191,7 +105,10 @@ const Update = (props) => {
                   required
                   className="form-control"
                 >
-                  <option> {props.updateuser?.Address?.state || "Select State"}</option>
+                  <option>
+                    {" "}
+                    {props.updateuser?.Address?.state || "Select State"}
+                  </option>
                   {state_arr.map((stat, index) => {
                     return (
                       <option value={stat} key={index}>
@@ -215,9 +132,10 @@ const Update = (props) => {
                   className="form-control"
                   required
                 >
-                  <option>{props.updateuser?.Address?.city || "Select City"}</option>
+                  <option>
+                    {props.updateuser?.Address?.city || "Select City"}
+                  </option>
 
-                 
                   {stateindex.map((city, index) => {
                     return (
                       <option value={city} key={index}>
@@ -260,10 +178,6 @@ const Update = (props) => {
                   name="phoneNo"
                   placeholder="Phone No."
                   defaultValue={props.updateuser?.phoneNo}
-<<<<<<< HEAD
-=======
-                  
->>>>>>> master
                   id="phoneNo"
                   maxlength="10"
                   onChange={handleChange}
@@ -282,10 +196,6 @@ const Update = (props) => {
                   placeholder="Emergency No."
                   onChange={handleChange}
                   defaultValue={props.updateuser?.emergencyNo}
-<<<<<<< HEAD
-=======
-                  
->>>>>>> master
                   type="tel"
                   maxLength="10"
                 />
@@ -303,10 +213,6 @@ const Update = (props) => {
                   placeholder="Skills"
                   onChange={handleselect}
                   defaultValue={props.updateuser?.skills}
-<<<<<<< HEAD
-=======
-                  
->>>>>>> master
                   name="skills"
                 />
               </div>
