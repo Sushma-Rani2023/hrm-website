@@ -16,7 +16,7 @@ const Update = (props) => {
   const [Address, setAddress] = useState(props?.updateuser?.Address);
   const handleSubmit = async (e) => {
     const token = localStorage.getItem("token");
-    update["Address"]=Address
+    update["Address"] = Address;
     alert("Update Successfully");
     console.log("ipdateing object is", update);
     e.preventDefault();
@@ -38,20 +38,18 @@ const Update = (props) => {
   };
 
   const handleState = (e) => {
-    console.log("event is", e, e.target.value,);
+    console.log("event is", e, e.target.value);
     setAddress({ ...Address, [e.target.name]: e.target.value });
 
-    var city_arr = city_a[ e.target.selectedIndex].split("|")
+    var city_arr = city_a[e.target.selectedIndex].split("|");
     setStateindex(city_arr || []);
   };
   const handleaddress = (e) => {
-    console.log(e.target.name,e.target.value)
+    console.log(e.target.name, e.target.value);
     setAddress({ ...Address, [e.target.name]: e.target.value });
-    console.log(Address)
-    
+    console.log(Address);
   };
   const handleselect = (selectedOptions) => {
-
     update["skills"] = selectedOptions;
   };
   const handleChange = (e) => {
@@ -107,7 +105,10 @@ const Update = (props) => {
                   required
                   className="form-control"
                 >
-                  <option> {props.updateuser?.Address?.state || "Select State"}</option>
+                  <option>
+                    {" "}
+                    {props.updateuser?.Address?.state || "Select State"}
+                  </option>
                   {state_arr.map((stat, index) => {
                     return (
                       <option value={stat} key={index}>
@@ -131,9 +132,10 @@ const Update = (props) => {
                   className="form-control"
                   required
                 >
-                  <option>{props.updateuser?.Address?.city || "Select City"}</option>
+                  <option>
+                    {props.updateuser?.Address?.city || "Select City"}
+                  </option>
 
-                 
                   {stateindex.map((city, index) => {
                     return (
                       <option value={city} key={index}>
