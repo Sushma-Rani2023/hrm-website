@@ -2,7 +2,7 @@ import {useNavigate} from 'react-router-dom'
 import Header from '../project page/Header'
 import {React , useState} from 'react' 
 import SelectCurrency from 'react-select-currency';
-
+import handleLogout from '../logout';
 
 import axios from '../../axios'
 
@@ -23,7 +23,22 @@ function Client_form() {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('/client/info',client,{
+   const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+      axiosInstance.post('/client/info',client,{
     headers: {
     "Content-Type": "application/json",
     
@@ -41,6 +56,11 @@ function Client_form() {
       navigate("/client")
    })
   }
+  catch(error){
+    console.log(error)
+  }
+  }
+
     return (
         <div>
 

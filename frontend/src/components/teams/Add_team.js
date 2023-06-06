@@ -4,25 +4,38 @@ import Popup from "../Popup";
 import Team_form from "./Team_form";
 import axios from "../../axios";
 import Update_team from "./Update_team";
+import handleLogout from "../logout";
+
 function Add_team(props) {
  
   const [data , setData] = useState([]);
   const[loader,setLoader]=useState(true)
   const getAds = async () => {
-    const res = await axios.get(`/Team/info/${props.project_id}`, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+    await axiosInstance.get(`/Team/info/${props.project_id}`, 
     {
       headers: {
       "Content-Type": "application/json",
-      
-      
-      
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      
-      
-      
       },
-      
-          }).then((res)=>{setLoader(false);setData(res.data.data)})
+ }).then((res)=>{setLoader(false);setData(res.data.data)})}
+ catch(err){
+  console.log(err)
+ }
    
   }
 
@@ -31,7 +44,23 @@ function Add_team(props) {
   }, [])
 
   function Delete (editId){
-    axios.delete(`/Team//deleted/${editId}`, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    try{
+      axiosInstance.delete(`/Team//deleted/${editId}`, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -45,10 +74,10 @@ function Add_team(props) {
       },
       
           })
-        .then(response => console.log('Delete successful'))
-        .catch(error => {
+        .then(response => console.log('Delete successful'))}
+        catch(error) {
             console.error('There was an error!', error);
-        });
+        };
     const updated_data=data.filter((item)=>item._id!==editId)
     setData(updated_data)
 

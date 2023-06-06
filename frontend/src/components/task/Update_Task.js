@@ -9,7 +9,7 @@ import {
   } from "reactstrap";
   
 import { getCookie } from '../../axios';
-
+import handleLogout from '../logout';
 import axios from '../../axios'
 
 function Update_role(props) {
@@ -37,7 +37,22 @@ function Update_role(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/task/updatetask/${task._id}`,task, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+      axiosInstance.put(`/task/updatetask/${task._id}`,task, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -54,11 +69,11 @@ function Update_role(props) {
          .then(response => {console.log('Updated successful',task); props.toggle2();
          console.log('updated role is',task)
          props.getAds();}
-        )
-         .catch(error => {
+        )}
+         catch(error) {
              console.error('There was an error!', error);
    
-    })
+    }
     props.toggle2();
     console.log('updated role is',task)
     props.getAds();

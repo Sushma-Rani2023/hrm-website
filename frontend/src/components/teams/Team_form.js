@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
-
+import handleLogout from '../logout'
 import axios from '../../axios'
 
 function Team_form(props) {
@@ -20,27 +20,40 @@ function Team_form(props) {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('Team/createTeam',team, 
+   const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    try{
+      axiosInstance.post('Team/createTeam',team, 
    {
      headers: {
      "Content-Type": "application/json",
-     
-     
-     
+ 
      Authorization: `Bearer ${localStorage.getItem("token")}`,
-     
-     
-     
      },
-     
-         })
+ })
    .then( (response) => {
       console.log('creating ',team)
       props.toggle();
       // navigate({state:{data:location.state.data}})
       props.getAds()
 
-   })
+   })}
+   catch(err){
+    console.log(err)
+   }
   }
   
 

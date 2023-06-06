@@ -3,7 +3,7 @@ import Header from '../project page/Header'
 import {React , useState} from 'react' 
 import { useLocation } from 'react-router-dom'
 import SelectCurrency from 'react-select-currency'
-
+import handleLogout from '../logout'
 
 import axios from '../../axios'
 
@@ -23,7 +23,22 @@ function Update_Client() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/client/updateclient/${client._id}`,client,{
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+      axiosInstance.put(`/client/updateclient/${client._id}`,client,{
       headers: {
       "Content-Type": "application/json",
       
@@ -37,11 +52,12 @@ function Update_Client() {
       
     })
          .then(response => {console.log('Updated successful')
-         navigate("/client")})
-         .catch(error => {
+         navigate("/client")})}
+
+         catch(error){
              console.error('There was an error!', error);
    
-    })
+    }
    
    }
     return (
@@ -93,7 +109,7 @@ function Update_Client() {
         <label for="billing" className="col-md-3 control-label">Billing </label>
         <div className="col-md-5">
        <select  name='Billing' onChange={handleform} className='form-select '  >
-       <option value={client.Billing} selected>Choose Here...</option>
+       <option value={client.Billing} selected>{client.Billing}</option>
            <option value="Hourly Cost">Hourly Cost</option>
            <option value="Fixed Cost">Fixed Cost</option>
        </select>

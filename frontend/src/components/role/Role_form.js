@@ -1,7 +1,7 @@
 import {useLocation, useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
 import axios from '../../axios'
-
+import handleLogout from '../logout'
 function Role_form(props) {
   const location=useLocation()
   const navigate= useNavigate();
@@ -19,7 +19,22 @@ function Role_form(props) {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   axios.post('engineer/createengineer',role,
+   const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+   
+   try {axiosInstance.post('engineer/createengineer',role,
    {
      headers: {
      "Content-Type": "application/json",
@@ -40,7 +55,10 @@ function Role_form(props) {
       // navigate({state:{data:location.state.data}})
       props.getAds()
 
-   })
+   })}
+   catch(err){
+    console.log(err)
+   }
   }
   
 

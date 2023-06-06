@@ -7,6 +7,7 @@ import Taskicon from "./Taskicon";
 import Update_Task from "./Update_Task"
 import { Loader } from "../Loader";
 import { UncontrolledDropdown,Button,DropdownToggle,DropdownItem,DropdownMenu } from "reactstrap";
+import handleLogout from "../logout";
 function Add_task(props) {
   const [modal, setModal] = useState(false);
   const [updation,setUpdation]=useState(false)
@@ -17,8 +18,24 @@ function Add_task(props) {
   const [status,setStatus]=useState(false)
   const [assignee,setAssginee]=useState(false)
   const [loader,setLoader]=useState(true)
+
   async function getAds() {
-    const res = await axios.get(`/task/taskdetails/${props.project_id}`, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+    await axiosInstance.get(`/task/taskdetails/${props.project_id}`, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -31,7 +48,10 @@ function Add_task(props) {
       
       },
       
-          }).then((res)=>{setLoader(false);setData(res.data)})
+          }).then((res)=>{setLoader(false);setData(res.data)})}
+      catch(err){
+        console.log(err)
+      }
 
   
   }
@@ -40,7 +60,21 @@ function Add_task(props) {
   }, []);
 
   function Delete(id) {
-    const res = axios.delete(`/task/deletetask/${id}`, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+   try{ axiosInstance.delete(`/task/deletetask/${id}`, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -53,10 +87,11 @@ function Add_task(props) {
       
       },
       
-          });
-    res.then(() => console.log("Deleted Successfully"));
-    setData(data.filter((item) => data._id !== id));
-    getAds();
+      })
+    .then(() => {setData(data.filter((item) => data._id !== id));getAds()})}
+    catch(err){
+      console.log(err)
+    }
   }
   console.log("data is", data);
   const [selected, setSelected] = useState(["Choose Here"]);

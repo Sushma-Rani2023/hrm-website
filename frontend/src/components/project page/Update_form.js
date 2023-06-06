@@ -3,7 +3,7 @@ import Header from './Header'
 import {React ,useEffect, useState} from 'react' 
 import axios from '../../axios'
 import {useLocation} from 'react-router-dom'
-
+import handleLogout from '../logout'
 function Update_form() {
 
   const location =useLocation()
@@ -22,7 +22,22 @@ function Update_form() {
 
   const handlesubmit = async (e) => {
    e.preventDefault();
-   await axios.put(`/project/updateproject/${location.state.EditId}`, 
+   const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+   await axiosInstance.put(`/project/updateproject/${location.state.EditId}`, 
    project,
    {
      headers: {
@@ -39,11 +54,11 @@ function Update_form() {
      })
         .then(response => {console.log('Updated successful'
         )
-        navigate("/")})
-        .catch(error => {
+        navigate("/")})}
+        catch(error ) {
             console.error('There was an error!', error);
   
-   })
+   }
   
   }
 
@@ -95,7 +110,7 @@ function Update_form() {
       <div className="form-group row">
         <label for="projectstatus" className="col-md-3 control-label">Project Status </label>
         <select  className='form-select col-md-3'  style={{maxWidth:'255px',marginLeft:'12px'}} name="Projectstatus" onChange={handleform} >
-        <option value={project.Projectstatus} selected>Choose Here</option>
+        <option value={project.Projectstatus} selected>{project.Projectstatus}</option>
         <option value="Not started">Not Started</option>
         <option value="In Progress">In Progress</option>
         <option value="Completed">Completed</option>

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { React, useState } from "react";
-
+import handleLogout from "../logout";
 import axios from "../../axios";
 
 function Add_form() {
@@ -17,9 +17,24 @@ function Add_form() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
+
     const token=localStorage.getItem("token")
-    console.log(token,'$$$$$$$$$$$$$$$$$$$')
-    axios
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+      axiosInstance
       .post(
         "/project/createproject",project,
         {
@@ -34,7 +49,10 @@ function Add_form() {
       .then((response) => {
         console.log("creating project", response.data, project);
         navigate("/");
-      });
+      })}
+      catch(err){
+        console.log(err)
+      }
     // const response = await fetch('http://localhost:8080/project/createproject',{
     // method:'POST',
     // body:JSON.stringify(project),

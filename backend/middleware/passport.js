@@ -77,10 +77,10 @@ authRouter.get('/auth/microsoft/callback',
         const user = req.user
         const userData = { userId: user._id, fullName: user.fullName, email: user.email };
         const secretKey = process.env.KEY;
-        const expired = { expiresIn: '1h' };
+        const expired = { expiresIn: "20s" };
         const token = jwt.sign(userData, secretKey, expired);
         console.log(token);
-       // res.cookie("token" , token )
+      
 
         res.redirect(process.env._fronturl + '/?token=' + token);
     });

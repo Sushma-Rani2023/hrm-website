@@ -1,13 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LogoutButton from "../logout";
-
-
-
+import handleLogout from "../logout";
 function Header() {
-
-  
-
 
   return (
 	<div className="header border">
@@ -34,8 +28,10 @@ function Header() {
      
     </ul>
     <div class="nav-item">
-        <form class="form-inline my-2 my-lg-0 justify-content-end">
-          <LogoutButton/>
+        <form class="form-inline my-2 my-lg-0 justify-content-end">  
+        <button className="btn btn-info" onClick={handleLogout}>
+      Logout
+    </button>
         </form>
       </div>
       </div>

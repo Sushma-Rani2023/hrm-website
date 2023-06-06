@@ -3,12 +3,29 @@ import { useEffect, useState } from "react";
 import Header from "../project page/Header";
 import axios from "../../axios";
 import { Loader } from "../Loader";
+import handleLogout from "../logout";
 function Add_Client() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loader,setLoader]=useState(true)
   const getAds = async () => {
-    await axios.get("/client/Clientdetails",{
+    const axiosInstance = axios.create();
+
+    await axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        console.log('errrorrrrr',error)
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+    await axiosInstance.get("/client/Clientdetails",{
       headers: {
       "Content-Type": "application/json",
       
@@ -20,8 +37,11 @@ function Add_Client() {
       
       },
       
-    },).then((res)=>{setLoader(false);setData(res.data.ClientData)});
-    ;
+    }).then((res)=>{setLoader(false);setData(res.data.ClientData)});
+    ;}
+    catch(err){
+      console.log(err)
+    }
 
    
   };
@@ -31,7 +51,22 @@ function Add_Client() {
   }, []);
 
   function Delete(editId) {
-    axios
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+      axiosInstance
       .delete(`/client/deleted/${editId}`,{
         headers: {
         "Content-Type": "application/json",
@@ -46,9 +81,10 @@ function Add_Client() {
         
       },)
       .then((response) => console.log("Delete successful"))
-      .catch((error) => {
+    }
+    catch(error)  {
         console.error("There was an error!", error);
-      });
+      };
     const updated_data = data.filter((item) => item._id !== editId);
     setData(updated_data);
   }
@@ -87,7 +123,7 @@ function Add_Client() {
               <th>Client Manager</th>
               <th>Currency Selector</th>
               <th>Billing</th>
-              <th>Optional</th>
+              <th>Description</th>
               <th>Actions</th>
             </tr>
           </thead>

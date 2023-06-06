@@ -2,7 +2,7 @@ import {useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
 import { useLocation } from 'react-router-dom'
 import { getCookie } from '../../axios'
-
+import handleLogout from '../logout'
 
 import axios from '../../axios'
 
@@ -24,7 +24,22 @@ function Update_role(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/engineer/updateengineer/${role._id}`,role, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+      axiosInstance.put(`/engineer/updateengineer/${role._id}`,role, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -41,11 +56,11 @@ function Update_role(props) {
          .then(response => {console.log('Updated successful',role); props.toggle();
          console.log('updated role is',role)
          props.getAds();}
-        )
-         .catch(error => {
+        )}
+         catch(error) {
              console.error('There was an error!', error);
    
-    })
+    }
     props.toggle();
     console.log('updated role is',role)
     props.getAds();

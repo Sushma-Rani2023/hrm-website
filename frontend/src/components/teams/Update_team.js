@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom'
 import {React , useState} from 'react' 
 import { useLocation } from 'react-router-dom'
-
+import handleLogout from '../logout'
 
 import axios from '../../axios'
 import { getCookie } from '../../axios'
@@ -20,28 +20,36 @@ function Update_team(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    axios.put(`/Team/updateTeam/${team._id}`,team, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+      axiosInstance.put(`/Team/updateTeam/${team._id}`,team, 
     {
       headers: {
-      "Content-Type": "application/json",
-      
-      
-      
+      "Content-Type": "application/json",  
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      
-      
-      
       },
-      
-          })
+  })
          .then(response => {console.log('Updated successful',team); props.toggle();
          console.log('updated role is',team)
          props.getAds();}
-        )
-         .catch(error => {
+        )}
+         catch(error) {
              console.error('There was an error!', error);
    
-    })
+    }
     props.toggle();
     console.log('updated role is',team)
     props.getAds();

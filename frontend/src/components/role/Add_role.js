@@ -7,13 +7,29 @@ import axios from "../../axios";
 import "font-awesome/css/font-awesome.min.css";
 import {} from "@fortawesome/fontawesome-svg-core";
 import { Loader } from "../Loader";
-
+import handleLogout from "../logout";
 
 function Add_Role(props) {
   const [data , setData] = useState([]);
   const [loader,setLoader]=useState(true)
   const getAds = async () => {
-    const res = await axios.get(`/engineer/engineerinfo/${props.project_id}`, 
+
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.request.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try {
+    await axiosInstance.get(`/engineer/engineerinfo/${props.project_id}`, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -26,7 +42,10 @@ function Add_Role(props) {
       
       },
       
-          }).then((res)=>{setLoader(false);setData(res.data)})
+          }).then((res)=>{setLoader(false);setData(res.data)})}
+      catch(err){
+        console.log(err)
+      }
    
    
   }
@@ -36,7 +55,22 @@ function Add_Role(props) {
   }, [])
 
   function Delete (editId){
-    axios.delete(`/engineer/deleteengineer/${editId}`, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    
+    try {axiosInstance.delete(`/engineer/deleteengineer/${editId}`, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -50,10 +84,10 @@ function Add_Role(props) {
       },
       
           })
-        .then(response => console.log('Delete successful'))
-        .catch(error => {
+        .then(response => console.log('Delete successful'))}
+        catch(error)  {
             console.error('There was an error!', error);
-        });
+        };
     const updated_data=data.filter((item)=>item._id!==editId)
     setData(updated_data)
 

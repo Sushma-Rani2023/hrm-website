@@ -8,6 +8,7 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { getCookie } from "../../axios";
+import handleLogout from "../logout";
 function Task_Form(props) {
   
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -35,8 +36,22 @@ function Task_Form(props) {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    console.log(task);
-    axios.post("task/createtask", task, 
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+      axiosInstance.post("task/createtask", task, 
     {
       headers: {
       "Content-Type": "application/json",
@@ -50,12 +65,13 @@ function Task_Form(props) {
       },
       
           }).then((response) => {
-      //console.log('creating ',role)
+      
       props.toggle();
-      console.log(task);
-      // navigate({state:{data:location.state.data}})
       props.getAds();
-    });
+    })}
+    catch(err){
+      console.log(err)
+    }
   };
 
   return (

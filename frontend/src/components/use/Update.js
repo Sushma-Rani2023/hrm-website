@@ -5,14 +5,14 @@ import { option } from "./data";
 import Select from "react-select";
 import { state_arr } from "./data";
 import { city_arr } from "./data";
+import handleLogout from "../logout";
 
 const Update = (props) => {
   const [update, setUpdate] = useState(props.updateuser);
   const [select, setSelected] = useState();
-  // const [city,setCity]=useState(props?.updateuser?.Address?.city)
   const [stateindex, setStateindex] = useState([]);
   const city_a = city_arr();
-
+  
   const [Address, setAddress] = useState(props?.updateuser?.Address);
   const handleSubmit = async (e) => {
     const token = localStorage.getItem("token");
@@ -20,7 +20,22 @@ const Update = (props) => {
     alert("Update Successfully");
     console.log("ipdateing object is", update);
     e.preventDefault();
-    await axios
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+    try{
+    await axiosInstance
       .put(`/user/updateuser/${update._id}`, update, {
         headers: {
           "Content-Type": "application/json",
@@ -29,10 +44,10 @@ const Update = (props) => {
       })
       .then((res) => {
         console.log("updated user Successfully");
-      })
-      .catch((err) => {
+      })}
+      catch(err) {
         console.log("Error while updating is ", err);
-      });
+      };
     props.getUser();
     props.toggle();
   };
@@ -68,9 +83,9 @@ const Update = (props) => {
       </div>
       <div
         className="row main-row_header"
-        style={{ fontsize: "1.5rem", display: "flex-row" }}
+        style={{ fontsize: "1.5rem"}}
       >
-        <p className="col-md-12">Add Details of Employee</p>
+        <p className="col-md-12" style={{marginLeft:"32px"}}>Update Details of Employee</p>
       </div>
       <br />
       <div className="col-md-12">
