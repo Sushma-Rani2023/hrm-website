@@ -145,7 +145,10 @@ const toggle2 = () => setUpdation(!updation);
              setUpdation(data)
             }} ></i>
            &nbsp;&nbsp;&nbsp;
-        <i className="fa-solid fa-trash" size="xs" onClick={()=>Delete(data._id)} ></i></td>
+        <i className="fa-solid fa-trash" size="xs" onClick={()=>{if (window.confirm("Are you sure you want to delete ")===true){
+        console.log('Deleting')
+        Delete(data._id)
+      }}} ></i></td>
         </tr>)
  
       }

@@ -122,11 +122,10 @@ const Team = () => {
                     <i
                       className="fa-solid fa-trash"
                       size="xs"
-                      onClick={() => {
-                        
-                          Delete(data._id);
-                        
-                        }
+                      onClick={() => {if (window.confirm("Are you sure you want to delete ")===true){
+        console.log('Deleting')
+        Delete(data._id)
+      }}
                       }
                     ></i>
                   </td>

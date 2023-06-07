@@ -13,6 +13,14 @@ function Add() {
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(true);
 
+  const handleclick=(id)=>{
+      if (window.confirm("Are you sure you want to delete ")===true){
+        console.log('Deleting')
+        Delete(id)
+      }
+
+      
+  }
   const getAds = async () => {
     const token = localStorage.getItem("token");
 
@@ -77,12 +85,13 @@ function Add() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })}
+      }).then(()=>{const updated_data = data.filter((item) => item._id !== editId);
+        setData(updated_data);})
+    }
       catch(error)  {
         console.error("There was an error!", error);
       };
-    const updated_data = data.filter((item) => item._id !== editId);
-    setData(updated_data);
+    
   }
 
   return (
@@ -142,7 +151,7 @@ function Add() {
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <i
                         className="fa-solid fa-trash"
-                        onClick={() => Delete(data._id)}
+                        onClick={() =>handleclick(data._id)}
                       ></i>
                     </td>
                   </tr>

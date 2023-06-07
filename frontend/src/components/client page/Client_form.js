@@ -118,7 +118,7 @@ function Client_form() {
         <option value="" selected>Choose Here</option>
         <option value="Hourly cost">Hourly cost</option>
         <option value="Fixed cost">Fixed cost</option>
-
+    
         </select>
         </div>
 
