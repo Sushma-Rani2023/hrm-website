@@ -9,7 +9,9 @@ const Router2 = require('./routes/engineer');
 const Router4 = require('./routes/Taskroutes');
 const RouterT = require('./routes/Team');
 const Router5=require("./routes/userroute")
+const Router6=require("./routes/Leadroutes")
 const app = express();
+const path =require('path')
 const serverless = require('serverless-http')
 const authRouter = require('./middleware/passport')
 
@@ -20,11 +22,11 @@ app.use(cors({
   origin: process.env._fronturl
 }));
 
-app.use(express.json({ extended: false }));
+app.use(express.json({ extended:true}));
 
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
-
+app.use(express.static(path.resolve(__dirname,'public')))
 
 
 app.use((req, res, next) => {
@@ -32,14 +34,6 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
-
-// const corsOptions ={
-//   origin:'*', 
-//   credentials:true,           
-//   optionSuccessStatus:200,
-// }
-
-// app.use(cors(corsOptions))
 
 app.use('/login', authRouter);
 
@@ -55,12 +49,10 @@ app.use('/Team', RouterT);
 
 app.use("/user",Router5)
 
+app.use("/lead",Router6)
+
 
 module.exports.handler = serverless(app);
-
- //module.exports = handler
-
-
 
 const PORT = process.env.PORT || 8080;
 

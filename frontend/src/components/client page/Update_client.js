@@ -1,10 +1,9 @@
-import {useNavigate} from 'react-router-dom'
+
 import Header from '../project page/Header'
 import {React , useState} from 'react' 
-import { useLocation } from 'react-router-dom'
+import { useLocation,useNavigate } from 'react-router-dom'
 import SelectCurrency from 'react-select-currency'
 import handleLogout from '../logout'
-
 import axios from '../../axios'
 
 function Update_Client() {
@@ -13,7 +12,6 @@ function Update_Client() {
 
   const [client, set] = useState(location.state.data);
   const handleform = (e) => {
-    
      set({
       ...client ,
       [e.target.name] : e.target.value 
@@ -24,7 +22,7 @@ function Update_Client() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     const axiosInstance = axios.create();
-
+   console.log('updating',client)
     axiosInstance.interceptors.response.use(
       (response) => {
         return response;
@@ -36,24 +34,17 @@ function Update_Client() {
         }
         return Promise.reject(error);
       }
-    );
+    )
     try{
-      axiosInstance.put(`/client/updateclient/${client._id}`,client,{
+      console.log('hitting')
+      await axiosInstance.put(`/client/updateclient/${client._id}`,client,{
       headers: {
-      "Content-Type": "application/json",
-      
-      
-      
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      
-      
-      
       },
       
-    })
-         .then(response => {console.log('Updated successful')
-         navigate("/client")})}
-
+    }).then(response=> {console.log('Updated successful')
+    navigate("/client")})
+         }
          catch(error){
              console.error('There was an error!', error);
    
@@ -77,36 +68,65 @@ function Update_Client() {
     <form className="form-horizontal" method="POST" id="add_new_user_form" onSubmit={handlesubmit}>
      
       <div className="form-group row ">
-        <label for="clientname" className="col-md-3 control-label" >Client Name</label>
+        <label htmlFor="clientname" className="col-md-3 control-label" >Client Name</label>
         <div className="col-md-5">
           <input className="form-control" id="clientname" value={client.Clientname} name="Clientname"  onChange={handleform}  />
         </div>
       </div>
 
       <div className="form-group row">
-        <label for="clientcode" className="col-md-3 control-label">Client code</label>
+        <label htmlFor="clientcode" className="col-md-3 control-label">Client code</label>
         <div className="col-md-5">
           <input className="form-control" id="clientcode" name="Clientcode" value={client.Clientcode} onChange={handleform} />
         </div>
       </div>
 
       <div className="form-group row">
-        <label for="clientmanager" className="col-md-3 control-label">Client Manager</label>
+        <label htmlFor="clientmanager" className="col-md-3 control-label">Client Manager</label>
         <div className="col-md-5">
           <input className="form-control" id="clientmanager" name="Clientmanager" value={client.Clientmanager} onChange={handleform} />
         </div>
       </div>
 
+
       <div className="form-group row">
-        <label for="currencyselector" className="col-md-3 control-label">Currency </label>
+        <label htmlhtmlFor="clientmanager" className="col-md-3 control-label">Client Phone No.</label>
+        <div className="col-md-5">
+          <input type='tel' maxLength={10} className="form-control" id="clientmanager"  value={client.Clientphone} name="Clientphone" onChange={handleform} required />
+        </div>
+      </div>
+
+      <div className="form-group row">
+        <label htmlhtmlFor="clientmanager" className="col-md-3 control-label">Client Email Id</label>
+        <div className="col-md-5">
+          <input type="email" className="form-control" id="clientmanager"  value={client.Clientmail} name="Clientmail" onChange={handleform} required />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label htmlhtmlFor="clientmanager" className="col-md-3 control-label">Client Company</label>
+        <div className="col-md-5">
+          <input type='string' className="form-control" id="clientmanager" value={client.Clientcompany} name="Clientcompany" onChange={handleform} />
+        </div>
+      </div>
+
+      <div className="form-group row">
+        <label htmlhtmlFor="clientmanager" className="col-md-3 control-label">Client Country</label>
+        <div className="col-md-5">
+          <input type='string' className="form-control" id="clientmanager"  value={client.Clientcountry} name="Clientcountry" onChange={handleform}  />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label htmlFor="currencyselector" className="col-md-3 control-label">Currency </label>
         <div  className="col-md-5">
         <SelectCurrency className='form-select '  value={client.Currencyselector} name="Currencyselector" onChange={handleform} />
 </div>
       </div>
 
+      
+
 
       <div className="form-group row">
-        <label for="billing" className="col-md-3 control-label">Billing </label>
+        <label htmlFor="billing" className="col-md-3 control-label">Billing </label>
         <div className="col-md-5">
        <select  name='Billing' onChange={handleform} className='form-select '  >
        <option value={client.Billing} selected>{client.Billing}</option>
@@ -118,7 +138,7 @@ function Update_Client() {
     
  
       <div className="form-group row">
-        <label for="description" className="col-md-3 control-label" > Description</label>
+        <label htmlFor="description" className="col-md-3 control-label" > Description</label>
         <div className="col-md-5" >
           <textarea className="form-control" id="description" maxLength='200' rows={3} value={client.Optional} name="Optional" onChange={handleform}/>
         </div>

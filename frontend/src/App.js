@@ -17,7 +17,7 @@ import Add_Role from "./components/role/Add_role";
 import Role_form from "./components/role/Role_form";
 
 import Update_role from "./components/role/Update_role";
-
+import Lead from "./components/campaign/Add_Lead";
 import First from "./components/Project/First";
 
 import View from "./components/Project/View";
@@ -79,6 +79,7 @@ function App() {
             <Route path="/" element={<First />}></Route>
 
             <Route path="/project/view" element={<View />}></Route>
+            <Route path="/campaign" element={<Lead/>}></Route>
 
             <Route path="/project/team/form" element={<Team_form />}></Route>
             <Route path="/team" element={<Team/>}></Route>

@@ -189,7 +189,7 @@ function Add_form() {
                   <button
                     type="submit"
                     id="add_new_user_btn"
-                    className="btn btn-success  single-click"
+                    className="btn btn-success single-click"
                   >
                     Add new project
                   </button>

@@ -57,7 +57,7 @@ function Client_form() {
    })
   }
   catch(error){
-    console.log(error)
+    console.log(error,client)
   }
   }
 
@@ -81,28 +81,53 @@ function Client_form() {
       <div className="form-group row ">
         <label htmlFor="clientname" className="col-md-3 control-label" >Client Name</label>
         <div className="col-md-5">
-          <input className="form-control" id="clientname" name="Clientname"  onChange={handleform} required />
+          <input className="form-control" placeholder='Name'  id="clientname" name="Clientname"  onChange={handleform} required />
         </div>
       </div>
 
       <div className="form-group row">
         <label htmlFor="clientcode" className="col-md-3 control-label">Client code</label>
         <div className="col-md-5">
-          <input className="form-control" id="clientcode" name="Clientcode"  onChange={handleform} required />
+          <input className="form-control" id="clientcode" placeholder='Code' name="Clientcode"  onChange={handleform} required />
         </div>
       </div>
 
       <div className="form-group row">
         <label htmlFor="clientmanager" className="col-md-3 control-label">Client Manager</label>
         <div className="col-md-5">
-          <input className="form-control" id="clientmanager" name="Clientmanager" onChange={handleform} required />
+          <input className="form-control" id="clientmanager"  placeholder='Manager' name="Clientmanager" onChange={handleform} required />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label htmlFor="clientmanager" className="col-md-3 control-label">Client Phone No.</label>
+        <div className="col-md-5">
+          <input type='tel' maxLength={10} className="form-control" id="clientmanager"  placeholder='Phone Number ' name="Clientphone" onChange={handleform} required />
+        </div>
+      </div>
+
+      <div className="form-group row">
+        <label htmlFor="clientmanager" className="col-md-3 control-label">Client Email Id</label>
+        <div className="col-md-5">
+          <input type="email" className="form-control" id="clientmanager"  placeholder='Email Id' name="Clientmail" onChange={handleform} required />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label htmlFor="clientmanager" className="col-md-3 control-label">Client Company</label>
+        <div className="col-md-5">
+          <input type='string' className="form-control" id="clientmanager"  placeholder='Company Name' name="Clientcompany" onChange={handleform} />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label htmlFor="clientmanager" className="col-md-3 control-label">Client Country</label>
+        <div className="col-md-5">
+          <input type='string' className="form-control" id="clientmanager"  placeholder='Country Name' name="Clientcountry" onChange={handleform}  />
         </div>
       </div>
 
       <div className="form-group row">
         <label htmlFor="currencyselector" className="col-md-3 control-label">Currency </label>
     <div className="col-md-5">
-        <SelectCurrency className='form-select'  value={'USD'} name="Currencyselector" onChange={handleform} />
+        <SelectCurrency className='form-select'   name="Currencyselector" onChange={handleform} />
 
          
           </div>

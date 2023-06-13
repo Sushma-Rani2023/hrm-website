@@ -5,8 +5,13 @@ const ClientSchema = new mongoose.Schema({
     Clientcode: String,
     Clientmanager:String,
     Currencyselector:String,
+    Clientphone:Number,
+    Clientmail:String,
+    Clientcompany:String,
+    Clientcountry:String,
     Billing:String,
     Optional: String,
+
 })
 
 module.exports = mongoose.model('Clients', ClientSchema);

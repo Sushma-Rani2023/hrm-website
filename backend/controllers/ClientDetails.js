@@ -10,6 +10,11 @@ const Clientinfo = (req,res) => {
         Currencyselector:req.body.Currencyselector,
         Billing:req.body.Billing,
         Optional:req.body.Optional,
+        Clientcompany:req.body.Clientcompany,
+        Clientcountry:req.body.Clientcountry,
+        Clientmail:req.body.Clientmail,
+        Clientphone:req.body.Clientphone
+    
        })
     Client.save()
     .then(result =>{
@@ -62,7 +67,7 @@ const Clientget = (req,res) => {
 }
 
 const updateClient = async (req, res) => {
-    const { Clientname, Clientcode, Clientmanager,Currencyselector, Billing, Optional  } = req.body;
+    const { Clientname, Clientcode, Clientmanager,Currencyselector, Billing, Optional,Clientphone,Clientmail,Clientcompany,Clientcountry  } = req.body;
     const id = req.params.id;
     const Updatedclient = await ClientDetails.findByIdAndUpdate(id);
   
@@ -72,7 +77,11 @@ const updateClient = async (req, res) => {
     Updatedclient.Currencyselector = Currencyselector || Updatedclient.Currencyselector;
     Updatedclient.Billing = Billing || Updatedclient.Billing;
     Updatedclient.Optional = Optional || Updatedclient.Optional;
-    
+    Updatedclient.Clientphone=Clientphone || Updatedclient.Clientphone;
+    Updatedclient.Clientmail=Clientmail || Updatedclient.Clientmail;
+    Updatedclient.Clientcountry=Clientcountry || Updatedclient.Clientcountry;
+    Updatedclient.Clientcompany=Clientcompany || Updatedclient.Clientcompany
+
     Updatedclient
       .save()
       .then((data) => {

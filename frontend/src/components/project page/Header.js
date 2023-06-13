@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import handleLogout from "../logout";
 function Header() {
 
@@ -23,6 +22,10 @@ function Header() {
       </li>
       <li>
         <a class="nav-link" href="/team">Team</a>
+      </li>
+      <li>
+      <a class="nav-link" href="/campaign">Campaign</a>
+
       </li>
      
      

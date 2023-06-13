@@ -122,6 +122,7 @@ function Add_Client() {
               <th>Client Code</th>
               <th>Client Manager</th>
               <th>Currency Selector</th>
+              <></>
               <th>Billing</th>
               <th>Description</th>
               <th>Actions</th>
