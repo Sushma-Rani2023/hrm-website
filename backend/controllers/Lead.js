@@ -1,6 +1,6 @@
 const Leadmodel = require("../models/Leadmodel")
 const xlsx=require('xlsx')
-const excel=require('convert-excel-to-json')
+import { saveAs } from 'file-saver';
 const createlead = (req,res) => {
 
     const Lead = new Leadmodel({
@@ -125,7 +125,19 @@ const importuser = async (req, res) => {
       res.send({ status: 400, success: false, msg: err.message });
     }
   };
+
+  const download=async (req,res)=>{
+   
+        try {
+          const data = await Leadmodel.find();
+          res.json(data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          res.status(500).json({ error: 'Error fetching data' });
+        }
+      
+  }
   
   
 
-  module.exports ={createlead,getleadinfo,deletelead,updatelead,importuser}
+  module.exports ={createlead,getleadinfo,deletelead,updatelead,importuser,download}

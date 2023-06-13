@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Popup from "../Popup";
 import Lead_form from './Lead_form'
 import Update_lead from './Update_lead';
@@ -9,9 +9,9 @@ import {} from "@fortawesome/fontawesome-svg-core";
 import { Loader } from "../Loader";
 import handleLogout from "../logout";
 import Header from '../project page/Header';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import { UncontrolledDropdown,Button,DropdownToggle,DropdownItem,DropdownMenu, Dropdown } from "reactstrap";
-import upload from './upload';
-
 const Lead = () => {
   const [data , setData] = useState([]);
   const [loader,setLoader]=useState(true)
@@ -116,10 +116,29 @@ const handleCheckboxChange = (itemId) => {
   }
 };
 
+const handleDownload = async ()=>{
+  const dataWithoutIdAndV = data.map(({ _id, __v, ...rest }) => rest);
+
+  const worksheet = XLSX.utils.json_to_sheet(dataWithoutIdAndV);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+  const excelData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+  const blob = new Blob([excelData], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  saveAs(blob, 'data.xlsx');
+
+
+}
+
   const handleFileUpload = async (event) => {
     const uploadedFile = event.target.files[0];
-    await upload(uploadedFile).then((res)=>getAds())
-   .catch((err)=>console.log(err))
+    try {
+      await upload(uploadedFile); // Call the upload function with the uploaded file
+      getAds(); // Fetch updated data after successful upload
+    } catch (error) {
+      console.error('There was an error!', error);
+    }
     }
 
 
@@ -179,8 +198,9 @@ const handleCheckboxChange = (itemId) => {
         </div>
         <div className="col-md-12 d-flex justify-content-end" >
         
+        <button className='btn btn-info mr-3' onClick={()=>handleDownload()}><i className='fa-solid fa-download'/>&nbsp;&nbsp;&nbsp;.xlsx</button>
           <UncontrolledDropdown group>
-        <Button className="btn btn-info pull right" >Add Lead By</Button>
+        <Button className="btn btn-info pull right" > <i className='fa-solid fa-user'/>&nbsp;&nbsp;&nbsp;Add </Button>
         <Dropdown isOpen={dropdownOpen} toggle={() => setDropdownOpen(!dropdownOpen)}>
         <DropdownToggle caret className="btn btn-info" />
         <DropdownMenu>
