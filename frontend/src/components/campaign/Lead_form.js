@@ -112,7 +112,7 @@ const Lead_form = (props) => {
     
       <div className="form-group row">
         <div >
-          <button type="submit" id="add_new_user_btn" className="btn btn-success  single-click" >Add new Client </button>
+          <button type="submit" id="add_new_user_btn" className="btn btn-success  single-click" >Add new Lead </button>
         </div>
       </div>
     </form>

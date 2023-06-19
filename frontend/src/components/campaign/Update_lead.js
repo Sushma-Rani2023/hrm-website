@@ -108,7 +108,7 @@ const Update_lead = (props) => {
       <div className="form-group row">
         <label htmlFor="clientmanager" className="col-md-3 control-label">Country</label>
         <div className="col-md-5">
-          <input type='string' className="form-control" id="clientmanager"  placeholder='Country Name' name="Country" onChange={handleform} defaultValue={props.updation.Country}  />
+          <input type='string' className="form-control" id="clientmanager" placeholder='Country Name' name="Country" onChange={handleform} defaultValue={props.updation.Country}  />
         </div>
       </div>
 
