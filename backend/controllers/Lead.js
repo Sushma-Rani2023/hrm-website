@@ -1,6 +1,5 @@
 const Leadmodel = require("../models/Leadmodel")
 const xlsx=require('xlsx')
-import { saveAs } from 'file-saver';
 const createlead = (req,res) => {
 
     const Lead = new Leadmodel({
@@ -109,35 +108,26 @@ const importuser = async (req, res) => {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const data = xlsx.utils.sheet_to_json(sheet);
-  
-    //   const existingData = await Leadmodel.find({}, '-_id Name Country Company Phone Email');
-  
-    //   const existingDataWithoutId = existingData.map(obj => {
-    //     const { Name, Country, Company, Phone, Email } = obj.toObject();
-    //     return { Name, Country, Company, Phone, Email };
-    //   });
-  
-    //   const mergedData = existingDataWithoutId.concat(data);
+      console.log(data)
+      const emails = data.map(entry => entry.Email);
+const uniqueEmails = [...new Set(emails)];
+
+if (emails.length !== uniqueEmails.length) {
+  console.log('Duplicate email addresses found in the data.',emails.length,uniqueEmails.length,emails,uniqueEmails);
+  res.send({status:400,success:false ,msg:'duplicate email',data:data})
+}
+else{
+      await Leadmodel.deleteMany({});
       await Leadmodel.insertMany(data);
   
       res.send({ status: 200, success: true, msg: 'Excel imported' });
-    } catch (err) {
+    }} catch (err) {
       res.send({ status: 400, success: false, msg: err.message });
     }
-  };
-
-  const download=async (req,res)=>{
-   
-        try {
-          const data = await Leadmodel.find();
-          res.json(data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-          res.status(500).json({ error: 'Error fetching data' });
-        }
-      
   }
+;
+
   
   
 
-  module.exports ={createlead,getleadinfo,deletelead,updatelead,importuser,download}
+  module.exports ={createlead,getleadinfo,deletelead,updatelead,importuser}
