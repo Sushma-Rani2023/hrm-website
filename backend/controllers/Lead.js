@@ -114,7 +114,7 @@ const uniqueEmails = [...new Set(emails)];
 
 if (emails.length !== uniqueEmails.length) {
   console.log('Duplicate email addresses found in the data.',emails.length,uniqueEmails.length,emails,uniqueEmails);
-  res.send({status:400,success:false ,msg:'duplicate email',data:data})
+  res.send({status:405,success:false ,msg:'duplicate email',data:data})
 }
 else{
       await Leadmodel.deleteMany({});

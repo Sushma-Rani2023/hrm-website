@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import Popup from '../Popup';
-import Lead_form from './Lead_form';
-import Update_lead from './Update_lead';
-import axios from '../../axios';
-import 'font-awesome/css/font-awesome.min.css';
-import { Loader } from '../Loader';
-import handleLogout from '../logout';
-import Header from '../project page/Header';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
+import React, { useEffect, useState } from "react";
+import Popup from "../Popup";
+import Lead_form from "./Lead_form";
+import Update_lead from "./Update_lead";
+import axios from "../../axios";
+import "font-awesome/css/font-awesome.min.css";
+import { Loader } from "../Loader";
+import handleLogout from "../logout";
+import Header from "../project page/Header";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 import {
   UncontrolledDropdown,
   Button,
@@ -16,14 +16,15 @@ import {
   DropdownItem,
   DropdownMenu,
   Dropdown,
-} from 'reactstrap';
+} from "reactstrap";
 
 const Lead = () => {
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(true);
+
   // const [visibleItems, setVisibleItems] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 1;
+  const itemsPerPage = 2;
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   // Calculate the indices for the current page
@@ -34,13 +35,13 @@ const Lead = () => {
   const currentPeople = data.slice(startIndex, endIndex);
 
   const handleNextPage = () => {
-    setCurrentPage(prevPage => prevPage + 1);
+    setCurrentPage((prevPage) => prevPage + 1);
   };
 
   const handlePrevPage = () => {
-    setCurrentPage(prevPage => prevPage - 1);
+    setCurrentPage((prevPage) => prevPage - 1);
   };
-   const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   // const visibleItemList = data.slice(0, visibleItems);
 
@@ -53,7 +54,7 @@ const Lead = () => {
       },
       (error) => {
         if (error.response.request.status === 401) {
-          console.log('handling response ');
+          console.log("handling response ");
           handleLogout();
         }
         return Promise.reject(error);
@@ -61,16 +62,18 @@ const Lead = () => {
     );
 
     try {
-      await axiosInstance.get('/lead/getleadinfo', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      }).then((res) => {
-        console.log(res)
-        setLoader(false);
-        setData(res.data);
-      });
+      await axiosInstance
+        .get("/lead/getleadinfo", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setLoader(false);
+          setData(res.data);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -89,7 +92,7 @@ const Lead = () => {
       },
       (error) => {
         if (error.response.status === 401) {
-          console.log('handling response ');
+          console.log("handling response ");
           handleLogout();
         }
         return Promise.reject(error);
@@ -100,8 +103,8 @@ const Lead = () => {
       axiosInstance
         .delete(`/lead/deletelead/${editId}`, {
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
         .then((response) => {
@@ -109,12 +112,13 @@ const Lead = () => {
           setData(updated_data);
         });
     } catch (error) {
-      console.error('There was an error!', error);
+      console.error("There was an error!", error);
     }
   }
 
   const [updation, setUpdation] = useState(false);
 
+  const [open1, setOpen1] = useState(false);
   const [modal, setModal] = useState(false);
   const toggle1 = () => setModal(!modal);
   const toggle2 = () => setUpdation(!updation);
@@ -135,18 +139,17 @@ const Lead = () => {
 
     const worksheet = XLSX.utils.json_to_sheet(dataWithoutIdAndV);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
 
     const excelData = XLSX.write(workbook, {
-      bookType: 'xlsx',
-      type: 'array',
+      bookType: "xlsx",
+      type: "array",
     });
 
-    const blob = new Blob(
-      [excelData],
-      { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }
-    );
-    saveAs(blob, 'data.xlsx');
+    const blob = new Blob([excelData], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    saveAs(blob, "data.xlsx");
   };
 
   const handleFileUpload = async (event) => {
@@ -155,12 +158,22 @@ const Lead = () => {
       await upload(uploadedFile); // Call the upload function with the uploaded file
       getAds(); // Fetch updated data after successful upload
     } catch (error) {
-      console.error('There was an error!', error);
+      console.error("There was an error!", error);
+    }
+  };
+
+  const handleSelectAll = () => {
+    const arr = currentPeople.map((item) => item._id);
+
+    if (selectedItems.length === currentPeople.length) {
+      setSelectedItems([]);
+    } else {
+      setSelectedItems(arr);
     }
   };
 
   const upload = (file) => {
-    console.log('uploading')
+    console.log("uploading");
     const axiosInstance = axios.create();
 
     axiosInstance.interceptors.response.use(
@@ -169,39 +182,47 @@ const Lead = () => {
       },
       (error) => {
         if (error.response.status === 401) {
+          handleLogout()
           // Handle unauthorized error
         }
+        
         return Promise.reject(error);
       }
     );
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     try {
       axiosInstance
-        .post('/lead/upload', formData, {
+        .post("/lead/upload", formData, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
-          console.log('Upload successful', response.data, getAds());
+          if(response.data.status===405){
+            alert('Duplicate Emails Exist')
+          }
+          else{
+            console.log('updated succesfully')
+            getAds()
+          }
         })
         .catch((error) => {
-          console.error('There was an error!', error);
+          console.error("There was an error!", error);
         });
     } catch (error) {
-      console.error('There was an error!', error);
+      console.error("There was an error!", error);
     }
 
     return true;
   };
 
   const handleCompletedClick = async () => {
-    const fileInput = document.getElementById('fileInput');
-    await fileInput.click();
+    const fileInput = document.getElementById("fileInput");
+    fileInput.click();
     setLoader(true);
     setDropdownOpen(false);
   };
@@ -221,33 +242,61 @@ const Lead = () => {
       )}
 
       <div className="row form_container">
-        <div className="col-md-3 lead " style={{ fontSize: '1.5rem' }}>
+        <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
           Inzint's Lead
         </div>
         <div className="col-md-12 d-flex justify-content-end">
-          <button className="btn btn-info mr-3" onClick={() => handleDownload()}>
-            <i className="fa-solid fa-download" />&nbsp;&nbsp;&nbsp;.xlsx
+          <button
+            className="btn btn-info mr-3"
+            onClick={() => handleDownload()}
+          >
+            <i className="fa-solid fa-download" />
+            &nbsp;&nbsp;&nbsp;.xlsx
           </button>
-          <UncontrolledDropdown group>
-            <Button className="btn btn-info pull right">
-              <i className="fa-solid fa-user" />&nbsp;&nbsp;&nbsp;Add
-            </Button>
-            <Dropdown isOpen={dropdownOpen} toggle={() => setDropdownOpen(!dropdownOpen)}>
+
+          <UncontrolledDropdown group className="mr-3">
+            <Button className="btn btn-info ">Select</Button>
+            <Dropdown isOpen={open1} toggle={() => setOpen1(!open1)}>
               <DropdownToggle caret className="btn btn-info" />
               <DropdownMenu>
-                <DropdownItem onClick={() => setModal(true)}>
-                  <i className="fa-solid fa-user-pen" />&nbsp;&nbsp;&nbsp; Form
-                </DropdownItem>
-                <DropdownItem onClick={handleCompletedClick}>
-                  <i className="fa-solid fa-file-import" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import
+                <DropdownItem onClick={handleSelectAll}>All</DropdownItem>
+                <DropdownItem onClick={() => setSelectedItems([])}>
+                  None
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </UncontrolledDropdown>
-          <input type="file" id="fileInput" onChange={handleFileUpload} style={{ display: 'none' }} />
+          <UncontrolledDropdown group>
+            <Button className="btn btn-info pull right">
+              <i className="fa-solid fa-user" />
+              &nbsp;&nbsp;&nbsp;Add
+            </Button>
+            <Dropdown
+              isOpen={dropdownOpen}
+              toggle={() => setDropdownOpen(!dropdownOpen)}
+            >
+              <DropdownToggle caret className="btn btn-info" />
+              <DropdownMenu>
+                <DropdownItem onClick={() => setModal(true)}>
+                  <i className="fa-solid fa-user-pen" />
+                  &nbsp;&nbsp;&nbsp; Form
+                </DropdownItem>
+                <DropdownItem onClick={handleCompletedClick}>
+                  <i className="fa-solid fa-file-import" />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </UncontrolledDropdown>
+          <input
+            type="file"
+            id="fileInput"
+            onChange={handleFileUpload}
+            style={{ display: "none" }}
+          />
         </div>
       </div>
-      <div className="col-md-13" style={{ marginTop: '45px' }}>
+      <div className="col-md-13" style={{ marginTop: "45px" }}>
         {loader && <Loader />}
         {!loader && (
           <table className="table table-hover">
@@ -262,14 +311,17 @@ const Lead = () => {
             </thead>
             <tbody>
               {currentPeople.map((data, index) => {
-                const isChecked = selectedItems.includes(data._id); // Check if the item is selected
+              
 
                 return (
                   <tr key={index}>
                     <td>
                       <input
                         type="checkbox"
-                        checked={isChecked}
+                        checked={
+                          selectedItems.length === currentPeople.length ||
+                          selectedItems.includes(data._id)
+                        }
                         onChange={() => handleCheckboxChange(data._id)}
                       />
                     </td>
@@ -288,8 +340,12 @@ const Lead = () => {
                         className="fa-solid fa-trash"
                         size="xs"
                         onClick={() => {
-                          if (window.confirm('Are you sure you want to delete?') === true) {
-                            console.log('Deleting');
+                          if (
+                            window.confirm(
+                              "Are you sure you want to delete?"
+                            ) === true
+                          ) {
+                            console.log("Deleting");
                             Delete(data._id);
                           }
                         }}
@@ -301,39 +357,26 @@ const Lead = () => {
             </tbody>
           </table>
         )}
-        {/* <div className="d-flex justify-content-end">
-          {visibleItems > 1 && (
-            <button className="btn btn-outline-danger mr-3" onClick={() => setVisibleItems(visibleItems - 1)}>
-              <i className="fa-solid fa-arrow-left" />
-            </button>
-          )}
-
-          {visibleItems < data.length && (
-            <button className="btn btn-outline-danger" onClick={() => setVisibleItems(visibleItems + 1)}>
-              <i className="fa-solid fa-arrow-right" />
-            </button>
-          )}
-        </div> */}
-        <div  className="d-flex justify-content-end">
-        <button
-        className="btn btn-outline-danger"
-          disabled={currentPage === 1}
-          onClick={handlePrevPage}
-        >
-         <i className="fa-solid fa-arrow-left" />
-        </button>
-        <button
-        className="btn btn-outline-danger"
-          disabled={currentPage === totalPages}
-          onClick={handleNextPage}
-        >
-         <i className="fa-solid fa-arrow-right" />
-        </button>
-      </div>
+        
+        <div className="d-flex justify-content-end">
+          <button
+            className="btn btn-outline-danger"
+            disabled={currentPage === 1}
+            onClick={handlePrevPage}
+          >
+            <i className="fa-solid fa-arrow-left" />
+          </button>
+          <button
+            className="btn btn-outline-danger"
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          >
+            <i className="fa-solid fa-arrow-right" />
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Lead;
-
