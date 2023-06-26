@@ -124,13 +124,14 @@ const Lead = () => {
   const toggle2 = () => setUpdation(!updation);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleCheckboxChange = (itemId) => {
-    if (selectedItems.includes(itemId)) {
-      // Item is already selected, so remove it from the selectedItems array
-      setSelectedItems(selectedItems.filter((id) => id !== itemId));
+  const handleCheckboxChange = (Email) => {
+    if (selectedItems.includes(Email)) {
+      
+      
+      setSelectedItems(selectedItems.filter((id) => id !== Email));
     } else {
       // Item is not selected, so add it to the selectedItems array
-      setSelectedItems([...selectedItems, itemId]);
+      setSelectedItems([...selectedItems, Email]);
     }
   };
 
@@ -163,7 +164,7 @@ const Lead = () => {
   };
 
   const handleSelectAll = () => {
-    const arr = currentPeople.map((item) => item._id);
+    const arr = currentPeople.map((item) => item.Email);
 
     if (selectedItems.length === currentPeople.length) {
       setSelectedItems([]);
@@ -227,6 +228,49 @@ const Lead = () => {
     setDropdownOpen(false);
   };
 
+  const handleSend=async()=>{
+    console.log(selectedItems)
+    const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          handleLogout()
+          // Handle unauthorized error
+        }
+        
+        return Promise.reject(error);
+      }
+    );
+
+  
+    try {
+      axiosInstance
+        .post("/lead/send", selectedItems, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          alert('Mail is Sent succesfully')
+         
+        })
+        .catch((error) => {
+          alert('There is an error')
+          console.error("There was an error!", error);
+        });
+    } catch (error) {
+      alert('There is an Error')
+
+      console.error("There was an error!", error);
+    }
+
+   }
+
   return (
     <div>
       <Header />
@@ -253,7 +297,15 @@ const Lead = () => {
             <i className="fa-solid fa-download" />
             &nbsp;&nbsp;&nbsp;.xlsx
           </button>
+          <button
+            className="btn btn-info mr-3"
+            onClick={() => handleSend()}
+          >
+            <i className="fa-solid fa-envelope" />
+            &nbsp;&nbsp;&nbsp;Send
+          </button>
 
+        
           <UncontrolledDropdown group className="mr-3">
             <Button className="btn btn-info ">Select</Button>
             <Dropdown isOpen={open1} toggle={() => setOpen1(!open1)}>
@@ -320,9 +372,9 @@ const Lead = () => {
                         type="checkbox"
                         checked={
                           selectedItems.length === currentPeople.length ||
-                          selectedItems.includes(data._id)
+                          selectedItems.includes(data.Email)
                         }
-                        onChange={() => handleCheckboxChange(data._id)}
+                        onChange={() => handleCheckboxChange(data.Email)}
                       />
                     </td>
                     <td>{data.Name}</td>

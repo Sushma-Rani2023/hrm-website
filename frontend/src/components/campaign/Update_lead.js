@@ -8,8 +8,7 @@ import handleLogout from '../logout'
 import axios from '../../axios'
 
 const Update_lead = (props) => {
-    const navigate= useNavigate();
-    const location =useLocation();
+
   
     const [lead, setLead] = useState(props.updation);
     
