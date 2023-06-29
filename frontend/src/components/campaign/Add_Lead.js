@@ -70,6 +70,7 @@ const Lead = () => {
           },
         })
         .then((res) => {
+          setSelectedItems([])
           console.log(res);
           setLoader(false);
           setData(res.data);
@@ -156,14 +157,14 @@ const Lead = () => {
   const handleFileUpload = async (event) => {
     const uploadedFile = event.target.files[0];
     try {
-      await upload(uploadedFile); // Call the upload function with the uploaded file
+      upload(uploadedFile); // Call the upload function with the uploaded file
       getAds(); // Fetch updated data after successful upload
     } catch (error) {
       console.error("There was an error!", error);
     }
   };
 
-  const handleSelectAll = () => {
+  const handleSelectAll = async() => {
     const arr = currentPeople.map((item) => item.Email);
 
     if (selectedItems.length === currentPeople.length) {
@@ -173,8 +174,8 @@ const Lead = () => {
     }
   };
 
-  const upload = (file) => {
-    console.log("uploading");
+  const upload = async (file) => {
+
     const axiosInstance = axios.create();
 
     axiosInstance.interceptors.response.use(
@@ -191,29 +192,70 @@ const Lead = () => {
       }
     );
 
-    const formData = new FormData();
-    formData.append("file", file);
 
     try {
-      axiosInstance
-        .post("/lead/upload", formData, {
+      const obj={file:file.name,fileType:file.type}
+      const response = await axiosInstance.post("/lead/upload", obj, {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "multipart/form-data",
+            
           },
         })
-        .then((response) => {
-          if(response.data.status===405){
-            alert('Duplicate Emails Exist')
-          }
-          else{
-            console.log('updated succesfully')
-            getAds()
-          }
-        })
-        .catch((error) => {
-          console.error("There was an error!", error);
-        });
+     
+        const signedUrl  = response.data.url;
+        const parsedUrl = new URL(signedUrl);
+
+        // Extract the key
+        const key = decodeURIComponent(parsedUrl.pathname.substring(1))
+        console.log('key is',key,file.type)
+         await fetch(signedUrl, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': file.type,
+          },
+          body: file,
+        }).then((res)=>{console.log('File uploaded successfully!');
+    
+        const axiosInstance = axios.create();
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          console.log("handling response ");
+          handleLogout();
+        }
+        return Promise.reject(error);
+      }
+    );
+        try{
+        
+        axiosInstance.post("lead/render",{key}, {
+          headers: {
+            "Content-Type":"application/json" ,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            
+          },
+        }).then(()=> getAds())
+
+
+        }
+        catch(err){
+          console.log(err)
+        }
+        
+        
+
+        
+        
+       
+        ;})
+  
+        
+        
     } catch (error) {
       console.error("There was an error!", error);
     }
@@ -229,6 +271,7 @@ const Lead = () => {
   };
 
   const handleSend=async()=>{
+    setLoader(true)
     console.log(selectedItems)
     const axiosInstance = axios.create();
 
@@ -239,7 +282,7 @@ const Lead = () => {
       (error) => {
         if (error.response.status === 401) {
           handleLogout()
-          // Handle unauthorized error
+         
         }
         
         return Promise.reject(error);
@@ -248,14 +291,19 @@ const Lead = () => {
 
   
     try {
+      console.log(JSON.stringify(selectedItems))
+    
       axiosInstance
-        .post("/lead/send", selectedItems, {
+        .post("/lead/send", {"arr":selectedItems}, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+      
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            
           },
         })
         .then((response) => {
+          setLoader(false)
           alert('Mail is Sent succesfully')
          
         })
