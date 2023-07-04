@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const sendEMail = async (req, res) => {
-  console.log('Sending Email');
+  console.log('Sending Email',req.body);
   try {
   
     const transporter = nodemailer.createTransport({
@@ -16,8 +16,8 @@ const sendEMail = async (req, res) => {
     const mailOptions = {
       from: process.env.outlook_mail,
       to: req.body.arr,
-      subject: 'Test Email',
-      text: 'This is a test email sent from Node.js using Nodemailer.',
+      subject: req.body.subject,
+      html:req.body.html
     };
     
     const info = await transporter.sendMail(mailOptions);

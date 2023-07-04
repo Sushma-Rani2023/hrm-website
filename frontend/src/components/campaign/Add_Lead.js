@@ -7,6 +7,7 @@ import "font-awesome/css/font-awesome.min.css";
 import { Loader } from "../Loader";
 import handleLogout from "../logout";
 import Header from "../project page/Header";
+import Mail from "./Mail"
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import {
@@ -21,10 +22,12 @@ import {
 const Lead = () => {
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [mail,setMail]= useState(false)
+  const[compose,setCompose]=useState([])
 
   // const [visibleItems, setVisibleItems] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 4;
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   // Calculate the indices for the current page
@@ -123,6 +126,9 @@ const Lead = () => {
   const [modal, setModal] = useState(false);
   const toggle1 = () => setModal(!modal);
   const toggle2 = () => setUpdation(!updation);
+  const toggle3 = () => {
+    setMail(!mail);
+  };
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleCheckboxChange = (Email) => {
@@ -185,7 +191,7 @@ const Lead = () => {
       (error) => {
         if (error.response.status === 401) {
           handleLogout()
-          // Handle unauthorized error
+          
         }
         
         return Promise.reject(error);
@@ -208,14 +214,14 @@ const Lead = () => {
 
         // Extract the key
         const key = decodeURIComponent(parsedUrl.pathname.substring(1))
-        console.log('key is',key,file.type)
+      
          await fetch(signedUrl, {
           method: 'PUT',
           headers: {
             'Content-Type': file.type,
           },
           body: file,
-        }).then((res)=>{console.log('File uploaded successfully!');
+        }).then( async (res)=>{console.log('File uploaded successfully!');
     
         const axiosInstance = axios.create();
 
@@ -233,7 +239,7 @@ const Lead = () => {
     );
         try{
         
-        axiosInstance.post("lead/render",{key}, {
+        await axiosInstance.post("lead/render",{key}, {
           headers: {
             "Content-Type":"application/json" ,
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -270,9 +276,11 @@ const Lead = () => {
     setDropdownOpen(false);
   };
 
-  const handleSend=async()=>{
-    setLoader(true)
+  const handleSend=async(message)=>{
+     setLoader(true)
     console.log(selectedItems)
+    message['arr']=selectedItems
+    console.log("message is",message)
     const axiosInstance = axios.create();
 
     axiosInstance.interceptors.response.use(
@@ -291,10 +299,9 @@ const Lead = () => {
 
   
     try {
-      console.log(JSON.stringify(selectedItems))
-    
+     
       axiosInstance
-        .post("/lead/send", {"arr":selectedItems}, {
+        .post("/lead/send", message, {
           headers: {
       
             "Content-Type": "application/json",
@@ -332,6 +339,15 @@ const Lead = () => {
           <Update_lead updation={updation} toggle={toggle2} getAds={getAds} />
         </Popup>
       )}
+      {
+        mail &&(
+          <Popup toggle={toggle3}>
+          <Mail toggle={toggle3} handleSend={handleSend}/>
+          
+
+          </Popup>
+        )
+      }
 
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
@@ -347,10 +363,10 @@ const Lead = () => {
           </button>
           <button
             className="btn btn-info mr-3"
-            onClick={() => handleSend()}
+            onClick={()=>setMail(true)}
           >
             <i className="fa-solid fa-envelope" />
-            &nbsp;&nbsp;&nbsp;Send
+            &nbsp;&nbsp;&nbsp;Compose
           </button>
 
         
