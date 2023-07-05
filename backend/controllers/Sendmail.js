@@ -31,3 +31,19 @@ const sendEMail = async (req, res) => {
 };
 
 module.exports = sendEMail;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

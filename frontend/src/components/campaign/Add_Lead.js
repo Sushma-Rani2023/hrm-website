@@ -7,7 +7,7 @@ import "font-awesome/css/font-awesome.min.css";
 import { Loader } from "../Loader";
 import handleLogout from "../logout";
 import Header from "../project page/Header";
-import Mail from "./Mail"
+import Mail from "./Mail";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import {
@@ -20,10 +20,11 @@ import {
 } from "reactstrap";
 
 const Lead = () => {
+  const [selectopen,setSelectopen]=useState(false)
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [mail,setMail]= useState(false)
-  const[compose,setCompose]=useState([])
+  const [mail, setMail] = useState(false);
+  const [compose, setCompose] = useState([]);
 
   // const [visibleItems, setVisibleItems] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,6 +37,10 @@ const Lead = () => {
 
   // Get the people to display for the current page
   const currentPeople = data.slice(startIndex, endIndex);
+
+ const toggleDropdown=()=>{
+  setSelectopen(!selectopen)
+ }
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -73,7 +78,7 @@ const Lead = () => {
           },
         })
         .then((res) => {
-          setSelectedItems([])
+          setSelectedItems([]);
           console.log(res);
           setLoader(false);
           setData(res.data);
@@ -133,8 +138,6 @@ const Lead = () => {
 
   const handleCheckboxChange = (Email) => {
     if (selectedItems.includes(Email)) {
-      
-      
       setSelectedItems(selectedItems.filter((id) => id !== Email));
     } else {
       // Item is not selected, so add it to the selectedItems array
@@ -170,7 +173,7 @@ const Lead = () => {
     }
   };
 
-  const handleSelectAll = async() => {
+  const handleSelectAll = async () => {
     const arr = currentPeople.map((item) => item.Email);
 
     if (selectedItems.length === currentPeople.length) {
@@ -181,7 +184,6 @@ const Lead = () => {
   };
 
   const upload = async (file) => {
-
     const axiosInstance = axios.create();
 
     axiosInstance.interceptors.response.use(
@@ -190,78 +192,68 @@ const Lead = () => {
       },
       (error) => {
         if (error.response.status === 401) {
-          handleLogout()
-          
-        }
-        
-        return Promise.reject(error);
-      }
-    );
-
-
-    try {
-      const obj={file:file.name,fileType:file.type}
-      const response = await axiosInstance.post("/lead/upload", obj, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            
-          },
-        })
-     
-        const signedUrl  = response.data.url;
-        const parsedUrl = new URL(signedUrl);
-
-        // Extract the key
-        const key = decodeURIComponent(parsedUrl.pathname.substring(1))
-      
-         await fetch(signedUrl, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': file.type,
-          },
-          body: file,
-        }).then( async (res)=>{console.log('File uploaded successfully!');
-    
-        const axiosInstance = axios.create();
-
-    axiosInstance.interceptors.response.use(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        if (error.response.status === 401) {
-          console.log("handling response ");
           handleLogout();
         }
+
         return Promise.reject(error);
       }
     );
-        try{
-        
-        await axiosInstance.post("lead/render",{key}, {
-          headers: {
-            "Content-Type":"application/json" ,
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            
+
+    try {
+      const obj = { file: file.name, fileType: file.type };
+      const response = await axiosInstance.post("/lead/upload", obj, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      const signedUrl = response.data.url;
+      const parsedUrl = new URL(signedUrl);
+
+      // Extract the key
+      const key = decodeURIComponent(parsedUrl.pathname.substring(1));
+
+      await fetch(signedUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": file.type,
+        },
+        body: file,
+      }).then(async (res) => {
+        console.log("File uploaded successfully!");
+
+        const axiosInstance = axios.create();
+
+        axiosInstance.interceptors.response.use(
+          (response) => {
+            return response;
           },
-        }).then(()=> getAds())
-
-
+          (error) => {
+            if (error.response.status === 401) {
+              console.log("handling response ");
+              handleLogout();
+            }
+            return Promise.reject(error);
+          }
+        );
+        try {
+          await axiosInstance
+            .post(
+              "lead/render",
+              { key },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              }
+            )
+            .then(() => getAds());
+        } catch (err) {
+          console.log(err);
         }
-        catch(err){
-          console.log(err)
-        }
-        
-        
-
-        
-        
-       
-        ;})
-  
-        
-        
+      });
     } catch (error) {
       console.error("There was an error!", error);
     }
@@ -276,11 +268,11 @@ const Lead = () => {
     setDropdownOpen(false);
   };
 
-  const handleSend=async(message)=>{
-     setLoader(true)
-    console.log(selectedItems)
-    message['arr']=selectedItems
-    console.log("message is",message)
+  const handleSend = async (message) => {
+    setLoader(true);
+    console.log(selectedItems);
+    message["arr"] = selectedItems;
+    console.log("message is", message);
     const axiosInstance = axios.create();
 
     axiosInstance.interceptors.response.use(
@@ -289,42 +281,35 @@ const Lead = () => {
       },
       (error) => {
         if (error.response.status === 401) {
-          handleLogout()
-         
+          handleLogout();
         }
-        
+
         return Promise.reject(error);
       }
     );
 
-  
     try {
-     
       axiosInstance
         .post("/lead/send", message, {
           headers: {
-      
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            
           },
         })
         .then((response) => {
-          setLoader(false)
-          alert('Mail is Sent succesfully')
-         
+          setLoader(false);
+          alert("Mail is Sent succesfully");
         })
         .catch((error) => {
-          alert('There is an error')
+          alert("There is an error");
           console.error("There was an error!", error);
         });
     } catch (error) {
-      alert('There is an Error')
+      alert("There is an Error");
 
       console.error("There was an error!", error);
     }
-
-   }
+  };
 
   return (
     <div>
@@ -339,15 +324,11 @@ const Lead = () => {
           <Update_lead updation={updation} toggle={toggle2} getAds={getAds} />
         </Popup>
       )}
-      {
-        mail &&(
-          <Popup toggle={toggle3}>
-          <Mail toggle={toggle3} handleSend={handleSend}/>
-          
-
-          </Popup>
-        )
-      }
+      {mail && (
+        <Popup toggle={toggle3}>
+          <Mail toggle={toggle3} handleSend={handleSend} />
+        </Popup>
+      )}
 
       <div className="row form_container">
         <div className="col-md-3 lead " style={{ fontSize: "1.5rem" }}>
@@ -356,21 +337,19 @@ const Lead = () => {
         <div className="col-md-12 d-flex justify-content-end">
           <button
             className="btn btn-info mr-3"
-            onClick={() => handleDownload()}
-          >
-            <i className="fa-solid fa-download" />
-            &nbsp;&nbsp;&nbsp;.xlsx
-          </button>
-          <button
-            className="btn btn-info mr-3"
-            onClick={()=>setMail(true)}
+            onClick={() => {
+              if (selectedItems.length) {
+                setMail(true);
+              } else {
+                alert("Please select the receiver");
+              }
+            }}
           >
             <i className="fa-solid fa-envelope" />
             &nbsp;&nbsp;&nbsp;Compose
           </button>
 
-        
-          <UncontrolledDropdown group className="mr-3">
+          {/* <UncontrolledDropdown group className="mr-3">
             <Button className="btn btn-info ">Select</Button>
             <Dropdown isOpen={open1} toggle={() => setOpen1(!open1)}>
               <DropdownToggle caret className="btn btn-info" />
@@ -381,9 +360,12 @@ const Lead = () => {
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-          </UncontrolledDropdown>
+          </UncontrolledDropdown> */}
           <UncontrolledDropdown group>
-            <Button className="btn btn-info pull right">
+            <Button
+              className="btn btn-info pull right"
+              onClick={() => setModal(true)}
+            >
               <i className="fa-solid fa-user" />
               &nbsp;&nbsp;&nbsp;Add
             </Button>
@@ -393,13 +375,13 @@ const Lead = () => {
             >
               <DropdownToggle caret className="btn btn-info" />
               <DropdownMenu>
-                <DropdownItem onClick={() => setModal(true)}>
-                  <i className="fa-solid fa-user-pen" />
-                  &nbsp;&nbsp;&nbsp; Form
-                </DropdownItem>
                 <DropdownItem onClick={handleCompletedClick}>
                   <i className="fa-solid fa-file-import" />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import
+                  &nbsp;&nbsp;&nbsp;Import
+                </DropdownItem>
+                <DropdownItem onClick={() => handleDownload()}>
+                  <i className="fa-solid fa-download" />
+                  &nbsp;&nbsp;&nbsp;Export
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -418,7 +400,20 @@ const Lead = () => {
           <table className="table table-hover">
             <thead>
               <tr>
-                <th>Select</th>
+                <th>
+                  <div className="d-flex">
+                    <div>Select</div>
+                    <div class="dropdown">
+  {/* <button  id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"> */}
+  <i className="fa-regular fa-square-caret-down ml-1"data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false" />
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#" onClick={handleSelectAll}>All</a>
+    <a class="dropdown-item" href="#" onClick={() => setSelectedItems([])}>None</a>
+  </div>
+</div>
+                    
+                  </div>
+                </th>
                 <th>Name</th>
                 <th>Company Name</th>
                 <th>Actions</th>
@@ -427,8 +422,6 @@ const Lead = () => {
             </thead>
             <tbody>
               {currentPeople.map((data, index) => {
-              
-
                 return (
                   <tr key={index}>
                     <td>
@@ -473,7 +466,7 @@ const Lead = () => {
             </tbody>
           </table>
         )}
-        
+
         <div className="d-flex justify-content-end">
           <button
             className="btn btn-outline-danger"
