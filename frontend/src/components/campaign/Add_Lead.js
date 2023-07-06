@@ -136,12 +136,12 @@ const Lead = () => {
   };
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleCheckboxChange = (Email) => {
-    if (selectedItems.includes(Email)) {
-      setSelectedItems(selectedItems.filter((id) => id !== Email));
+  const handleCheckboxChange = (id) => {
+    if (selectedItems.includes(id)) {
+      setSelectedItems(selectedItems.filter((Id) => Id !==id));
     } else {
       // Item is not selected, so add it to the selectedItems array
-      setSelectedItems([...selectedItems, Email]);
+      setSelectedItems([...selectedItems, id]);
     }
   };
 
@@ -174,7 +174,7 @@ const Lead = () => {
   };
 
   const handleSelectAll = async () => {
-    const arr = currentPeople.map((item) => item.Email);
+    const arr = currentPeople.map((item) => item._id);
 
     if (selectedItems.length === currentPeople.length) {
       setSelectedItems([]);
@@ -289,16 +289,17 @@ const Lead = () => {
     );
 
     try {
-      axiosInstance
+      await axiosInstance
         .post("/lead/send", message, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
-        .then((response) => {
+        .then(async (response) => {
           setLoader(false);
-          alert("Mail is Sent succesfully");
+          console.log('response is',response)
+          alert(response.msg);
         })
         .catch((error) => {
           alert("There is an error");
@@ -309,6 +310,8 @@ const Lead = () => {
 
       console.error("There was an error!", error);
     }
+    setLoader(false)
+    getAds()
   };
 
   return (
@@ -429,9 +432,9 @@ const Lead = () => {
                         type="checkbox"
                         checked={
                           selectedItems.length === currentPeople.length ||
-                          selectedItems.includes(data.Email)
+                          selectedItems.includes(data._id)
                         }
-                        onChange={() => handleCheckboxChange(data.Email)}
+                        onChange={() => handleCheckboxChange(data._id)}
                       />
                     </td>
                     <td>{data.Name}</td>
