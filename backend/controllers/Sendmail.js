@@ -3,8 +3,9 @@ const compile = require("string-template");
 const mongoose = require("mongoose");
 const Leadmodel = require("../models/Leadmodel");
 
-const sendEMail = async (req, res) => {
+const sendEmail = async (req, res) => {
   console.log("Sending Email", req.body);
+
   try {
     const transporter = nodemailer.createTransport({
       service: "outlook365",
@@ -14,42 +15,45 @@ const sendEMail = async (req, res) => {
       },
     });
 
-    req.body.arr.forEach(async (id) => {
-      const user_id=new mongoose.Types.ObjectId(id)
+    const sendMailPromises = req.body.arr.map(async (id) => {
+      try {
+        const user_id = new mongoose.Types.ObjectId(id);
+        const user = await Leadmodel.findById(user_id);
+        console.log(user.Name);
 
-      const user = await Leadmodel.findById(user_id);
+        const Html = compile(req.body.html, {
+          name: user.Name,
+          email: user.Email,
+          country: user.Country,
+          company: user.Company,
+          phone: user.Phone,
+        });
 
-      Html = compile(req.body.html, {
-        name: user.Name,
-        email: user.Email,
-        country: user.Country,
-        company: user.Company,
-        phone: user.Phone,
-      });
-      const mailOptions = {
-        from: process.env.outlook_mail,
-        to: user.Email,
-        subject: req.body.subject,
-        html: Html,
-      };
+        const mailOptions = {
+          from: process.env.outlook_mail,
+          to: user.Email,
+          subject: req.body.subject,
+          html: Html,
+        };
 
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          res.send({msg:"There is an error"})
-
-          console.log("Error:", error);
-        } else {
-          res.send({msg:"mail sent successfully"})
-          console.log("Email sent:", info.response);
-        }
-      });
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Email sent:", info.response);
+      } catch (error) {
+        console.log("Error:", error);
+      }
     });
 
-   
+    // Limit the number of parallel emails to, for example, 5.
+    const concurrencyLimit = 5;
+    for (let i = 0; i < sendMailPromises.length; i += concurrencyLimit) {
+      await Promise.all(sendMailPromises.slice(i, i + concurrencyLimit));
+    }
+
+    res.send({ msg: "Mail sent successfully" });
   } catch (error) {
-    console.log("error is", error);
-    res.send({msg:"There is an error"});
+    console.log("Error is", error);
+    res.send({ msg: "There is an error" });
   }
 };
 
-module.exports = sendEMail;
+module.exports = sendEmail;
