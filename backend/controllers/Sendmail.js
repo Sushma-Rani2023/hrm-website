@@ -43,7 +43,7 @@ const sendEmail = async (req, res) => {
       }
     });
 
-    // Limit the number of parallel emails to, for example, 5.
+   
     const concurrencyLimit = 5;
     for (let i = 0; i < sendMailPromises.length; i += concurrencyLimit) {
       await Promise.all(sendMailPromises.slice(i, i + concurrencyLimit));
